@@ -4,9 +4,9 @@ body {
   font-family: 'Open Sans';
 }
 
-.login-section {
+.register-section {
   background-color: white;
-  height: 320px;
+  height: 620px;
   width: 450px;
   padding: 2em 2em;
   margin: auto;
@@ -26,12 +26,12 @@ label {
   margin-top: 2em;
 }
 
-#username, #password {
+#firstname, #lastname, #email, #number, #username, #password {
   display: block;
   margin: 0 auto;
 }
 
-.login-cta {
+.register-cta {
   background-color: #a33838;
   color: white;
   display: block;
@@ -50,4 +50,4 @@ p {
 a {
   color: gray;
 }
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=reg.css.map */
