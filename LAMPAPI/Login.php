@@ -5,7 +5,7 @@
 	$firstName = "";
 	$lastName = "";
 
-	$conn = new mysqli("localhost", "root", getenv("SQL_PW"), "ContactManager"); 	
+	$conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
 	if($conn->connect_error)
 	{
 		returnWithError($conn->connect_error);
