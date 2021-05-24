@@ -6,30 +6,23 @@
 	$lastName = "";
 
 	$conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-	if($conn->connect_error)
-	{
+	if($conn->connect_error) {
 		returnWithError($conn->connect_error);
-	}
-	else
-	{
+	} else {
 		$stmt = $conn->prepare("SELECT id,firstname,lastname FROM users WHERE login=? AND password =?");
 		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if($row = $result->fetch_assoc())
-		{
+		if($row = $result->fetch_assoc()) {
 			returnWithInfo($row['firstname'], $row['lastname'], $row['id']);
-		}
-		else
-		{
+		} else {
 			$stmt2 = $conn->prepare("SELECT password FROM users WHERE login=?");
 			$stmt2->bind_param("s", $inData["login"]);
 			$stmt2->execute();
 			$result2 = $stmt2->get_result();
 	
-			if($row2 = $result2->fetch_assoc())
-			{
+			if($row2 = $result2->fetch_assoc()) {
 				returnWithError("Invalid password.");
 			} else {
 				returnWithError("Invalid user name.");
@@ -41,25 +34,21 @@
 		$conn->close();
 	}
 	
-	function getRequestInfo()
-	{
+	function getRequestInfo() {
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function sendResultInfoAsJson($obj)
-	{
+	function sendResultInfoAsJson($obj) {
 		header('Content-type: application/json');
 		echo $obj;
 	}
 	
-	function returnWithError($err)
-	{
+	function returnWithError($err) {
 		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson($retValue);
 	}
 	
-	function returnWithInfo($firstName, $lastName, $id)
-	{
+	function returnWithInfo($firstName, $lastName, $id) {
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson($retValue);
 	}
