@@ -5,21 +5,21 @@
 	$firstName = "";
 	$lastName = "";
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+	$conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
 	if($conn->connect_error)
 	{
 		returnWithError($conn->connect_error);
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
+		$stmt = $conn->prepare("SELECT id,firstname,lastname FROM users WHERE login=? AND password =?");
 		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
 		if($row = $result->fetch_assoc())
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo($row['firstname'], $row['lastname'], $row['id']);
 		}
 		else
 		{
