@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:&display=swap");
+:root {
+  --primary-color: #A33838;
+}
+
+body {
+  background: var(--primary-color);
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.navbar {
+  background: white;
+  padding: 1em;
+}
+
+.navbar .logo {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  font-size: 1.5em;
+}
+
+.navbar .logo span {
+  color: var(--primary-color);
+}
+
+.navbar nav {
+  padding-top: 0.25em;
+}
+
+.navbar nav .log-out {
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-content: space-between;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contacts {
+  background: white;
+  padding: 1em;
+  margin: 1em 10em;
+  text-align: left;
+}
+
+.contacts h1 {
+  font-size: 2em;
+  font-weight: normal;
+}
+
+.contacts .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=contacts.css.map */
