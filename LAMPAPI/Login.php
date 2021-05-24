@@ -23,7 +23,18 @@
 		}
 		else
 		{
-			returnWithError("No Records Found");
+			$stmt2 = $conn->prepare("SELECT password FROM users WHERE login=?");
+			$stmt2->bind_param("s", $inData["login"]);
+			$stmt2->execute();
+			$result2 = $stmt2->get_result();
+	
+			if($row2 = $result2->fetch_assoc())
+			{
+				returnWithError("Invalid password.");
+			} else {
+				returnWithError("Invalid user name.");
+			}
+			$stmt2->close();
 		}
 
 		$stmt->close();
