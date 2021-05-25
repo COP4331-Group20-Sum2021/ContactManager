@@ -6,7 +6,7 @@ body {
 
 .login-section {
   background-color: white;
-  height: 320px;
+  height: 350px;
   width: 450px;
   padding: 2em 2em;
   margin: auto;
@@ -49,5 +49,15 @@ p {
 
 a {
   color: gray;
+}
+
+#loginResult {
+  display: inline-block;
+  font-size: 0.8em;
+  width: 90%;
+  text-align: center;
+  margin-left: 5%;
+  margin-bottom: 2%;
+  color: #95060a;
 }
 /*# sourceMappingURL=main.css.map */

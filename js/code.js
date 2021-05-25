@@ -11,8 +11,8 @@ function doLogin()
 	firstName = "";
 	lastName = "";
 	
-	var login = document.getElementById("loginName").value;
-	var password = document.getElementById("loginPassword").value;
+	var login = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
 //	var hash = md5( password );
 	
 	document.getElementById("loginResult").innerHTML = "";
@@ -35,7 +35,7 @@ function doLogin()
 		
 				if(userId < 1)
 				{		
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					document.getElementById("loginResult").innerHTML = jsonObject.error;
 					return;
 				}
 		
@@ -44,7 +44,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contacts.html";
 				
 			}
 		};

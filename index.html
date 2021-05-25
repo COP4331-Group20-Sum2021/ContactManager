@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Manager Group 20</title>
+    <script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -17,8 +19,8 @@
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password">
-
-                <input type="submit" class="login-cta" value="Login">
+                <button type="button" id="login" class="login-cta" onclick="doLogin();">Login</button>
+                <span id="loginResult"></span>
                 <p><a href="register.html">Don't have a login? Click here to sign up!</a></p>
             </form>
         </div>
