@@ -1,7 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+:root {
+  --primary-color: #A33838;
+}
+
 body {
-  background-color: #a33838;
-  font-family: 'Open Sans';
+  background-color: var(--primary-color);
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.navbar {
+  background: white;
+  padding: 1em;
+}
+
+.navbar .logo {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  font-size: 1.5em;
+}
+
+.navbar .logo span {
+  color: var(--primary-color);
+}
+
+.navbar nav {
+  padding-top: 0.25em;
+}
+
+.navbar nav .log-out {
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-content: space-between;
 }
 
 .register-section {
@@ -26,13 +63,13 @@ label {
   margin-top: 2em;
 }
 
-#firstname, #lastname, #email, #number, #username, #password {
+#firstname, #lastname, #username, #password, #passwordRetype {
   display: block;
   margin: 0 auto;
 }
 
 .register-cta {
-  background-color: #a33838;
+  background-color: var(--primary-color);
   color: white;
   display: block;
   margin: 0 auto;

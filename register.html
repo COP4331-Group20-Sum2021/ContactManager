@@ -3,26 +3,43 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title of webpage -->
 	<title>Register as Contact Manager</title>
+	
+
+	<!-- Linking javascript -->
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+	<script type="text/javascript" src="js/reg.js"></script>
+
+	<!-- Linking css -->
 	<link rel="stylesheet" href="css/reg.css">
 </head>
 <body>
+
+	<!-- Navigation bar -->
+	<div class="navbar">
+        <div class="container">
+            <a class="logo" href="#">Contact<span>Manager</span></a>    
+
+            <nav>
+                <a class="log-out" href="index.html">Log out</a>    
+            </nav>
+        </div>
+    </div>
+
 	<section class="register-section">       
 		<div class="register">
 			<h2>Group 20 Register</h2>
 
+			<!-- Register credentials -->
 			<form action="">
 				<label for="firstname">First Name:</label>
 				<input type="text" id="firstname" name="firstname">
 
 				<label for="lastname">Last Name:</label>
 				<input type="text" id="lastname" name="lastname">
-
-				<label for="email">Email:</label>
-				<input type="email" id="email" name="email">
-
-				<label for="number">Phone Number:</label>
-				<input type="text" id="number" name="number">
 				
 				<label for="username">Username:</label>
 				<input type="text" id="username" name="username">
@@ -30,7 +47,12 @@
 				<label for="password">Password:</label>
 				<input type="password" id="password" name="password">
 
+				<label for="passwordRetype">Password Confirmation:</label>
+				<input type="passwordRetype" id="passwordRetype" name="passwordRetype">
+
 				<input type="submit" class="register-cta" value="Register">
+
+				<!-- Link to login page -->
 				<p><a href="index.html">Already have an account? Click here to login!</a></p>
 			</form>
 		</div>
