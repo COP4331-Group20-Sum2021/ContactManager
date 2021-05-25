@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root
 {
@@ -129,3 +129,13 @@ input
     transform: rotate(45deg);
     cursor: pointer;
 }
+
+.initials
+{
+    position: relative;
+    top: -285px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 300;
+}
+
