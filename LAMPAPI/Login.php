@@ -9,7 +9,7 @@
     if($conn->connect_error) {
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("SELECT id,firstname,lastname FROM users WHERE login=? AND password =?");
+        $stmt = $conn->prepare("SELECT id,firstname,lastname FROM users WHERE login=? AND password=?");
         $stmt->bind_param("ss", $inData["login"], $inData["password"]);
         $stmt->execute();
         $result = $stmt->get_result();

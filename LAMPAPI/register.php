@@ -20,7 +20,6 @@
             $addstmt->bind_param("ssss", $username, $inData["password"], $inData["firstname"], $inData["lastname"]);
             $addstmt->execute();
 
-            returnWithError($addstmt->get_result()->fetch_assoc());
             returnWithSuccess();
 
             $addstmt->close();
