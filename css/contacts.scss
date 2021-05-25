@@ -76,3 +76,56 @@ ul
         align-items: center;
     }
 }
+
+a.log-out:hover
+{
+    font-weight: bold;
+}
+
+a.log-out:visited
+{
+    color: black;
+}
+
+.bg-modal
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.modal-content
+{
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0;
+    position: relative;
+    
+}
+
+input
+{
+    width: 50%;
+    display: block;
+    margin: 15px auto;
+}
+
+.close
+{
+    position: absolute;
+    top: -15px;
+    right: 5px;
+    font-size: 40px;
+    font-weight: 300;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
