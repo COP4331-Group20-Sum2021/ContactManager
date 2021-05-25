@@ -1,6 +1,11 @@
 <?php
     $inData = getRequestInfo();
 
+    error_reporting(-1); // reports all errors
+    ini_set("display_errors", "1"); // shows all errors
+    ini_set("log_errors", 1);
+    ini_set("error_log", "/tmp/php-error.log");
+
     $id = 0;
     $firstName = "";
     $lastName = "";
@@ -16,6 +21,9 @@
 
         if($row = $result->fetch_assoc()) {
             returnWithInfo($row['firstname'], $row['lastname'], $row['id']);
+            $upstmt = $conn->prepare("UPDATE users SET datelastloggedin=CURRENT_TIMESTAMP WHERE id=?");
+            $upstmt->bind_param("s", $inData["id"]);
+            $upstmt->execute();
         } else {
             $stmt2 = $conn->prepare("SELECT password FROM users WHERE login=?");
             $stmt2->bind_param("s", $inData["login"]);
