@@ -10,10 +10,11 @@ function doRegister()
 	userId = 0;
 
     // Get entrys from the webpage.
-	var uname = document.getElementById("username").value;
-	var pword = document.getElementById("password").value;
     var fname = document.getElementById("firstname").value;
     var lname = document.getElementById("lastname").value;
+	var uname = document.getElementById("username").value;
+	var pword = document.getElementById("password").value;
+	var retype = document.getElementById("passwordRetype").value;
     //	var hash = md5( password );
 	
     // Get error message.
@@ -21,7 +22,7 @@ function doRegister()
 
     // Store the values in the jsonPayload.
     //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-	var jsonPayload = '{"login" : "' + uname + '", "password" : "' + pword + '", "firstname" : "' + fname + '", "lastname" "' + lname + '"}';
+	var jsonPayload = '{"login" : "' + uname + '", "password" : "' + pword + '" "passwordRetype" : "' + retype + '", "firstname" : "' + fname + '", "lastname" "' + lname + '"}';
 	var url = urlBase + '/register.' + extension;
 
     // Create an HTTPRequest.
@@ -41,7 +42,7 @@ function doRegister()
 		
 				if(userId < 1)
 				{		
-					document.getElementById("loginResult").innerHTML = jsonObject.error;
+					document.getElementById("registerResult").innerHTML = jsonObject.error;
 					return;
 				}
 
