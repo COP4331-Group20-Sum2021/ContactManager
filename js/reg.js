@@ -17,7 +17,7 @@ function doRegister()
     //	var hash = md5( password );
 	
     // Get error message.
-	document.getElementById("loginResult").innerHTML = "";
+	document.getElementById("registerResult").innerHTML = "";
 
     // Store the values in the jsonPayload.
     //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
@@ -56,7 +56,7 @@ function doRegister()
 	catch(err)
 	{
         // Send a register error.
-		document.getElementById("loginResult").innerHTML = err.message;
+		document.getElementById("registerResult").innerHTML = err.message;
 	}
 
 }
