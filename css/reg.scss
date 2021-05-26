@@ -59,8 +59,15 @@ body
     width: 450px;
     padding: 2em 2em;
     margin: auto;
-    margin-top: 10em;
+    margin-top: 8em;
     border-radius: .6em 1.2em;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn
+{
+    0% {opacity:0;}
+    100% {opacity:1;}
 }
 
 h2
