@@ -129,4 +129,31 @@ input {
   font-size: 30px;
   font-weight: 300;
 }
+
+.contacts-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+}
+
+.contacts-table tbody, .contacts-table tr {
+  border-bottom: 1px solid #b6b6b6;
+}
+
+.contacts-table td {
+  padding-right: 100px;
+}
+
+.contacts-table .contacts-body td.profile-pic h4.initials-item {
+  position: relative;
+  text-align: center;
+  margin: 0;
+  top: -26px;
+}
+
+.contacts-table .contacts-body td.profile-pic svg.circle-svg {
+  position: relative;
+  top: 10px;
+}
 /*# sourceMappingURL=contacts.css.map */
