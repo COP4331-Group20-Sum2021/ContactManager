@@ -106,7 +106,7 @@ function addContact(e)
     e.preventDefault();
     document.querySelector('.bg-modal').style.display = 'none';
 
-    if (input && input2 != (undefined || ""))
+    if (input || input2 != (undefined || ""))
     {
         const contactRow = document.createElement('tr');
         contactRow.classList.add('contactRow');
