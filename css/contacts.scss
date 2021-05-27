@@ -237,6 +237,7 @@ body
     }
 }
 
+// responsive
 @media(max-width: 828px)
 {
     .contacts-table 
@@ -263,7 +264,7 @@ body
     .contacts
     {
         padding: 0.5em;
-        margin: 0.5em 5em;
+        margin: 0.5em 1em;
 
         .container
         {
