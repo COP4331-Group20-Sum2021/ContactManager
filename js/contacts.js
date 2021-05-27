@@ -37,9 +37,12 @@ function getFirstName(e)
 {
     input = e.target.value;
     firstInitial = input.charAt(0);
+    let fl = firstInitial + lastInitial;
 
-    if (lastInitial == undefined)
-        document.getElementById("fl").innerHTML = firstInitial;
+    if (input2 != undefined)
+        printInitials(fl);
+    else
+        printInitials(firstInitial);
 }
 
 // get first letter inputed into the 'Last Name' field
@@ -49,8 +52,15 @@ function getLastName(e)
 {
     input2 = e.target.value;
     lastInitial = input2.charAt(0);
-    const fl = firstInitial + lastInitial;
-    document.getElementById("fl").innerHTML = fl;
+    let fl = firstInitial + lastInitial;
+
+    printInitials(fl);
+}
+
+// print initials
+function printInitials(i)
+{
+    document.getElementById("fl").innerHTML = i;
 }
 
 // get first letter inputed into the 'Last Name' field
@@ -85,7 +95,7 @@ function addContact(e)
     e.preventDefault();
     document.querySelector('.bg-modal').style.display = 'none';
 
-    if (input != undefined)
+    if (input && input2 != (undefined || ""))
     {
         const contactRow = document.createElement('tr');
         contactRow.classList.add('contactRow');
@@ -97,7 +107,6 @@ function addContact(e)
         circle.classList.add('circle-svg');
         circle.setAttribute('width', '40');
         circle.setAttribute('height', '40');
-
         const profilePic = document.createElementNS('http://www.w3.org/2000/svg','circle');
         profilePic.setAttribute('cx', '20');
         profilePic.setAttribute('cy', '20');
