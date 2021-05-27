@@ -9,6 +9,7 @@ const phone = document.getElementById('phone');
 
 const getPlusButton = document.getElementById('plusButton');
 const getCloseButton = document.querySelector('.close');
+const getConfirmCloseButton = document.querySelector('.confirm-delete-close');
 
 const getDoneButton = document.querySelector('.done-button');
 const contactsTable = document.querySelector('.contacts-body');
@@ -25,6 +26,10 @@ phone.addEventListener('keyup', getPhone);
 getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
 getCloseButton.addEventListener('click', closeButton);
+getConfirmCloseButton.addEventListener('click', closeConfirmButton);
+
+
+contactsTable.addEventListener('click', deleteRow);
 
 // =============================================================================
 // Functions:
@@ -89,6 +94,12 @@ function closeButton()
     document.querySelector('.bg-modal').style.display = 'none';
 }
 
+// close add contact popup with 'x' button
+function closeConfirmButton()
+{
+    document.querySelector('.bg-modal-confirm-delete').style.display = 'none';
+}
+
 // add contact
 function addContact(e)
 {
@@ -138,6 +149,31 @@ function addContact(e)
         newPhone.classList.add('phone-item');
         contactRow.appendChild(newPhone);
 
+        const deleteButton = document.createElement('td');
+        const dButton = document.createElement('button');
+        deleteButton.appendChild(dButton);
+        deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
+        deleteButton.classList.add('delete-btn');
+        contactRow.appendChild(deleteButton);
+
         contactsTable.appendChild(contactRow);
+    }
+}
+
+function deleteRow(e)
+{
+    const b = e.target;
+
+    if (b.classList[0] === 'delete-button')
+    {
+        document.querySelector('.bg-modal-confirm-delete').style.display = 'flex';
+
+        document.querySelector('.confirm-button').onclick = function()
+        {
+            document.querySelector('.bg-modal-confirm-delete').style.display = 'none';
+            const contactCell = b.parentElement;
+            const contactRow = contactCell.parentElement;
+            contactRow.remove();
+        }
     }
 }
