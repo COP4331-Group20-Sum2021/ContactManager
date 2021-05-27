@@ -50,6 +50,37 @@ On success, `id`, `firstName` and `lastName` will be their values in the databas
  - `status` will either be `"success"` or `"failure"`.
  - `message` will contain the failure message or `"Login succeeded."` on success
 
+
+# update.php
+This end point requires at all fields of a contact are sent, event if they were not updated.
+## Input:
+```json
+{
+    "firstname": "example",
+    "lastname": "example",
+    "phone": "example",
+    "email": "example",
+    "description": "example",
+    "id": 0
+}
+```
+ - `firstname` is the firstname of the contact
+ - `lastname`is the last name of the contact
+ - `phone` is the phone number of the contact
+ - `email` is the email of the contact
+ - `description` is the description for the contact
+ - `id` is the id of the contact record, and is a number. 
+
+## Output:
+```json
+{
+    "status": "string",
+    "message": "string"
+}
+```
+ - `status` will either be `"success"` or `"failure"`.
+ - `message` will contain the failure message or `"Update succeeded."` on success
+
 # futureapi.php
 ## Input:
 ```json
