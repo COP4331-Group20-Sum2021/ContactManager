@@ -48,7 +48,7 @@ On success, `id`, `firstName` and `lastName` will be their values in the databas
 }
 ```
  - `status` will either be `"success"` or `"failure"`.
- - `message` will contain the failure message or `"Login succeeded."` on success
+ - `message` will contain the failure message or `"Register succeeded."` on success
 
 
 # update.php
