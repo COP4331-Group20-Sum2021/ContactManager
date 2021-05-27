@@ -7,7 +7,7 @@ var lastName = "";
 
 
 function doRegister()
-{
+{5
     // Get entrys from the webpage.
     var fname = document.getElementById("firstname").value;
     var lname = document.getElementById("lastname").value;
@@ -18,16 +18,12 @@ function doRegister()
 	
     // Set error message to the empty string.
 	document.getElementById("registerResult").innerHTML = "";
-
-	// If password confirmation does not match, throw an error.
-	if (pword.localeCompare(retype) != 0)
-	{
-		document.getElementById("registerResult").innerHTML = "Passwords do not match. Please try again.";
-		return;
-	}
 	
+	if (validRegister(fname, lname, uname, pword, retype) == 1)
+		return;
+
     // Store the values in the jsonPayload.
-	var jsonPayload = '{"login" : "' + uname + '", "password" : "' + hash + '", "firstname" : "' + fname + '", "lastname" : "' + lname + '"}';
+	var jsonPayload = JSON.stringify({ "login": uname, "password" : hash , "firstname" : fname, "lastname" : lname  });
 	var url = urlBase + '/register.' + extension;
 
     // Create an HTTPRequest.
@@ -59,6 +55,7 @@ function doRegister()
 					lastName = jsonObject.lastName;
 					saveCookie();
 					window.location.href = "contacts.html";
+					res
 				}
 			}
 		};
@@ -83,7 +80,7 @@ function doLogin()
 	document.getElementById("loginResult").innerHTML = "";
 
 	// Store the values in the jsonPayload.
-	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
+	var jsonPayload = JSON.stringify({ "login" : login, "password" : hash });
 	var url = urlBase + '/Login.' + extension;
     
 	// Create an HTTPRequest.
@@ -126,6 +123,24 @@ function doLogin()
 	{
 		// Send a login error.
 		document.getElementById("loginResult").innerHTML = err.message;
+	}
+}
+
+function validRegister(fname, lname, uname, pword, retype)
+{
+	if ((fname || lname || uname || pword || retype) == (undefined || ""))
+	{
+		document.getElementById("registerResult").innerHTML = "Field Missing. Please try again.";
+		return 1;
+	}
+	else if (pword.localeCompare(retype) != 0)
+	{
+		document.getElementById("registerResult").innerHTML = "Passwords do not match. Please try again.";
+		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 }
 
