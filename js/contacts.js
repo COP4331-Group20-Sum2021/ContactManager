@@ -25,6 +25,7 @@ phone.addEventListener('keyup', getPhone);
 getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
 getCloseButton.addEventListener('click', closeButton);
+contactsTable.addEventListener('click', deleteRow);
 
 // =============================================================================
 // Functions:
@@ -138,6 +139,25 @@ function addContact(e)
         newPhone.classList.add('phone-item');
         contactRow.appendChild(newPhone);
 
+        const deleteButton = document.createElement('td');
+        const dButton = document.createElement('button');
+        deleteButton.appendChild(dButton);
+        deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
+        deleteButton.classList.add('delete-btn');
+        contactRow.appendChild(deleteButton);
+
         contactsTable.appendChild(contactRow);
+    }
+}
+
+function deleteRow(e)
+{
+    const b = e.target;
+
+    if (b.classList[0] === 'delete-button')
+    {
+        const contactCell = b.parentElement;
+        const contactRow = contactCell.parentElement;
+        contactRow.remove();
     }
 }
