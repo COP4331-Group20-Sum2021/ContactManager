@@ -7,7 +7,7 @@ var lastName = "";
 
 
 function doRegister()
-{5
+{
     // Get entrys from the webpage.
     var fname = document.getElementById("firstname").value;
     var lname = document.getElementById("lastname").value;
