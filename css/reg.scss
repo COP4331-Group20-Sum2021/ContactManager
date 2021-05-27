@@ -1,8 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+// Importing custom font.
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+// Implement global color.
+:root
+{
+    --primary-color: #A33838;
+}
+
 body 
 {
-    background-color: rgb(163, 56, 56);
-    font-family: 'Open Sans';
+    background-color: var(--primary-color);
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.navbar
+{
+    background: white;
+    padding: 1em;
+
+    .logo
+    {
+        text-decoration: none;
+        font-weight: 600;
+        color: black;
+        font-size: 1.5em;
+
+        span 
+        {
+            color: var(--primary-color);
+        }
+    }
+
+    nav
+    {
+        padding-top: 0.25em;
+
+        .log-out
+        {
+            font-size: 1em;
+            text-decoration: none;
+        }
+        
+    }
+
+    .container
+    {
+        display: flex;
+        place-content: space-between;
+    }
 }
 
 .register-section
@@ -13,8 +59,15 @@ body
     width: 450px;
     padding: 2em 2em;
     margin: auto;
-    margin-top: 10em;
+    margin-top: 8em;
     border-radius: .6em 1.2em;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn
+{
+    0% {opacity:0;}
+    100% {opacity:1;}
 }
 
 h2
@@ -31,7 +84,7 @@ label
     margin-top: 2em;
 }
 
-#firstname, #lastname, #email, #number, #username, #password
+#firstname, #lastname, #username, #password, #passwordRetype
 {
     display:block;
     margin: 0 auto;
@@ -40,7 +93,7 @@ label
 
 .register-cta
 {
-    background-color: rgb(163, 56, 56);
+    background-color: var(--primary-color);
     color: white;
     display: block;
     margin: 0 auto;
