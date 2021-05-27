@@ -22,7 +22,7 @@ CREATE TABLE `ContactManager`.`contacts`
 	 `phone` VARCHAR(50) NOT NULL DEFAULT '',
 	 `email` VARCHAR(50) NOT NULL DEFAULT '',
 	 `description` VARCHAR(100) NOT NULL DEFAULT '',
-	 `pic` BLOB,
-     PRIMARY KEY (`id`)
+     PRIMARY KEY (`id`),
+	 FOREIGN KEY (userid) REFERENCES users(id)
   )
 engine = innodb; 
