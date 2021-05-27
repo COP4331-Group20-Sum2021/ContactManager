@@ -145,7 +145,14 @@ function addContact(e)
         contactRow.appendChild(newEmail);
 
         const newPhone = document.createElement('td');
-        newPhone.innerText = input4;
+        const opar = "(";
+        const cpar = ")";
+        const dash = "-";
+        const ac = input4.slice(0, 3);
+        const num3 = input4.slice(3, 6);
+        const num4 = input4.slice(6, 11);
+        const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
+        newPhone.innerText = phonenumber;
         newPhone.classList.add('phone-item');
         contactRow.appendChild(newPhone);
 
