@@ -5,56 +5,128 @@ var userId = 0;
 var firstName = "";
 var lastName = "";
 
-function doLogin()
+
+function doRegister()
 {
-	userId = 0;
-	firstName = "";
-	lastName = "";
+    // Get entrys from the webpage.
+    var fname = document.getElementById("firstname").value;
+    var lname = document.getElementById("lastname").value;
+	var uname = document.getElementById("username").value;
+	var pword = document.getElementById("password").value;
+	var retype = document.getElementById("passwordRetype").value;
+	var hash = md5(password);
 	
-	var login = document.getElementById("username").value;
-	var password = document.getElementById("password").value;
-//	var hash = md5( password );
+    // Set error message to the empty string.
+	document.getElementById("registerResult").innerHTML = "";
+
+	// If password confirmation does not match, throw an error.
+	if (pword.localeCompare(retype) != 0)
+	{
+		document.getElementById("registerResult").innerHTML = "Passwords do not match. Please try again.";
+		return;
+	}
 	
-	document.getElementById("loginResult").innerHTML = "";
+    // Store the values in the jsonPayload.
+	var jsonPayload = '{"login" : "' + uname + '", "password" : "' + hash + '" "passwordRetype" : "' + retype + '", "firstname" : "' + fname + '", "lastname" "' + lname + '"}';
+	var url = urlBase + '/register.' + extension;
 
-//	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
-	var url = urlBase + '/Login.' + extension;
-
+    // Create an HTTPRequest.
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    // Send Payload and act on response.
 	try
 	{
+		// Wait for response.
 		xhr.onreadystatechange = function() 
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				var jsonObject = JSON.parse( xhr.responseText );
+				// Parse the response.
+				var jsonObject = JSON.parse(xhr.responseText);
 				userId = jsonObject.id;
-		
-				if(userId < 1)
-				{		
-					document.getElementById("loginResult").innerHTML = jsonObject.error;
-					return;
-				}
-		
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
-
-				saveCookie();
-	
-				window.location.href = "contacts.html";
 				
+				// If server sends an error response, throw an error.
+				// Otherwise save a cookie and redirect.
+				if (jsonObject.status == "error")
+				{
+					throw jsonObject;
+				}
+				else
+				{
+					firstName = jsonObject.firstName;
+					lastName = jsonObject.lastName;
+					saveCookie();
+					window.location.href = "contacts.html";
+				}
 			}
 		};
+		// Send the payload.
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
+        // Send a register error.
+		document.getElementById("registerResult").innerHTML = err.message;
+	}
+}
+
+function doLogin()
+{	
+	// Get entrys from the webpage.
+	var login = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	var hash = md5(password);
+	
+	// Set error message to the empty string.
+	document.getElementById("loginResult").innerHTML = "";
+
+	// Store the values in the jsonPayload.
+	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
+	var url = urlBase + '/Login.' + extension;
+    
+	// Create an HTTPRequest.
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	// Send Payload and act on response.
+	try
+	{
+		// Wait for response.
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				// Parse the response.
+				var jsonObject = JSON.parse( xhr.responseText );
+				userId = jsonObject.id;
+		
+				// If server sends an error response, throw an error.
+				// Otherwise save a cookie and redirect.
+				if (jsonObject.status == "error")
+				{
+					throw jsonObject;
+				}
+				else
+				{
+					firstName = jsonObject.firstName;
+					lastName = jsonObject.lastName;
+					saveCookie();
+					window.location.href = "contacts.html";
+				}
+				
+			}
+		};
+		// Send the payload.
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		// Send a login error.
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
-
 }
 
 function saveCookie()
@@ -70,25 +142,25 @@ function readCookie()
 	userId = -1;
 	var data = document.cookie;
 	var splits = data.split(",");
-	for(var i = 0; i < splits.length; i++) 
+	for (var i = 0; i < splits.length; i++) 
 	{
 		var thisOne = splits[i].trim();
 		var tokens = thisOne.split("=");
-		if(tokens[0] == "firstName")
+		if (tokens[0] == "firstName")
 		{
 			firstName = tokens[1];
 		}
-		else if(tokens[0] == "lastName")
+		else if (tokens[0] == "lastName")
 		{
 			lastName = tokens[1];
 		}
-		else if(tokens[0] == "userId")
+		else if (tokens[0] == "userId")
 		{
 			userId = parseInt(tokens[1].trim());
 		}
 	}
 	
-	if(userId < 0)
+	if (userId < 0)
 	{
 		window.location.href = "index.html";
 	}
@@ -107,74 +179,3 @@ function doLogout()
 	window.location.href = "index.html";
 }
 
-function addColor()
-{
-	var newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-	
-	var jsonPayload = '{"color" : "' + newColor + '", "userId" : ' + userId + '}';
-	var url = urlBase + '/AddColor.' + extension;
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
-}
-
-function searchColor()
-{
-	var srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	var colorList = "";
-	
-	var jsonPayload = '{"search" : "' + srch + '","userId" : ' + userId + '}';
-	var url = urlBase + '/SearchColors.' + extension;
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				var jsonObject = JSON.parse( xhr.responseText );
-				
-				for(var i = 0; i < jsonObject.results.length; i++)
-				{
-					colorList += jsonObject.results[i];
-					if(i < jsonObject.results.length - 1)
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
-	
-}
