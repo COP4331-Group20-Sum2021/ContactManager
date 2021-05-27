@@ -27,7 +27,7 @@ function doRegister()
 	}
 	
     // Store the values in the jsonPayload.
-	var jsonPayload = '{"login" : "' + uname + '", "password" : "' + hash + '" "passwordRetype" : "' + retype + '", "firstname" : "' + fname + '", "lastname" "' + lname + '"}';
+	var jsonPayload = '{"login" : "' + uname + '", "password" : "' + hash + '", "firstname" : "' + fname + '", "lastname" : "' + lname + '"}';
 	var url = urlBase + '/register.' + extension;
 
     // Create an HTTPRequest.
