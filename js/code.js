@@ -14,7 +14,7 @@ function doRegister()
 	var uname = document.getElementById("username").value;
 	var pword = document.getElementById("password").value;
 	var retype = document.getElementById("passwordRetype").value;
-	var hash = md5(password);
+	var hash = md5(pword);
 	
     // Set error message to the empty string.
 	document.getElementById("registerResult").innerHTML = "";
