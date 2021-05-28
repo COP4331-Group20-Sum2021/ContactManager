@@ -16,15 +16,11 @@
         $stmt->execute();
 
         returnWithSuccess();
-        $stmt->close());
+        $stmt->close();
 		
         // close the data base connection
         $conn->close();
     }
-
-    
-
-    returnWithError("");														// Return with no error
 
     // helper function to get the input from front end and decode the json to a named array
     function getRequestInfo() {
