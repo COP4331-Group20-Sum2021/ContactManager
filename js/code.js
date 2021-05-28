@@ -5,7 +5,9 @@ var userId = 0;
 var firstName = "";
 var lastName = "";
 
-
+// =============================================================================
+// Register:
+// =============================================================================
 function doRegister()
 {
     // Get entrys from the webpage.
@@ -55,7 +57,6 @@ function doRegister()
 					lastName = jsonObject.lastName;
 					saveCookie();
 					window.location.href = "contacts.html";
-					res
 				}
 			}
 		};
@@ -66,63 +67,6 @@ function doRegister()
 	{
         // Send a register error.
 		document.getElementById("registerResult").innerHTML = err.message;
-	}
-}
-
-function doLogin()
-{	
-	// Get entrys from the webpage.
-	var login = document.getElementById("username").value;
-	var password = document.getElementById("password").value;
-	var hash = md5(password);
-	
-	// Set error message to the empty string.
-	document.getElementById("loginResult").innerHTML = "";
-
-	// Store the values in the jsonPayload.
-	var jsonPayload = JSON.stringify({ "login" : login, "password" : hash });
-	var url = urlBase + '/Login.' + extension;
-    
-	// Create an HTTPRequest.
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-	// Send Payload and act on response.
-	try
-	{
-		// Wait for response.
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				// Parse the response.
-				var jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
-		
-				// If server sends an error response, throw an error.
-				// Otherwise save a cookie and redirect.
-				if (jsonObject.status == "error")
-				{
-					throw jsonObject;
-				}
-				else
-				{
-					firstName = jsonObject.firstName;
-					lastName = jsonObject.lastName;
-					saveCookie();
-					window.location.href = "contacts.html";
-				}
-				
-			}
-		};
-		// Send the payload.
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		// Send a login error.
-		document.getElementById("loginResult").innerHTML = err.message;
 	}
 }
 
@@ -144,6 +88,83 @@ function validRegister(fname, lname, uname, pword, retype)
 	}
 }
 
+// =============================================================================
+// Login:
+// =============================================================================
+function doLogin()
+{	
+	// Get entrys from the webpage.
+	var login = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	var hash = md5(password);
+	
+	// Set error message to the empty string.
+	document.getElementById("loginResult").innerHTML = "";
+
+	if (validRegister(fname, lname, uname, pword, retype) == 1)
+		return;
+
+	// Store the values in the jsonPayload.
+	var jsonPayload = JSON.stringify({ "login" : login, "password" : hash});
+	var url = urlBase + '/Login.' + extension;
+    
+	// Create an HTTPRequest.
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	// Send Payload and act on response.
+	try
+	{
+		// Wait for response.
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				// Parse the response.
+				var jsonObject = JSON.parse( xhr.responseText );
+		
+				// If server sends an error response, throw an error.
+				// Otherwise save a cookie and redirect.
+				if (jsonObject.status == "error")
+				{
+					throw jsonObject;
+				}
+				else
+				{
+					firstName = jsonObject.firstName;
+					lastName = jsonObject.lastName;
+					saveCookie();
+					window.location.href = "contacts.html";
+				}
+			}
+		};
+		// Send the payload.
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		// Send a login error.
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+}
+
+function validLogin(login, password)
+{
+	if ((login || password) == (undefined || ""))
+	{
+		document.getElementById("registerResult").innerHTML = "Field Missing. Please try again.";
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+// =============================================================================
+// Cookie Management:
+// =============================================================================
 function saveCookie()
 {
 	var minutes = 20;
