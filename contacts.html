@@ -6,6 +6,7 @@
 	<title>Contacts | ContactManager</title>
 	<link rel="stylesheet" href="css/contacts.css">
     <link rel="shortcut icon" href="#">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -13,7 +14,7 @@
             <a class="logo" href="#">Contact<span>Manager</span></a>    
 
             <nav>
-                <a class="log-out" href="index.html">Log out</a>    
+                <a class="log-out" onclick="doLogout();">Log out</a>    
             </nav>
         </div>
     </div>
@@ -21,6 +22,12 @@
     <section class="contacts">
         <div class="container">
             <h1>Contacts</h1>
+            <div class="search">
+                <input class="search-bar" type="text" spellcheck="false" placeholder="&#61442; Search"/>
+                <button class="search-button" type="submit">Go</button>
+                
+            </div>
+            
             <a href="#" id="plusButton" class="add-contact">
                 <img src="assets/plus.svg" alt="Add Contact">
             </a>
@@ -34,6 +41,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="contacts-body"></tbody>
@@ -65,6 +73,8 @@
             <h1>Are you sure?</h1>
             <button class="confirm-button">Delete Contact</button>
         </div>
+    </div>
+    <script src="js/code.js"></script>
     <script src="js/contacts.js"></script>
 </body>
 </html>

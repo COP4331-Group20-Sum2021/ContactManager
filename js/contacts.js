@@ -1,9 +1,11 @@
+//readCookie();
+
 // =============================================================================
 // Selectors:
 // =============================================================================
 
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
+const firstNameContact = document.getElementById('firstName');
+const lastNameContact = document.getElementById('lastName');
 const email = document.getElementById('email');
 const phone = document.getElementById('phone');
 
@@ -18,8 +20,8 @@ const contactsTable = document.querySelector('.contacts-body');
 // Event Listeners:
 // =============================================================================
 
-firstName.addEventListener('keyup', getFirstName);
-lastName.addEventListener('keyup', getLastName);
+firstNameContact.addEventListener('keyup', getFirstName);
+lastNameContact.addEventListener('keyup', getLastName);
 email.addEventListener('keyup', getEmail);
 phone.addEventListener('keyup', getPhone);
 
@@ -27,7 +29,6 @@ getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
 getCloseButton.addEventListener('click', closeButton);
 getConfirmCloseButton.addEventListener('click', closeConfirmButton);
-
 
 contactsTable.addEventListener('click', deleteRow);
 

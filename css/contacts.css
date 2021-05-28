@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 :root {
   --primary-color: #A33838;
 }
@@ -54,11 +55,15 @@ body {
   padding: 1em;
   margin: 1em 10em;
   text-align: left;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .contacts h1 {
-  font-size: 2em;
+  font-size: 27px;
   font-weight: normal;
+  vertical-align: top;
 }
 
 .contacts .container {
@@ -69,6 +74,39 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 60px;
+  width: 100%;
+}
+
+.contacts .container .search .search-bar {
+  height: 24px;
+  width: 350px;
+  padding: 1px;
+  font-size: 13px;
+  margin: 5px 0;
+}
+
+.contacts .container .search .search-bar::-webkit-input-placeholder {
+  font-family: FontAwesome, Poppins;
+  font-weight: lighter;
+  overflow: visible;
+  vertical-align: top;
+  padding-left: 5px;
+  display: inline-block !important;
+  color: rgba(204, 204, 204, 0.815);
+}
+
+.contacts .container .search .search-button {
+  margin: 5px 0;
+  padding: 1px 5px;
+  height: 30px;
+  vertical-align: top;
+  font-family: Poppins;
+}
+
+.contacts .container img {
+  height: 20px;
+  vertical-align: center;
 }
 
 .bg-modal {
@@ -124,6 +162,10 @@ body {
   font-weight: 300;
 }
 
+.bg-modal .modal-content .done-button {
+  font-family: Poppins;
+}
+
 .bg-modal-confirm-delete {
   width: 100%;
   height: 100%;
@@ -153,7 +195,7 @@ body {
 }
 
 .bg-modal-confirm-delete .confirm-delete-content h1 {
-  color: #c72c2c;
+  color: var(--primary-color);
 }
 
 .bg-modal-confirm-delete .confirm-delete-content .confirm-delete-close {
@@ -167,19 +209,27 @@ body {
   cursor: pointer;
 }
 
+.bg-modal-confirm-delete .confirm-delete-content .confirm-button {
+  font-family: Poppins;
+}
+
 .contacts-table {
   border-collapse: collapse;
-  margin: 25px 0;
   font-size: 0.9em;
-  min-width: 400px;
+  width: 100%;
 }
 
 .contacts-table tbody, .contacts-table tr {
-  border-bottom: 1px solid #b6b6b6;
+  border: 1px solid #b6b6b6;
 }
 
-.contacts-table td {
-  padding-right: 100px;
+.contacts-table td, .contacts-table th {
+  padding-right: 12px 15px;
+  text-align: center;
+}
+
+.contacts-table .contacts-body tr:hover {
+  background-color: rgba(204, 204, 204, 0.39);
 }
 
 .contacts-table .contacts-body td.profile-pic h4.initials-item {
@@ -192,5 +242,36 @@ body {
 .contacts-table .contacts-body td.profile-pic svg.circle-svg {
   position: relative;
   top: 10px;
+}
+
+.contacts-table .contacts-body .delete-btn button {
+  height: 30px;
+  font-family: Poppins;
+}
+
+@media (max-width: 889px) {
+  .contacts-table {
+    display: none;
+  }
+  .contacts-table, tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+  .contacts-table .contacts-head, tbody .contacts-head, tr .contacts-head, td .contacts-head {
+    display: none;
+  }
+  td {
+    padding-bottom: 10px;
+  }
+  .contacts {
+    padding: 0.5em;
+    margin: 0.5em 1em;
+  }
+  .contacts .container h1 {
+    font-size: 18px;
+  }
+  .contacts .container .search .search-bar {
+    width: 150px;
+  }
 }
 /*# sourceMappingURL=contacts.css.map */
