@@ -186,6 +186,11 @@ body
             font-size: 30px;
             font-weight: 300;
         }
+
+        .done-button
+        {
+            font-family: Poppins;
+        }
     }
 }
 
@@ -229,6 +234,11 @@ body
             font-weight: 300;
             transform: rotate(45deg);
             cursor: pointer;
+        }
+
+        .confirm-button
+        {
+            font-family: Poppins;
         }
     }
 }
