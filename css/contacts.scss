@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 
 // =============================================================================
 // Body:
@@ -76,11 +77,13 @@ body
     padding: 1em;
     margin: 1em 10em;
     text-align: left;
+    align-items: center;
 
     h1 
     {
-        font-size: 2em;
+        font-size: 27px;
         font-weight: normal;
+        vertical-align: top;
     }
 
     .container
@@ -88,6 +91,46 @@ body
         display: flex;
         place-content: space-between;
         align-items: center;
+        height: 60px;
+        width: 100%;
+
+        .search
+        {
+            .search-bar
+            {
+                height: 24px;
+                width: 350px;
+                padding: 1px;
+                font-size: 13px;
+                margin: 5px 0;
+            }
+    
+            .search-bar::-webkit-input-placeholder
+            {
+                font-family: FontAwesome, Poppins;
+                font-weight: lighter;
+                overflow: visible;
+                vertical-align: top;
+                padding-left: 5px;
+                display: inline-block !important;
+                color:rgba(204, 204, 204, 0.815);
+            }
+
+            .search-button
+            {
+                margin: 5px 0;
+                padding: 1px 5px;
+                height: 30px;
+                vertical-align: top;
+                font-family: Poppins;
+            }
+        }
+
+        img
+        {
+            height: 20px;
+            vertical-align: center;
+        }
     }
 }
 
@@ -234,11 +277,24 @@ body
                 top: 10px;
             }
         }
+
+        .delete-btn
+        {
+            button 
+            {
+                height: 30px;
+                font-family: Poppins;
+            }
+            
+        }
     }
 }
 
-// responsive
-@media(max-width: 828px)
+// =============================================================================
+// Mobile:
+// =============================================================================
+
+@media(max-width: 889px)
 {
     .contacts-table 
     {
@@ -270,7 +326,16 @@ body
         {
             h1 
             {
-                font-size: 1em;
+                font-size: 18px;
+            }
+
+            .search
+            {
+                .search-bar
+                {
+                    width: 150px;
+                }
+
             }
         }
     }
