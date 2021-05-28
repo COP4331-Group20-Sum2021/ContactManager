@@ -6,8 +6,8 @@
     $searchResults = "";
 	$searchCount = 0;
 	$userId = $inData["userid"];
-    $fName = $inData["firstname"];
-    $lName = $inData["lastname"];
+    $fname = "%" . $inData["firstname"] . "%";
+    $lname = "%" . $inData["lastname"] . "%";
     //
 
     // connect to data base
@@ -17,7 +17,7 @@
     } else {
         
         $stmt = $conn->prepare ("SELECT * FROM contacts WHERE userid=? and (firstname like ? or lastname like ?)");
-        $stmt->bind_param("sss", $userId, "%" . $fname . "%", "%" . $lname . "%");
+        $stmt->bind_param("sss", $userId, $fname, $lname);
         $stmt->execute();
 
         $result = $stmt->get_result();
@@ -41,7 +41,6 @@
 			returnWithInfo($searchResults);
 		}
 
-		$conn->close();
 	}
 
 

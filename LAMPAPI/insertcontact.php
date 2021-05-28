@@ -21,12 +21,11 @@
         $stmt->execute();
 
         returnWithSuccess();
-        $stmt->close());
+        $stmt->close();
     }
         // close the data base connection
     $conn->close();
     
-
     // helper function to get the input from front end and decode the json to a named array
     function getRequestInfo() {
         return json_decode(file_get_contents('php://input'), true);
