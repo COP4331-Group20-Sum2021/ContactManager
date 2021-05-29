@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title of webpage -->
+	<title>Sign up | ContactManager</title>
+	
+
+	<!-- Linking javascript -->
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+
+	<!-- Linking css -->
+	<link rel="stylesheet" href="css/reg.css">
+</head>
+<body>
+
+	<!-- Navigation bar -->
+	<div class="navbar">
+        <div class="container">
+            <a class="logo" href="#">Contact<span>Manager</span></a>    
+        </div>
+    </div>
+
+	<section class="register-section">       
+		<div class="register">
+			<h2>Group 20 Register</h2>
+
+			<!-- Register credentials -->
+			<div class="form">
+				<label for="firstname">First Name:</label>
+				<input type="text" id="firstname" name="firstname">
+
+				<label for="lastname">Last Name:</label>
+				<input type="text" id="lastname" name="lastname">
+				
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username">
+
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password">
+
+				<label for="passwordRetype">Password Confirmation:</label>
+				<input type="password" id="passwordRetype" name="passwordRetype">
+
+				<button type="button" id="register" class="register-cta" onclick="doRegister();">Register</button>
+
+				<!-- Space for error msg -->
+				<div id="registerResult"></div>
+
+				<!-- Link to login page -->
+				<p><a href="index.html">Already have an account? Click here to login!</a></p>
+			</div>
+		</div>
+    </section>
+</body>
+</html>

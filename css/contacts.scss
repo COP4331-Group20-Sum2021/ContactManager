@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
+
+// =============================================================================
+// Body:
+// =============================================================================
+
+:root
+{
+    --primary-color: #A33838;
+}
+
+body
+{
+    background: var(--primary-color);
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+// =============================================================================
+// Navigation bar:
+// =============================================================================
+
+.navbar
+{
+    background: white;
+    padding: 1em;
+
+    .logo
+    {
+        text-decoration: none;
+        font-weight: 600;
+        color: black;
+        font-size: 1.5em;
+
+        span 
+        {
+            color: var(--primary-color);
+        }
+    }
+
+    nav
+    {
+        padding-top: 0.25em;
+
+        .log-out
+        {
+            font-size: 1em;
+            text-decoration: none;
+        }
+
+        a.log-out:hover
+        {
+            font-weight: bold;
+        }
+
+        a.log-out:visited
+        {
+            color: black;
+        }
+    }
+
+    .container
+    {
+        display: flex;
+        place-content: space-between;
+    }
+}
+
+// =============================================================================
+// Contacts header bar:
+// =============================================================================
+
+.contacts
+{
+    background: white;
+    padding: 1em;
+    margin: 1em 10em;
+    text-align: left;
+    align-items: center;
+
+    h1 
+    {
+        font-size: 27px;
+        font-weight: normal;
+        vertical-align: top;
+    }
+
+    .container
+    {
+        display: flex;
+        place-content: space-between;
+        align-items: center;
+        height: 60px;
+        width: 100%;
+
+        .search
+        {
+            .search-bar
+            {
+                height: 24px;
+                width: 350px;
+                padding: 1px;
+                font-size: 13px;
+                margin: 5px 0;
+            }
+    
+            .search-bar::-webkit-input-placeholder
+            {
+                font-family: FontAwesome, Poppins;
+                font-weight: lighter;
+                overflow: visible;
+                vertical-align: top;
+                padding-left: 5px;
+                display: inline-block !important;
+                color:rgba(204, 204, 204, 0.815);
+            }
+
+            .search-button
+            {
+                margin: 5px 0;
+                padding: 1px 5px;
+                height: 30px;
+                vertical-align: top;
+                font-family: Poppins;
+            }
+        }
+
+        img
+        {
+            height: 20px;
+            vertical-align: center;
+        }
+    }
+}
+
+// =============================================================================
+// Contact field popup:
+// =============================================================================
+
+.bg-modal
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    .modal-content
+    {
+        width: 500px;
+        height: 300px;
+        background-color: white;
+        border-radius: 4px;
+        text-align: center;
+        padding: 0;
+        position: relative;
+
+        .close
+        {
+            position: absolute;
+            top: -15px;
+            right: 5px;
+            font-size: 40px;
+            font-weight: 300;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+
+        input
+        {
+            width: 50%;
+            display: block;
+            margin: 15px auto;
+        }
+
+        .initials
+        {
+            position: relative;
+            top: -285px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 300;
+        }
+
+        .done-button
+        {
+            font-family: Poppins;
+        }
+    }
+}
+
+// =============================================================================
+// Contact confirm delete popup:
+// =============================================================================
+
+.bg-modal-confirm-delete
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    .confirm-delete-content
+    {
+        width: 400px;
+        height: 150px;
+        background-color: white;
+        border-radius: 4px;
+        text-align: center;
+        padding: 0;
+        position: relative;
+
+        h1 
+        {
+            color: var(--primary-color);
+        }
+
+        .confirm-delete-close
+        {
+            position: absolute;
+            top: -15px;
+            right: 5px;
+            font-size: 40px;
+            font-weight: 300;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+
+        .confirm-button
+        {
+            font-family: Poppins;
+        }
+    }
+}
+
+// =============================================================================
+// Contact table:
+// =============================================================================
+
+.contacts-table
+{
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 100%;
+
+    tbody, tr 
+    {
+        border: 1px solid #b6b6b6;
+    }
+
+    td, th 
+    {
+        padding-right: 12px 15px;
+        text-align: center;
+    }
+
+    .contacts-body
+    {
+        tr:hover
+        {
+            background-color: rgba(204, 204, 204, 0.39);
+        }
+
+        td.profile-pic
+        {
+            h4.initials-item 
+            {
+                position: relative;
+                text-align: center;
+                margin: 0;
+                top: -26px;
+            }
+
+            svg.circle-svg
+            {
+                position: relative;
+                top: 10px;
+            }
+        }
+
+        .delete-btn
+        {
+            button 
+            {
+                height: 30px;
+                font-family: Poppins;
+            }
+            
+        }
+    }
+}
+
+// =============================================================================
+// Mobile:
+// =============================================================================
+
+@media(max-width: 889px)
+{
+    .contacts-table 
+    {
+        display: none;
+    }
+
+    .contacts-table, tbody, tr, td 
+    {
+        display: block;
+        width: 100%;
+
+        .contacts-head
+        {
+            display: none;
+        }
+    }
+
+    td 
+    {
+        padding-bottom: 10px;
+    }
+
+    .contacts
+    {
+        padding: 0.5em;
+        margin: 0.5em 1em;
+
+        .container
+        {
+            h1 
+            {
+                font-size: 18px;
+            }
+
+            .search
+            {
+                .search-bar
+                {
+                    width: 150px;
+                }
+
+            }
+        }
+    }
+
+}
+

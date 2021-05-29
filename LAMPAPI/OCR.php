@@ -1,5 +1,4 @@
 <?php
-
   require 'vendor/autoload.php';
 
   use Google\Cloud\Vision\V1\Feature\Type;
@@ -58,5 +57,4 @@
     echo $obj;
   }
 
-  
 ?>
