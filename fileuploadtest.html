@@ -5,5 +5,19 @@
   <body>
 	  <input type="file" name="file" id="file">
 	  <input type="button" id="btn_uploadfile" value="Upload" onclick="uploadFile();" >
+	  <br><br>
+	  First Name:
+	  <input type="hidden" id="fname"> <br>
+	  Last Name:
+	  <input type="hidden" id="lname"> <br>
+	  Phone Number:
+	  <input type="hidden" id="phone"> <br>
+	  Email:
+	  <input type="hidden" id="email"> <br>
+	  Additional Information:
+	  <textarea id="desc" rows="4" cols="50" style="visibility: hidden;"></textarea>
+	  
+	  <!-- Note: We need to change the parameter inside ocrContact to the user's id. -->
+	  <button onclick="ocrContact(1)">Add Contact!</button>
   </body>
 </html>
