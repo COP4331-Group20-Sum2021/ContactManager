@@ -43,6 +43,6 @@
     }
 
     function returnWithSuccess() {
-        sendResultInfoAsJson('{"status": "success", "message": "Login succeeded."}');
+        sendResultInfoAsJson('{"status": "success", "message": "Creation succeeded."}');
     }
 ?>
