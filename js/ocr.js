@@ -13,17 +13,21 @@ function uploadFile() {
         
         // call on request changes state
         xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = this.responseText;
 			
-			// Holds an array with the text scanned.
-			var myObj = JSON.parse(response);
-			
-			// Creates an object with potential contactData
-			var processedResults = createContactObject(myObj);
-			console.log(processedResults);
-            }
-        };
+			if (this.readyState == 4 && this.status == 200) {
+				var response = this.responseText;
+				
+				// Holds an array with the text scanned.
+				var myObj = JSON.parse(response);
+				
+				// Creates an object with potential contactData
+				var processedResults = createContactObject(myObj);
+				console.log(processedResults);
+				
+				// Fill up the form with the data extracted from the business card
+				updateFields(processedResults);
+			}
+		};
         
         // Send request with data
         xhttp.send(formData);
@@ -94,5 +98,61 @@ function isName(currentString){
 
 function isEmail(currentString){
 	return currentString.includes("@");
+}
+
+function updateFields(usrObj){
+	document.getElementById("desc").style.visibility = 'visible';
+	document.getElementById("fname").type = 'text';
+	document.getElementById("lname").type = 'text';
+	document.getElementById("email").type = 'text';
+	document.getElementById("phone").type = 'text';
+	
+	document.getElementById('desc').value = usrObj.descr;
+	document.getElementById("fname").value = usrObj.fname;
+	document.getElementById("lname").value = usrObj.lname;
+	document.getElementById("phone").value = usrObj.phone;
+	document.getElementById("email").value = usrObj.email;
+	
+}
+
+// Add Contact to Database using API.
+// Receives the userid of the person
+function ocrContact(userid){
+	var fname = document.getElementById("fname").value;
+    var lname = document.getElementById("lname").value;
+	var email = document.getElementById("email").value;
+	var phone = document.getElementById("phone").value;
+	var desc = document.getElementById("desc").value;
+	
+	var jsonPayload = JSON.stringify({ "firstname": fname, "lastname" : lname , "phone" : phone, "email" : email, "description": desc, "userid":userid});
+	
+	var xhr = new XMLHttpRequest();
+	
+	xhr.open("POST", "LAMPAPI/insertcontact.php", true);
+	
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    // Send Payload and act on response.
+	try
+	{
+		// Wait for response.
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				// Parse the response.
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log(jsonObject);
+				alert(xhr.responseText);
+			}
+		};
+		// Send the payload.
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+        // Send a register error.
+		console.log(err.message);
+	}
 }
 
