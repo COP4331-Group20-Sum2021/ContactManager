@@ -81,6 +81,83 @@ This end point requires at all fields of a contact are sent, event if they were 
  - `status` will either be `"success"` or `"failure"`.
  - `message` will contain the failure message or `"Update succeeded."` on success
 
+# search.php
+## Input:
+```json
+{
+    "userid": 1,
+    "searchterm": "string"
+}
+```
+ - `userid` is the id asociated with the currently logged in user
+ - `searchterm` is the term to search by
+
+The search willl be conducted on a wild card basis. Any contact for the provided user id that has the value of `searchterm` anywhere in the asociated first or last name fields will be treated as a match.  
+To retrieve all contacts asociated with `userid`, provie `""` as the value of `searchterm`.
+
+## Output:
+```json
+{
+    "results": [
+        {
+            "id": 1,
+            "firstname": "string",
+            "lastname": "string",
+            "phone": "string",
+            "email": "string",
+            "description": "string",
+        },
+        {
+            "id": 1,
+            "firstname": "string",
+            "lastname": "string",
+            "phone": "string",
+            "email": "string",
+            "description": "string",
+        }
+    ],
+    "error": "string"
+}
+```
+ - `results` is an array of 0 to N json obejects representing contacts that match the search query. These objects all follow the following format:
+    - `id` the id of the contact
+    - `firstname` the first name of the contact
+    - `lastname` the last name of the contact
+    - `phone` the phone number of the contact
+    - `email` the email of the contact
+    - `description` the description of the contact
+ - `error` will be an empty string upon success, `"No Records Found."` if no records match in the databse, or an error message upon failure in the database.
+
+# futureapi.php
+## Input:
+```json
+{
+    "example": "example"
+}
+```
+
+## Output:
+```json
+{
+    "example": "example"
+}
+```
+
+# futureapi.php
+## Input:
+```json
+{
+    "example": "example"
+}
+```
+
+## Output:
+```json
+{
+    "example": "example"
+}
+```
+
 # futureapi.php
 ## Input:
 ```json

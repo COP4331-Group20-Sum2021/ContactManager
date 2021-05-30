@@ -30,7 +30,7 @@
         }
         
         if($searchCount == 0) {
-            returnWithError("No Records Found");
+            returnWithError("No Records Found.");
         } else {
             returnWithInfo($searchResults);
         }
