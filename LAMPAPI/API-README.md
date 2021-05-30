@@ -9,8 +9,8 @@ This readme will serve as doccumentation of the expected json input to, and expe
     "password": "string"
 }
 ```
- - `login` should be the raw login
- - `password` should be the md5 of the raw password
+- `login` should be the raw login
+- `password` should be the md5 of the raw password
 
 ## Output:
 ```json
@@ -35,10 +35,10 @@ On success, `id`, `firstName` and `lastName` will be their values in the databas
     "lastname": "example"
 }
 ```
- - `login` should be the raw login
- - `password` should be the md5 of the raw password
- - `firstname` should be the first name of the user
- - `lastname` should be the last name of the user 
+- `login` should be the raw login
+- `password` should be the md5 of the raw password
+- `firstname` should be the first name of the user
+- `lastname` should be the last name of the user 
 
 ## Output:
 ```json
@@ -47,8 +47,8 @@ On success, `id`, `firstName` and `lastName` will be their values in the databas
     "message": "string"
 }
 ```
- - `status` will either be `"success"` or `"failure"`.
- - `message` will contain the failure message or `"Register succeeded."` on success
+- `status` will either be `"success"` or `"failure"`.
+- `message` will contain the failure message or `"Register succeeded."` on success
 
 
 # update.php
@@ -64,12 +64,12 @@ This end point requires at all fields of a contact are sent, event if they were 
     "id": 0
 }
 ```
- - `firstname` is the firstname of the contact
- - `lastname`is the last name of the contact
- - `phone` is the phone number of the contact
- - `email` is the email of the contact
- - `description` is the description for the contact
- - `id` is the id of the contact record, and is a number. 
+- `firstname` should be the firstname of the contact
+- `lastname`should be the last name of the contact
+- `phone` should be the phone number of the contact
+- `email` should be the email of the contact
+- `description` should be the description for the contact
+- `id` should be the id of the contact record, and is a number. 
 
 ## Output:
 ```json
@@ -78,8 +78,8 @@ This end point requires at all fields of a contact are sent, event if they were 
     "message": "string"
 }
 ```
- - `status` will either be `"success"` or `"failure"`.
- - `message` will contain the failure message or `"Update succeeded."` on success
+- `status` will either be `"success"` or `"failure"`.
+- `message` will contain the failure message or `"Update succeeded."` on success
 
 # search.php
 ## Input:
@@ -89,8 +89,8 @@ This end point requires at all fields of a contact are sent, event if they were 
     "searchterm": "string"
 }
 ```
- - `userid` is the id asociated with the currently logged in user
- - `searchterm` is the term to search by
+- `userid` should be the id asociated with the currently logged in user
+- `searchterm` should be the term to search by
 
 The search willl be conducted on a wild card basis. Any contact for the provided user id that has the value of `searchterm` anywhere in the asociated first or last name fields will be treated as a match.  
 To retrieve all contacts asociated with `userid`, provie `""` as the value of `searchterm`.
@@ -119,44 +119,62 @@ To retrieve all contacts asociated with `userid`, provie `""` as the value of `s
     "error": "string"
 }
 ```
- - `results` is an array of 0 to N json obejects representing contacts that match the search query. These objects all follow the following format:
+- `results` is an array of 0 to N json obejects representing contacts that match the search query. These objects all follow the following format:
     - `id` the id of the contact
     - `firstname` the first name of the contact
     - `lastname` the last name of the contact
     - `phone` the phone number of the contact
     - `email` the email of the contact
     - `description` the description of the contact
- - `error` will be an empty string upon success, `"No Records Found."` if no records match in the databse, or an error message upon failure in the database.
+- `error` will be an empty string upon success, `"No Records Found."` if no records match in the databse, or an error message upon failure in the database.
 
-# futureapi.php
+# insertcontact.php
 ## Input:
 ```json
 {
-    "example": "example"
+    "firstname": "string",
+    "lastname": "string",
+    "phone": "string",
+    "email": "string",
+    "description": "string",
+    "userid": 1
 }
 ```
+- `firstname` should be the first name of the contact to insert
+- `lastname` should be the last name of the contact to insert
+- `phone` should be the phone number of the contact to insert
+- `email` should be the email of the contact to insert
+- `description` should be the description of the contact to insert
+- `userid` should be the id of the user that created this contact
 
 ## Output:
 ```json
 {
-    "example": "example"
+    "status": "string",
+    "message": "string"
 }
 ```
+- `status` will either be `"success"` or `"failure"`.
+- `message` will contain the failure message or `"Creation succeeded."` on success
 
-# futureapi.php
+# deletecontact.php
 ## Input:
 ```json
 {
-    "example": "example"
+    "id": 1
 }
 ```
+- `id` should be the id of the contact to delete. **NOTE:** This is _not_ the same as `userid`
 
 ## Output:
 ```json
 {
-    "example": "example"
+    "status": "string",
+    "message": "string"
 }
 ```
+- `status` will either be `"success"` or `"failure"`.
+- `message` will contain the failure message or `"Deletion succeeded."` on success
 
 # futureapi.php
 ## Input:

@@ -39,6 +39,6 @@
     }
 
     function returnWithSuccess() {
-        sendResultInfoAsJson('{"status": "success", "message": "Delection succeeded."}');
+        sendResultInfoAsJson('{"status": "success", "message": "Deletion succeeded."}');
     }
 ?>
