@@ -41,15 +41,15 @@
                 $file = fopen($location, 'r');
                 $complete = process($file);
                 //echo $complete;
-                //$arr = explode("\n", $complete);
-                returnWithInfo($complete);
+                $arr = explode("\n", $complete);
+                returnWithInfo($arr);
             }
         }
     }
 
-    function returnWithInfo($text) {
-        $retValue = '{"text":' . $text . '}';
-        sendResultInfoAsJson($retValue);
+    function returnWithInfo($textArr) {
+		$myJSON = json_encode($textArr);
+		echo $myJSON;
     }
 
     function sendResultInfoAsJson($obj) {
