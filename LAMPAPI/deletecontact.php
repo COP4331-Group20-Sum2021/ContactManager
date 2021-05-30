@@ -1,9 +1,9 @@
 <?php
     // get the json sent from frontend
     $inData = getRequestInfo();
-    
+
     //
-    $id = $inData["id"];											
+    $id = $inData["id"];
     //
 
     // connect to data base
@@ -17,7 +17,7 @@
 
         returnWithSuccess();
         $stmt->close();
-		
+
         // close the data base connection
         $conn->close();
     }
@@ -39,7 +39,6 @@
     }
 
     function returnWithSuccess() {
-        sendResultInfoAsJson('{"status": "success", "message": "Login succeeded."}');
+        sendResultInfoAsJson('{"status": "success", "message": "Deletion succeeded."}');
     }
-
 ?>

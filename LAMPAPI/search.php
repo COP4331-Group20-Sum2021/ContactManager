@@ -4,10 +4,9 @@
 
     //
     $searchResults = "";
-	$searchCount = 0;
-	$userId = $inData["userid"];
-    $fname = "%" . $inData["firstname"] . "%";
-    $lname = "%" . $inData["lastname"] . "%";
+    $searchCount = 0;
+    $userId = $inData["userid"];
+    $search = "%" . $inData["searchterm"] . "%";
     //
 
     // connect to data base
@@ -17,32 +16,26 @@
     } else {
         
         $stmt = $conn->prepare ("SELECT * FROM contacts WHERE userid=? and (firstname like ? or lastname like ?)");
-        $stmt->bind_param("sss", $userId, $fname, $lname);
+        $stmt->bind_param("sss", $userId, $search, $search);
         $stmt->execute();
 
         $result = $stmt->get_result();
-		
-		while($row = $result->fetch_assoc())
-		{
-			if($searchCount > 0)
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			$searchResults .= '{"id": "' . $row["id"] . '", "firstname": "' . $row["firstname"] . '", "lastname": "' . $row["lastname"] . '", "phone": "' . $row["phone"] . '", "email": "' . $row["email"] . '", "description": "' . $row["description"] . '"}'; //id firstname lastname phone, email, descirption
-		}
-		
-		if($searchCount == 0)
-		{
-			returnWithError("No Records Found");
-		}
-		else
-		{
-			returnWithInfo($searchResults);
-		}
+        
+        while($row = $result->fetch_assoc()) {
+            if($searchCount > 0) {
+                $searchResults .= ",";
+            }
+            $searchCount++;
+            $searchResults .= '{"id": "' . $row["id"] . '", "firstname": "' . $row["firstname"] . '", "lastname": "' . $row["lastname"] . '", "phone": "' . $row["phone"] . '", "email": "' . $row["email"] . '", "description": "' . $row["description"] . '"}'; //id firstname lastname phone, email, descirption
+        }
+        
+        if($searchCount == 0) {
+            returnWithError("No Records Found.");
+        } else {
+            returnWithInfo($searchResults);
+        }
 
-	}
-
+    }
 
     // close the data base connection
     $conn->close();
@@ -63,9 +56,8 @@
         sendResultInfoAsJson('{"status": "error", "message": "' . $err . '"}');
     }
 
-    function returnWithInfo($searchResults)
-	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
-		sendResultInfoAsJson($retValue);
-	}
+    function returnWithInfo($searchResults) {
+        $retValue = '{"results":[' . $searchResults . '],"error":""}';
+        sendResultInfoAsJson($retValue);
+    }
 ?>
