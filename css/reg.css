@@ -119,4 +119,10 @@ p {
 a {
   color: gray;
 }
+
+@media (max-width: 889px) {
+  .register-section {
+    width: 300px;
+  }
+}
 /*# sourceMappingURL=reg.css.map */

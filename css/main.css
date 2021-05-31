@@ -117,4 +117,10 @@ p {
 a {
   color: gray;
 }
+
+@media (max-width: 889px) {
+  .login-section {
+    width: 350px;
+  }
+}
 /*# sourceMappingURL=main.css.map */
