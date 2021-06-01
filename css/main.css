@@ -54,7 +54,7 @@ body {
   -webkit-animation: fadeIn 2s;
           animation: fadeIn 2s;
   border-color: var(--white);
-  border-width: 0.5rem;
+  border-width: 0.2rem;
   border-radius: 1rem;
   border-style: solid;
 }
@@ -105,7 +105,10 @@ label {
   text-decoration: none;
   padding: .6em 1.3em;
   font-size: 1.4em;
+  border-color: var(--white);
+  border-width: .2em;
   border-radius: 5em;
+  border-style: solid;
 }
 
 #loginResult {
