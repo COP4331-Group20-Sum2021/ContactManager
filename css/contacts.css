@@ -35,6 +35,7 @@ body {
 }
 .navbar nav a.log-out:hover {
   font-weight: bold;
+  cursor: pointer;
 }
 .navbar nav a.log-out:visited {
   color: var(--white);
