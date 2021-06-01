@@ -264,8 +264,9 @@ function editRow(e)
 
 
 
-        document.querySelector('.edit-done-button').onclick = function()
+        document.querySelector('.edit-done-button').onclick = function(e)
         {
+            e.preventDefault();
             contactRow.querySelector("h4").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
             contactRow.childNodes[1].innerText = editinput1 + " " + editinput2;
             contactRow.childNodes[2].innerText = editinput3;
