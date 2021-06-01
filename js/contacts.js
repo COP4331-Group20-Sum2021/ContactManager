@@ -182,6 +182,11 @@ function addContact(e)
 
         contactsTable.appendChild(contactRow);
 
+        sortTableByColumn(document.querySelector('.contacts-table'), 1);
+
+        // =======================
+        // Insert contact into API
+        // =======================
         var fname = firstNameContact.value;
         var lname = lastNameContact.value;
         var email = emailField.value;
@@ -204,7 +209,7 @@ function addContact(e)
                 {
                     var jsonObject = JSON.parse(xhr.responseText);
                     console.log(jsonObject);
-                    alert(xhr.responseText);
+                    //alert(xhr.responseText);
 
                     if (jsonObject.status === "error") {
                         // do something about the error
@@ -218,6 +223,30 @@ function addContact(e)
             console.log(err.message);
         }
     }
+}
+
+function sortTableByColumn(table, column, asc = true)
+{
+    const dirModifier = asc ? 1 : -1;
+    const tBody = table.tBodies[0];
+    const rows = Array.from(tBody.querySelectorAll("tr"));
+
+    const sortedRows = rows.sort((a, b) =>
+    {
+        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim().split(" ");
+        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim().split(" ");
+        aColText[1] = aColText[1].toUpperCase();
+        bColText[1] = bColText[1].toUpperCase();
+
+        return aColText[1] > bColText[1] ? (1 * dirModifier) : (-1 * dirModifier);
+    });
+
+    while (tBody.firstChild)
+    {
+        tBody.removeChild(tBody.firstChild);
+    }
+
+    tBody.append(...sortedRows);
 }
 
 function editRow(e)
