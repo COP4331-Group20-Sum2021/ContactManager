@@ -7,7 +7,9 @@
 
 :root
 {
-    --primary-color: #A33838;
+    --primary-color: #7B8FB0;
+    --secondary-color: #202733;
+    --white: #fff;
 }
 
 body
@@ -23,14 +25,14 @@ body
 
 .navbar
 {
-    background: white;
+    background: var(--secondary-color);
     padding: 1em;
 
     .logo
     {
         text-decoration: none;
         font-weight: 600;
-        color: black;
+        color: var(--white);
         font-size: 1.5em;
 
         span 
@@ -47,6 +49,7 @@ body
         {
             font-size: 1em;
             text-decoration: none;
+            color: var(--white);
         }
 
         a.log-out:hover
@@ -56,7 +59,7 @@ body
 
         a.log-out:visited
         {
-            color: black;
+            color: var(--white);
         }
     }
 
@@ -73,17 +76,23 @@ body
 
 .contacts
 {
-    background: white;
+    background: var(--secondary-color);
     padding: 1em;
     margin: 1em 10em;
     text-align: left;
     align-items: center;
+    color: var(--white);
+    border-color: var(--white);
+    border-width: 0.5rem;
+    border-radius: 1rem;
+    border-style: solid;
 
     h1 
     {
         font-size: 27px;
         font-weight: normal;
         vertical-align: top;
+        color: var(--white);
     }
 
     .container

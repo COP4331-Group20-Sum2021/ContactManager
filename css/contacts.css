@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 :root {
-  --primary-color: #A33838;
+  --primary-color: #7B8FB0;
+  --secondary-color: #202733;
+  --white: #fff;
 }
 
 body {
@@ -11,13 +13,13 @@ body {
 }
 
 .navbar {
-  background: white;
+  background: var(--secondary-color);
   padding: 1em;
 }
 .navbar .logo {
   text-decoration: none;
   font-weight: 600;
-  color: black;
+  color: var(--white);
   font-size: 1.5em;
 }
 .navbar .logo span {
@@ -29,12 +31,13 @@ body {
 .navbar nav .log-out {
   font-size: 1em;
   text-decoration: none;
+  color: var(--white);
 }
 .navbar nav a.log-out:hover {
   font-weight: bold;
 }
 .navbar nav a.log-out:visited {
-  color: black;
+  color: var(--white);
 }
 .navbar .container {
   display: -webkit-box;
@@ -44,18 +47,24 @@ body {
 }
 
 .contacts {
-  background: white;
+  background: var(--secondary-color);
   padding: 1em;
   margin: 1em 10em;
   text-align: left;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  color: var(--white);
+  border-color: var(--white);
+  border-width: 0.5rem;
+  border-radius: 1rem;
+  border-style: solid;
 }
 .contacts h1 {
   font-size: 27px;
   font-weight: normal;
   vertical-align: top;
+  color: var(--white);
 }
 .contacts .container {
   display: -webkit-box;

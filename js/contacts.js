@@ -132,7 +132,7 @@ function addContact(e)
         profilePic.setAttribute('cx', '20');
         profilePic.setAttribute('cy', '20');
         profilePic.setAttribute('r', '15');
-        profilePic.setAttribute('stroke', 'black');
+        profilePic.setAttribute('stroke', 'white');
         profilePic.setAttribute('stroke-width', '2');
         profilePic.setAttribute('fill', 'none');
         circle.appendChild(profilePic);
