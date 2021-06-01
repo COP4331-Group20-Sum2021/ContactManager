@@ -12,15 +12,17 @@
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
     if($conn->connect_error) {
+        // if error, return it to front end
         returnWithError($conn->connect_error);
     } else {
-        
+        // creates a new sql statement to get all records for a contact for the given user that has a first name or last name that contains the search term
         $stmt = $conn->prepare ("SELECT * FROM contacts WHERE userid=? and (firstname like ? or lastname like ?)");
         $stmt->bind_param("sss", $userId, $search, $search);
         $stmt->execute();
 
         $result = $stmt->get_result();
         
+        // loop over all result rows, construct the results array 
         while($row = $result->fetch_assoc()) {
             if($searchCount > 0) {
                 $searchResults .= ",";
@@ -29,6 +31,7 @@
             $searchResults .= '{"id": "' . $row["id"] . '", "firstname": "' . $row["firstname"] . '", "lastname": "' . $row["lastname"] . '", "phone": "' . $row["phone"] . '", "email": "' . $row["email"] . '", "description": "' . $row["description"] . '"}'; //id firstname lastname phone, email, descirption
         }
         
+        // chcek if any were created
         if($searchCount == 0) {
             returnWithError("No Records Found.");
         } else {
@@ -56,6 +59,7 @@
         sendResultInfoAsJson('{"status": "error", "message": "' . $err . '"}');
     }
 
+    // function to return a success state
     function returnWithInfo($searchResults) {
         $retValue = '{"results":[' . $searchResults . '],"error":""}';
         sendResultInfoAsJson($retValue);

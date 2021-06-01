@@ -14,13 +14,16 @@
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
     if($conn->connect_error) {
+        // if error, return it to front end
         returnWithError($conn->connect_error);
     } else {
+        // creates a new sql statement to insert the new contact into the database
         $stmt = $conn->prepare("INSERT INTO contacts (firstname, lastname, userid, phone, email, description) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $fName, $lName, $userId, $phone, $email, $description);
         $stmt->execute();
 
-        returnWithSuccess();
+        // blindly returns with a success condition (THIS IS BAD AND WILL BE ADDRESSED EVENTUALLY)
+        returnWithSuccess($stmt->insert_id);
         $stmt->close();
     }
     // close the data base connection
@@ -39,10 +42,11 @@
 
     // helper function to send back an error with the specified message
     function returnWithError($err) {
-        sendResultInfoAsJson('{"status": "error", "message": "' . $err . '"}');
+        sendResultInfoAsJson('{"status": "error", "message": "' . $err . '", "id":0}');
     }
 
-    function returnWithSuccess() {
-        sendResultInfoAsJson('{"status": "success", "message": "Creation succeeded."}');
+    // function to return a success state
+    function returnWithSuccess($obj) {
+        sendResultInfoAsJson('{"status": "success", "message": "Creation succeeded.", "id":' . $obj . '}');
     }
 ?>
