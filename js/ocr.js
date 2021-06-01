@@ -67,11 +67,11 @@ function createContactObject(textArray) {
 			continue;
 		}
 		// If it's not any of them, we just throw it here for the user to sort it.
-		descr += textArray[i] + "\n";
+		descr += textArray[i] + " ";
 		
 	}
 	
-	var obj = {fname: fname, lname: lname, phone: phone, email: email, descr: descr};
+	var obj = {fname: fname, lname: lname, phone: phone, email: email, descr: descr.replace(/\n/g, " ")};
 	return obj;
 
 }
@@ -122,7 +122,7 @@ function ocrContact(userid){
     var lname = document.getElementById("lname").value;
 	var email = document.getElementById("email").value;
 	var phone = document.getElementById("phone").value;
-	var desc = document.getElementById("desc").value;
+	var desc = document.getElementById("desc").value.replace(/\n/g, " ");;
 	
 	var jsonPayload = JSON.stringify({ "firstname": fname, "lastname" : lname , "phone" : phone, "email" : email, "description": desc, "userid":userid});
 	
