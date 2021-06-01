@@ -15,7 +15,7 @@
         returnWithError($conn->connect_error);
     } else {
         // creates a new sql statement to get all records for a contact for the given user that has a first name or last name that contains the search term
-        $stmt = $conn->prepare ("SELECT * FROM contacts WHERE userid=?");
+        $stmt = $conn->prepare ("SELECT * FROM contacts WHERE userid=? ORDER BY lastname");
         $stmt->bind_param("s", $userId);
         $stmt->execute();
 
