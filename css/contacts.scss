@@ -83,7 +83,7 @@ body
     align-items: center;
     color: var(--white);
     border-color: var(--white);
-    border-width: 0.5rem;
+    border-width: 0.2rem;
     border-radius: 1rem;
     border-style: solid;
 
@@ -324,7 +324,7 @@ body
 
     tbody, tr 
     {
-        border: 1px solid #b6b6b6;
+        border: 0.1rem solid var(--white);
     }
 
     td, th 
