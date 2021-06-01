@@ -11,10 +11,12 @@
     if($conn->connect_error) {
         returnWithError($conn->connect_error);
     } else {
+        // creates a new sql statement to delete the specified contact from the database
         $stmt = $conn->prepare("DELETE FROM contacts WHERE id=?");
         $stmt->bind_param("s", $id);
         $stmt->execute();
 
+        // blindly returns with a success condition (THIS IS BAD AND WILL BE ADDRESSED EVENTUALLY)
         returnWithSuccess();
         $stmt->close();
 
@@ -38,6 +40,7 @@
         sendResultInfoAsJson('{"status": "error", "message": "' . $err . '"}');
     }
 
+    // function to return a success state
     function returnWithSuccess() {
         sendResultInfoAsJson('{"status": "success", "message": "Deletion succeeded."}');
     }

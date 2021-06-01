@@ -17,7 +17,7 @@
         // if error, return it to front end
         returnWithError($conn->connect_error);
     } else {
-        // creates a new sql statement to insert the new contact into the data base
+        // creates a new sql statement to insert the new contact into the database
         $stmt = $conn->prepare("INSERT INTO contacts (firstname, lastname, userid, phone, email, description) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $fName, $lName, $userId, $phone, $email, $description);
         $stmt->execute();
@@ -42,9 +42,10 @@
 
     // helper function to send back an error with the specified message
     function returnWithError($err) {
-        sendResultInfoAsJson('{"status": "error", "message": "' . $err . '"}');
+        sendResultInfoAsJson('{"status": "error", "message": "' . $err . '", "id":0}');
     }
 
+    // function to return a success state
     function returnWithSuccess($obj) {
         sendResultInfoAsJson('{"status": "success", "message": "Creation succeeded.", "id":' . $obj . '}');
     }

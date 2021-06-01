@@ -24,7 +24,7 @@
             returnWithError("Username already in use.");
         } else {
             // create new user
-            // creates a new sql statement to inster the new user into the data base
+            // creates a new sql statement to insert the new user into the data base
             $addstmt = $conn->prepare("INSERT INTO users (login, password, firstname, lastname) VALUES (?, ?, ?, ?)");
             $addstmt->bind_param("ssss", $username, $inData["password"], $inData["firstname"], $inData["lastname"]);
             $addstmt->execute();
