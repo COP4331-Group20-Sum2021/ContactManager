@@ -151,11 +151,13 @@ To retrieve all contacts asociated with `userid`, provie `""` as the value of `s
 ```json
 {
     "status": "string",
-    "message": "string"
+    "message": "string",
+    "id": 1
 }
 ```
 - `status` will either be `"success"` or `"failure"`.
 - `message` will contain the failure message or `"Creation succeeded."` on success
+- `id` will be the id of the contact row that was just created, or 0 on failure
 
 # deletecontact.php
 ## Input:
