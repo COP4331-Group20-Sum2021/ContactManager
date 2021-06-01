@@ -186,6 +186,7 @@ function addContact(e)
 
 function editRow(e)
 {
+    e.preventDefault();
     const b = e.target;
 
     if (b.classList[0] === 'edit-button')
@@ -285,6 +286,7 @@ function editRow(e)
 
 function deleteRow(e)
 {
+    e.preventDefault();
     const b = e.target;
 
     if (b.classList[0] === 'delete-button')
