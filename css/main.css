@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 :root {
-  --primary-color: #A33838;
+  --primary-color: #7B8FB0;
+  --secondary-color: #202733;
+  --white: #fff;
 }
 
 body {
@@ -10,14 +12,14 @@ body {
 }
 
 .navbar {
-  background: white;
+  background: var(--secondary-color);
   padding: 1em;
 }
 
 .navbar .logo {
   text-decoration: none;
   font-weight: 600;
-  color: black;
+  color: var(--white);
   font-size: 1.5em;
 }
 
@@ -42,7 +44,7 @@ body {
 }
 
 .login-section {
-  background-color: white;
+  background-color: var(--secondary-color);
   height: 360px;
   width: 450px;
   padding: 2em 2em;
@@ -51,6 +53,10 @@ body {
   border-radius: .6em 1.2em;
   -webkit-animation: fadeIn 2s;
           animation: fadeIn 2s;
+  border-color: var(--white);
+  border-width: 0.5rem;
+  border-radius: 1rem;
+  border-style: solid;
 }
 
 @-webkit-keyframes fadeIn {
@@ -74,12 +80,14 @@ body {
 h2 {
   font-size: 2em;
   text-align: center;
+  color: var(--white);
   margin-top: 0em;
 }
 
 label {
   text-align: center;
   display: block;
+  color: var(--white);
   margin-top: 2em;
 }
 
@@ -102,7 +110,7 @@ label {
 
 #loginResult {
   height: 25px;
-  width: 450px;
+  width: 250px;
   text-align: center;
   color: red;
   display: block;
@@ -116,5 +124,12 @@ p {
 
 a {
   color: gray;
+}
+
+@media (max-width: 889px) {
+  .login-section {
+    width: 250px;
+    height: 450px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

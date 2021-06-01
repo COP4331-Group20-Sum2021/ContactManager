@@ -11,6 +11,7 @@ const phone = document.getElementById('phone');
 
 const getPlusButton = document.getElementById('plusButton');
 const getCloseButton = document.querySelector('.close');
+const getEditCloseButton = document.querySelector('.edit-close');
 const getConfirmCloseButton = document.querySelector('.confirm-delete-close');
 
 const getDoneButton = document.querySelector('.done-button');
@@ -28,9 +29,11 @@ phone.addEventListener('keyup', getPhone);
 getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
 getCloseButton.addEventListener('click', closeButton);
+getEditCloseButton.addEventListener('click', closeEditButton);
 getConfirmCloseButton.addEventListener('click', closeConfirmButton);
 
 contactsTable.addEventListener('click', deleteRow);
+contactsTable.addEventListener('click', editRow);
 
 // =============================================================================
 // Functions:
@@ -101,6 +104,12 @@ function closeConfirmButton()
     document.querySelector('.bg-modal-confirm-delete').style.display = 'none';
 }
 
+// close add contact popup with 'x' button
+function closeEditButton()
+{
+    document.querySelector('.edit-bg-modal').style.display = 'none';
+}
+
 // add contact
 function addContact(e)
 {
@@ -123,7 +132,7 @@ function addContact(e)
         profilePic.setAttribute('cx', '20');
         profilePic.setAttribute('cy', '20');
         profilePic.setAttribute('r', '15');
-        profilePic.setAttribute('stroke', 'black');
+        profilePic.setAttribute('stroke', 'white');
         profilePic.setAttribute('stroke-width', '2');
         profilePic.setAttribute('fill', 'none');
         circle.appendChild(profilePic);
@@ -131,7 +140,7 @@ function addContact(e)
         contactRow.appendChild(pp);
 
         const newInitials = document.createElement('h4');
-        newInitials.innerText = firstInitial + lastInitial;
+        newInitials.innerText = firstNameContact.value.charAt(0) + lastNameContact.value.charAt(0);
         newInitials.classList.add('initials-item');
         pp.appendChild(newInitials);
 
@@ -157,6 +166,13 @@ function addContact(e)
         newPhone.classList.add('phone-item');
         contactRow.appendChild(newPhone);
 
+        const editButton = document.createElement('td');
+        const eButton = document.createElement('button');
+        editButton.appendChild(eButton);
+        editButton.innerHTML = '<button class="edit-button">Edit</button>';
+        editButton.classList.add('edit-btn');
+        contactRow.appendChild(editButton);
+
         const deleteButton = document.createElement('td');
         const dButton = document.createElement('button');
         deleteButton.appendChild(dButton);
@@ -168,8 +184,110 @@ function addContact(e)
     }
 }
 
+function editRow(e)
+{
+    e.preventDefault();
+    const b = e.target;
+
+    if (b.classList[0] === 'edit-button')
+    {
+        document.querySelector('.edit-bg-modal').style.display = 'flex';
+
+        const editFirstNameContact = document.getElementById('edit-firstName');
+        const editLastNameContact = document.getElementById('edit-lastName');
+        const editEmailContact = document.getElementById('edit-email');
+        const editPhoneContact = document.getElementById('edit-phone');
+        const editInitials = document.getElementById('edit-fl');
+
+        const editCell = b.parentElement;
+        const contactRow = editCell.parentElement;
+        const initialsChild = contactRow.childNodes[0].innerText;
+        const nameChild = contactRow.childNodes[1].innerText;
+        const emailChild = contactRow.childNodes[2].innerText;
+        const phoneChild = contactRow.childNodes[3].innerText;
+
+        const nameArr = nameChild.split(" ");
+        const numPhone = phoneChild.replace(/[()-]/g, "").replace(" ", "");
+
+
+        editFirstNameContact.value = nameArr[0];
+        editLastNameContact.value = nameArr[1];
+        editEmailContact.value = emailChild;
+        editPhoneContact.value = numPhone;
+        editInitials.innerText = initialsChild;
+
+        editFirstNameContact.addEventListener('keyup', editFirstName);
+        editLastNameContact.addEventListener('keyup', editLastName);
+        editEmailContact.addEventListener('keyup', editEmail);
+        editPhoneContact.addEventListener('keyup', editPhone);
+
+        let editinput1 = nameArr[0];
+        function editFirstName(e)
+        {
+            editinput1 = e.target.value;
+            firstInitial = editinput1.charAt(0);
+            let fl = firstInitial + lastInitial;
+
+            if (editinput2 != undefined)
+                editprintInitials(fl);
+            else
+                editprintInitials(firstInitial);
+        }
+
+        let editinput2 = nameArr[1];
+        function editLastName(e)
+        {
+            editinput2 = e.target.value;
+            lastInitial = editinput2.charAt(0);
+            let fl = firstInitial + lastInitial;
+
+            editprintInitials(fl);
+        }
+
+        function editprintInitials(i)
+        {
+            document.getElementById("edit-fl").innerHTML = i;
+        }
+
+        let editinput3 = emailChild;
+        function editEmail(e)
+        {
+            editinput3 = e.target.value;
+        }
+
+        let editinput4 = numPhone;
+        function editPhone(e)
+        {
+            editinput4 = e.target.value;
+        }
+
+
+
+
+        document.querySelector('.edit-done-button').onclick = function(e)
+        {
+            e.preventDefault();
+            contactRow.querySelector("h4").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
+            contactRow.childNodes[1].innerText = editinput1 + " " + editinput2;
+            contactRow.childNodes[2].innerText = editinput3;
+
+            const opar = "(";
+            const cpar = ")";
+            const dash = "-";
+            const ac = editinput4.slice(0, 3);
+            const num3 = editinput4.slice(3, 6);
+            const num4 = editinput4.slice(6, 11);
+            const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
+
+            contactRow.childNodes[3].innerText = phonenumber;
+            document.querySelector('.edit-bg-modal').style.display = 'none';
+        }
+    }
+}
+
 function deleteRow(e)
 {
+    e.preventDefault();
     const b = e.target;
 
     if (b.classList[0] === 'delete-button')

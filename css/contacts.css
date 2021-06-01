@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 :root {
-  --primary-color: #A33838;
+  --primary-color: #7B8FB0;
+  --secondary-color: #202733;
+  --white: #fff;
 }
 
 body {
@@ -11,14 +13,14 @@ body {
 }
 
 .navbar {
-  background: white;
+  background: var(--secondary-color);
   padding: 1em;
 }
 
 .navbar .logo {
   text-decoration: none;
   font-weight: 600;
-  color: black;
+  color: var(--white);
   font-size: 1.5em;
 }
 
@@ -33,6 +35,7 @@ body {
 .navbar nav .log-out {
   font-size: 1em;
   text-decoration: none;
+  color: var(--white);
 }
 
 .navbar nav a.log-out:hover {
@@ -40,7 +43,7 @@ body {
 }
 
 .navbar nav a.log-out:visited {
-  color: black;
+  color: var(--white);
 }
 
 .navbar .container {
@@ -51,19 +54,25 @@ body {
 }
 
 .contacts {
-  background: white;
+  background: var(--secondary-color);
   padding: 1em;
   margin: 1em 10em;
   text-align: left;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  color: var(--white);
+  border-color: var(--white);
+  border-width: 0.5rem;
+  border-radius: 1rem;
+  border-style: solid;
 }
 
 .contacts h1 {
   font-size: 27px;
   font-weight: normal;
   vertical-align: top;
+  color: var(--white);
 }
 
 .contacts .container {
@@ -166,6 +175,63 @@ body {
   font-family: Poppins;
 }
 
+.edit-bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.edit-bg-modal .edit-modal-content {
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0;
+  position: relative;
+}
+
+.edit-bg-modal .edit-modal-content .edit-close {
+  position: absolute;
+  top: -15px;
+  right: 5px;
+  font-size: 40px;
+  font-weight: 300;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.edit-bg-modal .edit-modal-content input {
+  width: 50%;
+  display: block;
+  margin: 15px auto;
+}
+
+.edit-bg-modal .edit-modal-content .edit-initials {
+  position: relative;
+  top: -285px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.edit-bg-modal .edit-modal-content .edit-done-button {
+  font-family: Poppins;
+}
+
 .bg-modal-confirm-delete {
   width: 100%;
   height: 100%;
@@ -245,6 +311,11 @@ body {
 }
 
 .contacts-table .contacts-body .delete-btn button {
+  height: 30px;
+  font-family: Poppins;
+}
+
+.contacts-table .contacts-body .edit-btn button {
   height: 30px;
   font-family: Poppins;
 }
