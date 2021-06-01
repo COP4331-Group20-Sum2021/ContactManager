@@ -6,8 +6,8 @@
 
 const firstNameContact = document.getElementById('firstName');
 const lastNameContact = document.getElementById('lastName');
-const email = document.getElementById('email');
-const phone = document.getElementById('phone');
+const emailField = document.getElementById('email');
+const phoneField = document.getElementById('phone');
 
 const getPlusButton = document.getElementById('plusButton');
 const getCloseButton = document.querySelector('.close');
@@ -23,8 +23,8 @@ const contactsTable = document.querySelector('.contacts-body');
 
 firstNameContact.addEventListener('keyup', getFirstName);
 lastNameContact.addEventListener('keyup', getLastName);
-email.addEventListener('keyup', getEmail);
-phone.addEventListener('keyup', getPhone);
+emailField.addEventListener('keyup', getEmail);
+phoneField.addEventListener('keyup', getPhone);
 
 getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
@@ -181,6 +181,42 @@ function addContact(e)
         contactRow.appendChild(deleteButton);
 
         contactsTable.appendChild(contactRow);
+
+        var fname = firstNameContact.value;
+        var lname = lastNameContact.value;
+        var email = emailField.value;
+        var phone = phoneField.value;
+        var userid = 1;
+        var desc = "This is temporary";
+
+        var jsonPayload = JSON.stringify({"firstname": fname, "lastname": lname, "phone": phone, "email": email, "userid": userid, "description": desc});
+        console.log(jsonPayload);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/insertcontact.php", true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+        try
+        {
+            xhr.onreadystatechange = function()
+            {
+                if (this.readyState == 4 && this.status == 200) 
+                {
+                    var jsonObject = JSON.parse(xhr.responseText);
+                    console.log(jsonObject);
+                    alert(xhr.responseText);
+
+                    if (jsonObject.status === "error") {
+                        // do something about the error
+                    }
+                }
+            };
+            xhr.send(jsonPayload);
+        }
+        catch(err)
+        {
+            console.log(err.message);
+        }
     }
 }
 
