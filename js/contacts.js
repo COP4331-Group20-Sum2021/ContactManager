@@ -140,7 +140,7 @@ function addContact(e)
         contactRow.appendChild(pp);
 
         const newInitials = document.createElement('h4');
-        newInitials.innerText = firstInitial + lastInitial;
+        newInitials.innerText = firstNameContact.value.charAt(0) + lastNameContact.value.charAt(0);
         newInitials.classList.add('initials-item');
         pp.appendChild(newInitials);
 
