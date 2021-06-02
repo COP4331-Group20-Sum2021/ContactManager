@@ -130,7 +130,7 @@ function doLogin()
 				}
 				else
 				{
-					userId = jsonObject.userId;
+					userId = jsonObject.id; // Nathan: The api returns an 'id' in the json.
 					firstName = jsonObject.firstName;
 					lastName = jsonObject.lastName;
 					saveCookie();
