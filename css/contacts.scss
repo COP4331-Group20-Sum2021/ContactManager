@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 
 // =============================================================================
@@ -8,15 +7,17 @@
 :root
 {
     --primary-color: #7B8FB0;
+    --secondary-color-200: #2F394B;
     --secondary-color: #202733;
     --white: #fff;
+    --ff: 'Poppins', sans-serif;
 }
 
 body
 {
     background: var(--primary-color);
     margin: 0;
-    font-family: 'Poppins';
+    font-family: var(--ff);
 }
 
 // =============================================================================
@@ -84,9 +85,9 @@ body
     align-items: center;
     color: var(--white);
     border-color: var(--white);
-    border-width: 0.2rem;
-    border-radius: 1rem;
-    border-style: solid;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 
     h1 
     {
@@ -113,12 +114,13 @@ body
                 padding: 1px;
                 font-size: 13px;
                 margin: 5px 0;
+                background-color: var(--white);
             }
     
             .search-bar::-webkit-input-placeholder
             {
-                font-family: FontAwesome, Poppins;
-                font-weight: lighter;
+                font-family: FontAwesome, var(--ff);
+                font-weight: 400;
                 overflow: visible;
                 vertical-align: top;
                 padding-left: 5px;
@@ -132,7 +134,7 @@ body
                 padding: 1px 5px;
                 height: 30px;
                 vertical-align: top;
-                font-family: Poppins;
+                font-family: var(--ff);
             }
         }
 
@@ -199,7 +201,7 @@ body
 
         .done-button
         {
-            font-family: Poppins;
+            font-family: var(--ff);
         }
     }
 }
@@ -259,7 +261,7 @@ body
 
         .edit-done-button
         {
-            font-family: Poppins;
+            font-family: var(--ff);
         }
     }
 }
@@ -308,7 +310,7 @@ body
 
         .confirm-button
         {
-            font-family: Poppins;
+            font-family: var(--ff);
         }
     }
 }
@@ -322,40 +324,42 @@ body
     border-collapse: collapse;
     font-size: 0.9em;
     width: 100%;
+    font-weight: 200;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
 
     tbody, tr 
     {
-        border: 0.1rem solid var(--white);
+        border-bottom: 1px solid var(--white);
+    }
+
+    tbody, tr:last-of-type
+    {
+        border-bottom: 2px solid #2F3763;
+    }
+
+    th 
+    {
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .contact-head tr, th
+    {
+        background-color: #2F3763;
     }
 
     td, th 
     {
-        padding-right: 12px 15px;
-        text-align: center;
+        text-align: left;
+        padding: 10px;
     }
 
     .contacts-body
     {
         tr:hover
         {
-            background-color: rgba(204, 204, 204, 0.39);
-        }
-
-        td.profile-pic
-        {
-            h4.initials-item 
-            {
-                position: relative;
-                text-align: center;
-                margin: 0;
-                top: -26px;
-            }
-
-            svg.circle-svg
-            {
-                position: relative;
-                top: 10px;
-            }
+            background-color: var(--secondary-color-200);
         }
 
         .delete-btn
@@ -363,7 +367,7 @@ body
             button 
             {
                 height: 30px;
-                font-family: Poppins;
+                font-family: var(--ff);
             }
             
         }
@@ -373,9 +377,36 @@ body
             button 
             {
                 height: 30px;
-                font-family: Poppins;
+                font-family: var(--ff);
             }
         }
+
+        .name-item
+        {
+            span 
+            {
+                font-weight: 400;
+            }
+        }
+
+        .profile-pic
+        {
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            .circle-svg
+            {
+                margin: 0 auto;
+                display: block;
+            }
+
+            .initials-item
+            {
+                font-weight: 600;
+            }
+        }
+        
     }
 }
 
@@ -388,12 +419,16 @@ body
     .contacts-table 
     {
         display: none;
+
+        td, th 
+        {
+            text-align: center;
+        }
     }
 
     .contacts-table, tbody, tr, td 
     {
         display: block;
-        width: 100%;
 
         .contacts-head
         {

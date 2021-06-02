@@ -1,45 +1,53 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 :root {
   --primary-color: #7B8FB0;
+  --secondary-color-200: #2F394B;
   --secondary-color: #202733;
   --white: #fff;
+  --ff: 'Poppins', sans-serif;
 }
 
 body {
   background: var(--primary-color);
   margin: 0;
-  font-family: "Poppins";
+  font-family: var(--ff);
 }
 
 .navbar {
   background: var(--secondary-color);
   padding: 1em;
 }
+
 .navbar .logo {
   text-decoration: none;
   font-weight: 600;
   color: var(--white);
   font-size: 1.5em;
 }
+
 .navbar .logo span {
   color: var(--primary-color);
 }
+
 .navbar nav {
   padding-top: 0.25em;
 }
+
 .navbar nav .log-out {
   font-size: 1em;
   text-decoration: none;
   color: var(--white);
 }
+
 .navbar nav a.log-out:hover {
   font-weight: bold;
   cursor: pointer;
 }
+
 .navbar nav a.log-out:visited {
   color: var(--white);
 }
+
 .navbar .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -57,16 +65,19 @@ body {
           align-items: center;
   color: var(--white);
   border-color: var(--white);
-  border-width: 0.2rem;
-  border-radius: 1rem;
-  border-style: solid;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
+
 .contacts h1 {
   font-size: 27px;
   font-weight: normal;
   vertical-align: top;
   color: var(--white);
 }
+
 .contacts .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -78,29 +89,34 @@ body {
   height: 60px;
   width: 100%;
 }
+
 .contacts .container .search .search-bar {
   height: 24px;
   width: 350px;
   padding: 1px;
   font-size: 13px;
   margin: 5px 0;
+  background-color: var(--white);
 }
+
 .contacts .container .search .search-bar::-webkit-input-placeholder {
-  font-family: FontAwesome, Poppins;
-  font-weight: lighter;
+  font-family: FontAwesome, var(--ff);
+  font-weight: 400;
   overflow: visible;
   vertical-align: top;
   padding-left: 5px;
   display: inline-block !important;
   color: rgba(204, 204, 204, 0.815);
 }
+
 .contacts .container .search .search-button {
   margin: 5px 0;
   padding: 1px 5px;
   height: 30px;
   vertical-align: top;
-  font-family: Poppins;
+  font-family: var(--ff);
 }
+
 .contacts .container img {
   height: 20px;
   vertical-align: center;
@@ -123,6 +139,7 @@ body {
           align-items: center;
   display: none;
 }
+
 .bg-modal .modal-content {
   width: 500px;
   height: 300px;
@@ -132,6 +149,7 @@ body {
   padding: 0;
   position: relative;
 }
+
 .bg-modal .modal-content .close {
   position: absolute;
   top: -15px;
@@ -142,11 +160,13 @@ body {
           transform: rotate(45deg);
   cursor: pointer;
 }
+
 .bg-modal .modal-content input {
   width: 50%;
   display: block;
   margin: 15px auto;
 }
+
 .bg-modal .modal-content .initials {
   position: relative;
   top: -285px;
@@ -154,8 +174,9 @@ body {
   font-size: 30px;
   font-weight: 300;
 }
+
 .bg-modal .modal-content .done-button {
-  font-family: Poppins;
+  font-family: var(--ff);
 }
 
 .edit-bg-modal {
@@ -175,6 +196,7 @@ body {
           align-items: center;
   display: none;
 }
+
 .edit-bg-modal .edit-modal-content {
   width: 500px;
   height: 300px;
@@ -184,6 +206,7 @@ body {
   padding: 0;
   position: relative;
 }
+
 .edit-bg-modal .edit-modal-content .edit-close {
   position: absolute;
   top: -15px;
@@ -194,11 +217,13 @@ body {
           transform: rotate(45deg);
   cursor: pointer;
 }
+
 .edit-bg-modal .edit-modal-content input {
   width: 50%;
   display: block;
   margin: 15px auto;
 }
+
 .edit-bg-modal .edit-modal-content .edit-initials {
   position: relative;
   top: -285px;
@@ -206,8 +231,9 @@ body {
   font-size: 30px;
   font-weight: 300;
 }
+
 .edit-bg-modal .edit-modal-content .edit-done-button {
-  font-family: Poppins;
+  font-family: var(--ff);
 }
 
 .bg-modal-confirm-delete {
@@ -227,6 +253,7 @@ body {
           align-items: center;
   display: none;
 }
+
 .bg-modal-confirm-delete .confirm-delete-content {
   width: 400px;
   height: 150px;
@@ -236,9 +263,11 @@ body {
   padding: 0;
   position: relative;
 }
+
 .bg-modal-confirm-delete .confirm-delete-content h1 {
   color: var(--primary-color);
 }
+
 .bg-modal-confirm-delete .confirm-delete-content .confirm-delete-close {
   position: absolute;
   top: -15px;
@@ -249,61 +278,95 @@ body {
           transform: rotate(45deg);
   cursor: pointer;
 }
+
 .bg-modal-confirm-delete .confirm-delete-content .confirm-button {
-  font-family: Poppins;
+  font-family: var(--ff);
 }
 
 .contacts-table {
   border-collapse: collapse;
   font-size: 0.9em;
   width: 100%;
+  font-weight: 200;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
 }
+
 .contacts-table tbody, .contacts-table tr {
-  border: 0.1rem solid var(--white);
+  border-bottom: 1px solid var(--white);
 }
+
+.contacts-table tbody, .contacts-table tr:last-of-type {
+  border-bottom: 2px solid #2F3763;
+}
+
+.contacts-table th {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.contacts-table .contact-head tr, .contacts-table th {
+  background-color: #2F3763;
+}
+
 .contacts-table td, .contacts-table th {
-  padding-right: 12px 15px;
-  text-align: center;
+  text-align: left;
+  padding: 10px;
 }
+
 .contacts-table .contacts-body tr:hover {
-  background-color: rgba(204, 204, 204, 0.39);
+  background-color: var(--secondary-color-200);
 }
-.contacts-table .contacts-body td.profile-pic h4.initials-item {
-  position: relative;
-  text-align: center;
-  margin: 0;
-  top: -26px;
-}
-.contacts-table .contacts-body td.profile-pic svg.circle-svg {
-  position: relative;
-  top: 10px;
-}
+
 .contacts-table .contacts-body .delete-btn button {
   height: 30px;
-  font-family: Poppins;
+  font-family: var(--ff);
 }
+
 .contacts-table .contacts-body .edit-btn button {
   height: 30px;
-  font-family: Poppins;
+  font-family: var(--ff);
+}
+
+.contacts-table .contacts-body .name-item span {
+  font-weight: 400;
+}
+
+.contacts-table .contacts-body .profile-pic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.contacts-table .contacts-body .profile-pic .circle-svg {
+  margin: 0 auto;
+  display: block;
+}
+
+.contacts-table .contacts-body .profile-pic .initials-item {
+  font-weight: 600;
 }
 
 @media (max-width: 889px) {
   .contacts-table {
     display: none;
   }
-
+  .contacts-table td, .contacts-table th {
+    text-align: center;
+  }
   .contacts-table, tbody, tr, td {
     display: block;
-    width: 100%;
   }
   .contacts-table .contacts-head, tbody .contacts-head, tr .contacts-head, td .contacts-head {
     display: none;
   }
-
   td {
     padding-bottom: 10px;
   }
-
   .contacts {
     padding: 0.5em;
     margin: 0.5em 1em;
@@ -315,3 +378,4 @@ body {
     width: 150px;
   }
 }
+/*# sourceMappingURL=contacts.css.map */
