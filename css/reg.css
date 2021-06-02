@@ -52,7 +52,7 @@ body {
   margin-top: 8em;
   border-radius: .6em 1.2em;
   border-color: var(--white);
-  border-width: 0.5rem;
+  border-width: 0.2rem;
   border-radius: 1rem;
   border-style: solid;
   -webkit-animation: fadeIn 2s;
@@ -99,14 +99,17 @@ label {
 
 .register-cta {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--white);
   display: block;
   margin: 0 auto;
   margin-top: 2em;
   text-decoration: none;
   padding: .6em 1.3em;
   font-size: 1.4em;
+  border-color: var(--white);
+  border-width: .2em;
   border-radius: 5em;
+  border-style: solid;
 }
 
 #registerResult {
