@@ -124,28 +124,39 @@ function addContact(e)
         const pp = document.createElement('td');
         pp.classList.add('profile-pic');
 
-        const circle = document.createElementNS('http://www.w3.org/2000/svg','svg');
-        circle.classList.add('circle-svg');
-        circle.setAttribute('width', '40');
-        circle.setAttribute('height', '40');
-        const profilePic = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        profilePic.setAttribute('cx', '20');
-        profilePic.setAttribute('cy', '20');
-        profilePic.setAttribute('r', '15');
-        profilePic.setAttribute('stroke', 'white');
-        profilePic.setAttribute('stroke-width', '2');
-        profilePic.setAttribute('fill', 'none');
-        circle.appendChild(profilePic);
-        pp.appendChild(circle);
+        const parentSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        parentSvg.classList.add('circle-svg');
+        parentSvg.setAttribute('width', '40');
+        parentSvg.setAttribute('height', '40');
+        //parentSvg.setAttribute('viewbox', '0 0 40 40');
+        pp.appendChild(parentSvg);
+
+        const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        parentSvg.appendChild(group);
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute('cx', '20');
+        circle.setAttribute('cy', '20');
+        circle.setAttribute('r', '15');
+        circle.setAttribute('stroke', 'white');
+        circle.setAttribute('stroke-width', '2');
+        circle.setAttribute('fill', 'none');
+        group.appendChild(circle);
+
+        const newInitials = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        newInitials.innerHTML = firstNameContact.value.charAt(0) + lastNameContact.value.charAt(0);
+        newInitials.classList.add('initials-item');
+        newInitials.setAttribute('x', '50%');
+        newInitials.setAttribute('y', '50%');
+        newInitials.setAttribute('text-anchor', 'middle');
+        newInitials.setAttribute('fill', 'white');
+        newInitials.setAttribute('stroke', 'none');
+        newInitials.setAttribute('dy', '0.3em');
+        group.appendChild(newInitials);
         contactRow.appendChild(pp);
 
-        const newInitials = document.createElement('h4');
-        newInitials.innerText = firstNameContact.value.charAt(0) + lastNameContact.value.charAt(0);
-        newInitials.classList.add('initials-item');
-        pp.appendChild(newInitials);
-
         const newContact = document.createElement('td');
-        newContact.innerText = input + " " + input2;
+        newContact.innerHTML = '<td>' + input + " " + '<span>' + input2 + '<span></td>';
         newContact.classList.add('name-item');
         contactRow.appendChild(newContact);
 
@@ -182,6 +193,11 @@ function addContact(e)
 
         contactsTable.appendChild(contactRow);
 
+        sortTableByColumn(document.querySelector('.contacts-table'), 1);
+
+        // =======================
+        // Insert contact into API
+        // =======================
         var fname = firstNameContact.value;
         var lname = lastNameContact.value;
         var email = emailField.value;
@@ -204,7 +220,7 @@ function addContact(e)
                 {
                     var jsonObject = JSON.parse(xhr.responseText);
                     console.log(jsonObject);
-                    alert(xhr.responseText);
+                    //alert(xhr.responseText);
 
                     if (jsonObject.status === "error") {
                         // do something about the error
@@ -218,6 +234,33 @@ function addContact(e)
             console.log(err.message);
         }
     }
+}
+
+function sortTableByColumn(table, column, asc = true)
+{
+    const dirModifier = asc ? 1 : -1;
+    const tBody = table.tBodies[0];
+    const rows = Array.from(tBody.querySelectorAll("tr"));
+
+    const sortedRows = rows.sort((a, b) =>
+    {
+        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim().split(" ");
+        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim().split(" ");
+
+        aColText[1] = aColText[1].toUpperCase();
+        bColText[1] = bColText[1].toUpperCase();
+
+        return aColText[1] > bColText[1] ? (1 * dirModifier) : (-1 * dirModifier);
+    });
+
+    while (tBody.firstChild)
+    {
+        tBody.removeChild(tBody.firstChild);
+    }
+
+    tBody.append(...sortedRows);
+
+
 }
 
 function editRow(e)
