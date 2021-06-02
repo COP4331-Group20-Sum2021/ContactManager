@@ -51,6 +51,7 @@ body
             font-size: 1em;
             text-decoration: none;
             color: var(--white);
+            transition: font-weight 150ms;
         }
 
         a.log-out:hover
@@ -80,11 +81,10 @@ body
 {
     background: var(--secondary-color);
     padding: 1em;
-    margin: 1em 10em;
+    margin: 1em 5em;
     text-align: left;
     align-items: center;
     color: var(--white);
-    border-color: var(--white);
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
@@ -165,12 +165,13 @@ body
     .modal-content
     {
         width: 500px;
-        height: 300px;
+        height: 450px;
         background-color: white;
         border-radius: 4px;
         text-align: center;
         padding: 0;
         position: relative;
+        
 
         .close
         {
@@ -188,12 +189,21 @@ body
             width: 50%;
             display: block;
             margin: 15px auto;
+            font-family: var(--ff);
+        }
+
+        textarea
+        {
+            width: 50%;
+            display: block;
+            margin: 15px auto;
+            font-family: var(--ff);
         }
 
         .initials
         {
             position: relative;
-            top: -285px;
+            top: -500px;
             text-align: center;
             font-size: 30px;
             font-weight: 300;
@@ -316,13 +326,53 @@ body
 }
 
 // =============================================================================
+// Description popup:
+// =============================================================================
+
+.bg-modal-description
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    .description-content
+    {
+        width: 35%;
+        height: auto;
+        background-color: white;
+        border-radius: 4px;
+        text-align: left;
+        padding: 0.75em 0.75em;
+        position: relative;
+
+        .description-close
+        {
+            position: absolute;
+            top: -15px;
+            right: 5px;
+            font-size: 40px;
+            font-weight: 300;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+    }
+}
+
+
+// =============================================================================
 // Contact table:
 // =============================================================================
 
 .contacts-table
 {
     border-collapse: collapse;
-    font-size: 0.9em;
+    font-size: 1em;
     width: 100%;
     font-weight: 200;
     border-radius: 5px 5px 0 0;
@@ -330,7 +380,7 @@ body
 
     tbody, tr 
     {
-        border-bottom: 1px solid var(--white);
+        border-bottom: 1px solid rgb(155, 154, 154);
     }
 
     tbody, tr:last-of-type
@@ -357,9 +407,14 @@ body
 
     .contacts-body
     {
-        tr:hover
+        tr 
         {
-            background-color: var(--secondary-color-200);
+            transition: background-color 250ms ease-in-out;
+
+            &:hover
+            {
+                background-color: var(--secondary-color-200);
+            }
         }
 
         .delete-btn
@@ -386,6 +441,25 @@ body
             span 
             {
                 font-weight: 400;
+            }
+
+            .name-description
+            {
+                text-decoration: none;
+                color: white;
+                border-bottom: 1px solid transparent;
+                transition: border-color 250ms ease-in-out;
+                
+                &:hover
+                {
+                    border-color: white;
+                    cursor: pointer;
+                }
+            }
+
+            .description-text
+            {
+                display: none;
             }
         }
 

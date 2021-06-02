@@ -8,6 +8,9 @@ const firstNameContact = document.getElementById('firstName');
 const lastNameContact = document.getElementById('lastName');
 const emailField = document.getElementById('email');
 const phoneField = document.getElementById('phone');
+const descriptionField = document.getElementById('description');
+const getModalDescription = document.querySelector('.bg-modal-description');
+const getDescriptionText = document.querySelector('.description-text');
 
 const getPlusButton = document.getElementById('plusButton');
 const getCloseButton = document.querySelector('.close');
@@ -25,6 +28,7 @@ firstNameContact.addEventListener('keyup', getFirstName);
 lastNameContact.addEventListener('keyup', getLastName);
 emailField.addEventListener('keyup', getEmail);
 phoneField.addEventListener('keyup', getPhone);
+descriptionField.addEventListener('keyup', getDescription);
 
 getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
@@ -34,12 +38,13 @@ getConfirmCloseButton.addEventListener('click', closeConfirmButton);
 
 contactsTable.addEventListener('click', deleteRow);
 contactsTable.addEventListener('click', editRow);
+contactsTable.addEventListener('click', descriptionDisplay);
 
 // =============================================================================
 // Functions:
 // =============================================================================
 
-// get first letter inputed into the 'First Name' field
+// get first name and first letter inputed into the 'First Name' field
 let input;
 let firstInitial;
 function getFirstName(e)
@@ -54,7 +59,7 @@ function getFirstName(e)
         printInitials(firstInitial);
 }
 
-// get first letter inputed into the 'Last Name' field
+// get last name and first letter inputed into the 'Last Name' field
 let input2;
 let lastInitial;
 function getLastName(e)
@@ -72,18 +77,52 @@ function printInitials(i)
     document.getElementById("fl").innerHTML = i;
 }
 
-// get first letter inputed into the 'Last Name' field
+// get email
 let input3;
 function getEmail(e)
 {
     input3 = e.target.value;
 }
 
-// get first letter inputed into the 'Last Name' field
+// get phone number
 let input4;
 function getPhone(e)
 {
     input4 = e.target.value;
+}
+
+// get description
+let input5;
+function getDescription(e)
+{
+    input5 = e.target.value;
+}
+
+function descriptionDisplay(e)
+{
+    e.preventDefault();
+    const b = e.target;
+
+    if (b.classList[0] === 'name-description')
+    {
+        document.querySelector('.bg-modal-description').style.display = 'flex';
+
+        let nameCell = b.parentElement;
+        if (b.nodeName === 'SPAN') 
+        {
+            nameCell = nameCell.parentElement;
+        }
+
+        const desc = nameCell.querySelector('.description-text');
+        const description = desc.innerText;
+        
+        getDescriptionText.innerText = description;
+    }
+}
+
+function descriptionClose()
+{
+    document.querySelector('.bg-modal-description').style.display = 'none';
 }
 
 // open add contact popup with the plus button
@@ -116,7 +155,7 @@ function addContact(e)
     e.preventDefault();
     document.querySelector('.bg-modal').style.display = 'none';
 
-    if (input || input2 != (undefined || ""))
+    if (true)
     {
         const contactRow = document.createElement('tr');
         contactRow.classList.add('contactRow');
@@ -126,18 +165,17 @@ function addContact(e)
 
         const parentSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
         parentSvg.classList.add('circle-svg');
-        parentSvg.setAttribute('width', '40');
-        parentSvg.setAttribute('height', '40');
-        //parentSvg.setAttribute('viewbox', '0 0 40 40');
+        parentSvg.setAttribute('width', '60');
+        parentSvg.setAttribute('height', '60');
         pp.appendChild(parentSvg);
 
         const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         parentSvg.appendChild(group);
 
         const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        circle.setAttribute('cx', '20');
-        circle.setAttribute('cy', '20');
-        circle.setAttribute('r', '15');
+        circle.setAttribute('cx', '30');
+        circle.setAttribute('cy', '30');
+        circle.setAttribute('r', '20');
         circle.setAttribute('stroke', 'white');
         circle.setAttribute('stroke-width', '2');
         circle.setAttribute('fill', 'none');
@@ -156,15 +194,23 @@ function addContact(e)
         contactRow.appendChild(pp);
 
         const newContact = document.createElement('td');
-        newContact.innerHTML = '<td>' + input + " " + '<span>' + input2 + '<span></td>';
+        newContact.innerHTML = '<a class="name-description">' + input + " " + '<span class="name-description">' + input2 + '</span></a>';
         newContact.classList.add('name-item');
         contactRow.appendChild(newContact);
 
+        // description
+        const descriptionInsert = document.createElement('p');
+        descriptionInsert.classList.add("description-text");
+        descriptionInsert.innerHTML = input5;
+        newContact.appendChild(descriptionInsert);
+
+        // email
         const newEmail = document.createElement('td');
         newEmail.innerText = input3;
         newEmail.classList.add('email-item');
         contactRow.appendChild(newEmail);
 
+        // phone
         const newPhone = document.createElement('td');
         const opar = "(";
         const cpar = ")";
@@ -301,7 +347,7 @@ function editRow(e)
         editLastNameContact.value = nameArr[1];
         editEmailContact.value = emailChild;
         editPhoneContact.value = numPhone;
-        editInitials.innerText = initialsChild;
+        editInitials.innerHTML = initialsChild;
 
         editFirstNameContact.addEventListener('keyup', editFirstName);
         editLastNameContact.addEventListener('keyup', editLastName);

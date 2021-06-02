@@ -37,6 +37,8 @@ body {
   font-size: 1em;
   text-decoration: none;
   color: var(--white);
+  -webkit-transition: font-weight 150ms;
+  transition: font-weight 150ms;
 }
 
 .navbar nav a.log-out:hover {
@@ -58,13 +60,12 @@ body {
 .contacts {
   background: var(--secondary-color);
   padding: 1em;
-  margin: 1em 10em;
+  margin: 1em 5em;
   text-align: left;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   color: var(--white);
-  border-color: var(--white);
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
@@ -142,7 +143,7 @@ body {
 
 .bg-modal .modal-content {
   width: 500px;
-  height: 300px;
+  height: 450px;
   background-color: white;
   border-radius: 4px;
   text-align: center;
@@ -165,11 +166,19 @@ body {
   width: 50%;
   display: block;
   margin: 15px auto;
+  font-family: var(--ff);
+}
+
+.bg-modal .modal-content textarea {
+  width: 50%;
+  display: block;
+  margin: 15px auto;
+  font-family: var(--ff);
 }
 
 .bg-modal .modal-content .initials {
   position: relative;
-  top: -285px;
+  top: -500px;
   text-align: center;
   font-size: 30px;
   font-weight: 300;
@@ -283,9 +292,48 @@ body {
   font-family: var(--ff);
 }
 
+.bg-modal-description {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.bg-modal-description .description-content {
+  width: 35%;
+  height: auto;
+  background-color: white;
+  border-radius: 4px;
+  text-align: left;
+  padding: 0.75em 0.75em;
+  position: relative;
+}
+
+.bg-modal-description .description-content .description-close {
+  position: absolute;
+  top: -15px;
+  right: 5px;
+  font-size: 40px;
+  font-weight: 300;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  cursor: pointer;
+}
+
 .contacts-table {
   border-collapse: collapse;
-  font-size: 0.9em;
+  font-size: 1em;
   width: 100%;
   font-weight: 200;
   border-radius: 5px 5px 0 0;
@@ -293,7 +341,7 @@ body {
 }
 
 .contacts-table tbody, .contacts-table tr {
-  border-bottom: 1px solid var(--white);
+  border-bottom: 1px solid #9b9a9a;
 }
 
 .contacts-table tbody, .contacts-table tr:last-of-type {
@@ -314,6 +362,11 @@ body {
   padding: 10px;
 }
 
+.contacts-table .contacts-body tr {
+  -webkit-transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out;
+}
+
 .contacts-table .contacts-body tr:hover {
   background-color: var(--secondary-color-200);
 }
@@ -330,6 +383,23 @@ body {
 
 .contacts-table .contacts-body .name-item span {
   font-weight: 400;
+}
+
+.contacts-table .contacts-body .name-item .name-description {
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: border-color 250ms ease-in-out;
+  transition: border-color 250ms ease-in-out;
+}
+
+.contacts-table .contacts-body .name-item .name-description:hover {
+  border-color: white;
+  cursor: pointer;
+}
+
+.contacts-table .contacts-body .name-item .description-text {
+  display: none;
 }
 
 .contacts-table .contacts-body .profile-pic {
