@@ -250,6 +250,14 @@ function sortTableByColumn(table, column, asc = true)
         aColText[1] = aColText[1].toUpperCase();
         bColText[1] = bColText[1].toUpperCase();
 
+        if(aColText[1] == bColText[1])
+        {
+            aColText[0] = aColText[0].toUpperCase();
+            bColText[0] = bColText[0].toUpperCase();
+
+            return aColText[0] > bColText[0] ? (1 * dirModifier) : (-1 * dirModifier);
+        }
+
         return aColText[1] > bColText[1] ? (1 * dirModifier) : (-1 * dirModifier);
     });
 
@@ -340,13 +348,10 @@ function editRow(e)
             editinput4 = e.target.value;
         }
 
-
-
-
         document.querySelector('.edit-done-button').onclick = function(e)
         {
             e.preventDefault();
-            contactRow.querySelector("h4").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
+            contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
             contactRow.childNodes[1].innerText = editinput1 + " " + editinput2;
             contactRow.childNodes[2].innerText = editinput3;
 
