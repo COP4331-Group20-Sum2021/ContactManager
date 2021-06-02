@@ -4,7 +4,7 @@
 
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         returnWithError($conn->connect_error);
     } else {
         // = = = = = = = = = = API GOES HERE = = = = = = = = = = 

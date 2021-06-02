@@ -4,7 +4,7 @@
 
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         // if error, return it to front end
         returnWithError($conn->connect_error);
     } else {
@@ -18,7 +18,7 @@
         $result = $stmt->get_result();
 
         // check if there was a result row
-        if($row = $result->fetch_assoc()) {
+        if ($row = $result->fetch_assoc()) {
             // if there was a result row, return the login info
             returnWithInfo($row['firstname'], $row['lastname'], $row['id']);
             // updates the last logged in date of the user
@@ -32,7 +32,7 @@
             $stmt2->execute();
             $result2 = $stmt2->get_result();
 
-            if($row2 = $result2->fetch_assoc()) {
+            if ($row2 = $result2->fetch_assoc()) {
                 // if the second sql statement returned something, the login matched another login in the database, 
                 // and therefore the password supplied didnt match with that login
                 returnWithError("Invalid password.");

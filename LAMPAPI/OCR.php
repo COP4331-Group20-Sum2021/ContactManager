@@ -20,7 +20,7 @@
         return $fullText;
     }
 
-    if(isset($_FILES['file']['name'])) {
+    if (isset($_FILES['file']['name'])) {
         // file name
         $filename = $_FILES['file']['name'];
 
@@ -35,9 +35,9 @@
         $valid_ext = array("pdf","doc","docx","jpg","png","jpeg");
         //echo $location;
         $response = 0;
-        if(in_array($file_extension,$valid_ext)) {
+        if (in_array($file_extension,$valid_ext)) {
             // Upload file
-            if(move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
                 $file = fopen($location, 'r');
                 $complete = process($file);
                 //echo $complete;

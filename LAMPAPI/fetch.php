@@ -10,7 +10,7 @@
 
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         // if error, return it to front end
         returnWithError($conn->connect_error);
     } else {
@@ -22,8 +22,8 @@
         $result = $stmt->get_result();
         
         // loop over all result rows, construct the results array 
-        while($row = $result->fetch_assoc()) {
-            if($searchCount > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ($searchCount > 0) {
                 $searchResults .= ",";
             }
             $searchCount++;
@@ -31,7 +31,7 @@
         }
         
         // chcek if any were created
-        if($searchCount == 0) {
+        if ($searchCount == 0) {
             returnWithError("No Records Found.");
         } else {
             returnWithInfo($searchResults);

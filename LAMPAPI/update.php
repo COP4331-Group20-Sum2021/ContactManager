@@ -4,7 +4,7 @@
 
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         returnWithError($conn->connect_error);
     } else {
         // = = = = = = = = = = API GOES HERE = = = = = = = = = = 
@@ -17,7 +17,11 @@
             $stmt->bind_param("ssssss", $inData["firstname"], $inData["lastname"], $inData["phone"], $inData["email"], $inData["description"], $inData["id"]);
             $stmt->execute();
 
-            returnWithSuccess();
+            if ($stmt->errno) {
+                returnWithError($stmt->error);
+            } else {
+                returnWithSuccess();
+            }
 
             $stmt->close();
         }

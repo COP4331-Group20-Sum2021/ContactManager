@@ -8,7 +8,7 @@
 
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         returnWithError($conn->connect_error);
     } else {
         // creates a new sql statement to delete the specified contact from the database
@@ -16,8 +16,12 @@
         $stmt->bind_param("s", $id);
         $stmt->execute();
 
-        // blindly returns with a success condition (THIS IS BAD AND WILL BE ADDRESSED EVENTUALLY)
-        returnWithSuccess();
+        if ($stmt->errno) {
+            returnWithError($stmt->error);
+        } else {
+            returnWithSuccess();
+        }
+
         $stmt->close();
 
         // close the data base connection

@@ -13,7 +13,7 @@
 
     // connect to data base
     $conn = new mysqli("localhost", "dbuser", getenv("SQL_PW"), "ContactManager");
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         // if error, return it to front end
         returnWithError($conn->connect_error);
     } else {
@@ -22,8 +22,13 @@
         $stmt->bind_param("ssssss", $fName, $lName, $userId, $phone, $email, $description);
         $stmt->execute();
 
-        // blindly returns with a success condition (THIS IS BAD AND WILL BE ADDRESSED EVENTUALLY)
-        returnWithSuccess($stmt->insert_id);
+
+        if ($stmt->errno) {
+            returnWithError($stmt->error);
+        } else {
+            returnWithSuccess($stmt->insert_id);
+        }
+
         $stmt->close();
     }
     // close the data base connection
