@@ -25,7 +25,7 @@ function doRegister()
 		return;
 
     // Store the values in the jsonPayload.
-	var jsonPayload = JSON.stringify({ "login": uname, "password" : hash , "firstname" : fname, "lastname" : lname  });
+	var jsonPayload = JSON.stringify({ "login": uname, "password" : hash , "firstname" : fname, "lastname" : lname });
 	var url = urlBase + '/register.' + extension;
 
     // Create an HTTPRequest.
@@ -43,7 +43,6 @@ function doRegister()
 			{
 				// Parse the response.
 				var jsonObject = JSON.parse(xhr.responseText);
-				userId = jsonObject.userId;
 
 				// If server sends an error response, throw an error.
 				// Otherwise save a cookie and redirect.
@@ -53,8 +52,6 @@ function doRegister()
 				}
 				else
 				{
-					firstName = jsonObject.firstName;
-					lastName = jsonObject.lastName;
 					saveCookie();
 					window.location.href = "contacts.html";
 				}
@@ -120,13 +117,11 @@ function doLogin()
 		xhr.onreadystatechange = function()
 		{
 
-
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				// Parse the response.
 				var jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.userId;
-
+				
 				// If server sends an error response, throw an error.
 				// Otherwise save a cookie and redirect.
 				if (jsonObject.id < 1)
@@ -135,6 +130,7 @@ function doLogin()
 				}
 				else
 				{
+					userId = jsonObject.userId;
 					firstName = jsonObject.firstName;
 					lastName = jsonObject.lastName;
 					saveCookie();
@@ -202,10 +198,6 @@ function readCookie()
 	if (userId < 0)
 	{
 		window.location.href = "index.html";
-	}
-	else
-	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
