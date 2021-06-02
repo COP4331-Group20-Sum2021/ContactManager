@@ -352,7 +352,7 @@ function editRow(e)
         {
             e.preventDefault();
             contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
-            contactRow.childNodes[1].innerText = editinput1 + " " + editinput2;
+            contactRow.childNodes[1].innerHTML = '<td>' + editinput1 + " " + '<span>' + editinput2 + '<span></td>';
             contactRow.childNodes[2].innerText = editinput3;
 
             const opar = "(";
@@ -364,6 +364,7 @@ function editRow(e)
             const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
 
             contactRow.childNodes[3].innerText = phonenumber;
+            sortTableByColumn(document.querySelector('.contacts-table'), 1);
             document.querySelector('.edit-bg-modal').style.display = 'none';
         }
     }
