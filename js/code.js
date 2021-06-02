@@ -43,7 +43,8 @@ function doRegister()
 			{
 				// Parse the response.
 				var jsonObject = JSON.parse(xhr.responseText);
-				
+				userId = jsonObject.userId;
+
 				// If server sends an error response, throw an error.
 				// Otherwise save a cookie and redirect.
 				if (jsonObject.status == "error")
@@ -124,6 +125,7 @@ function doLogin()
 			{
 				// Parse the response.
 				var jsonObject = JSON.parse( xhr.responseText );
+				userId = jsonObject.userId;
 
 				// If server sends an error response, throw an error.
 				// Otherwise save a cookie and redirect.
