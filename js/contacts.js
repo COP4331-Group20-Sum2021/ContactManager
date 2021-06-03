@@ -9,7 +9,6 @@ const lastNameContact = document.getElementById('lastName');
 const emailField = document.getElementById('email');
 const phoneField = document.getElementById('phone');
 const descriptionField = document.getElementById('description');
-const getModalDescription = document.querySelector('.bg-modal-description');
 const getDescriptionText = document.querySelector('.description-text');
 
 const getPlusButton = document.getElementById('plusButton');
@@ -19,6 +18,9 @@ const getConfirmCloseButton = document.querySelector('.confirm-delete-close');
 
 const getDoneButton = document.querySelector('.done-button');
 const contactsTable = document.querySelector('.contacts-body');
+
+const getSearchInput = document.querySelector('.search-bar');
+const searchButton = document.querySelector('.search-button');
 
 // =============================================================================
 // Event Listeners:
@@ -39,6 +41,8 @@ getConfirmCloseButton.addEventListener('click', closeConfirmButton);
 contactsTable.addEventListener('click', deleteRow);
 contactsTable.addEventListener('click', editRow);
 contactsTable.addEventListener('click', descriptionDisplay);
+
+searchButton.addEventListener('click', runSearch);
 
 // =============================================================================
 // Functions:
@@ -277,7 +281,7 @@ function addContact(e)
                     {
                         // TODO change the below to some sort of popping up action idk man
                         // Insert ID of error box div into the quotes.
-                        document.getElementById("").innerHTML = jsonObject.message;
+                        // document.getElementById("").innerHTML = jsonObject.message;
                         return;
                     }
                     
@@ -299,7 +303,7 @@ function addContact(e)
         catch(err)
         {
             // Insert ID of error box div into the quotes.
-            document.getElementById("").innerHTML = err.message;
+            // document.getElementById("").innerHTML = err.message;
             console.log(err.message);
         }
     }
@@ -350,6 +354,9 @@ function editRow(e)
 
     if (b.classList[0] === 'edit-button')
     {
+        var contactId = b.parentElement.dataset.id;
+
+        // show dialog
         document.querySelector('.edit-bg-modal').style.display = 'flex';
 
         const editFirstNameContact = document.getElementById('edit-firstName');
@@ -359,6 +366,7 @@ function editRow(e)
         const editInitials = document.getElementById('edit-fl');
         const editDescriptionContact = document.getElementById('edit-description');
 
+        // get original info
         const editCell = b.parentElement;
         const contactRow = editCell.parentElement;
         const initialsChild = contactRow.childNodes[0].innerText;
@@ -434,29 +442,80 @@ function editRow(e)
         document.querySelector('.edit-done-button').onclick = function(e)
         {
             e.preventDefault();
-            contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + 
-            editinput2.charAt(0);
 
-            contactRow.childNodes[1].innerHTML = '<a class="name-description">' 
-            + editinput1 + " " + '<span class="name-description">' + editinput2 + '</span></a>';
+            var jsonPayload = JSON.stringify({
+                "firstname": editinput1.trim(),
+                "lastname": editinput2.trim(),
+                "phone": editinput4.trim(),
+                "email": editinput3.trim(),
+                "id": contactId, 
+                "description": editinput5.trim()
+            });
 
-            contactRow.childNodes[2].innerText = editinput3;
-            const descriptionInsert = document.createElement('p');
-            descriptionInsert.classList.add("description-text");
-            descriptionInsert.innerHTML = editinput5;
-            contactRow.childNodes[1].appendChild(descriptionInsert);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/update.php", true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-            const opar = "(";
-            const cpar = ")";
-            const dash = "-";
-            const ac = editinput4.slice(0, 3);
-            const num3 = editinput4.slice(3, 6);
-            const num4 = editinput4.slice(6, 11);
-            const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
+            try
+            {
+                xhr.onreadystatechange = function()
+                {
+                    if (this.readyState == 4 && this.status == 200)
+                    {
+                        var jsonObject = JSON.parse(xhr.responseText);
+                        console.log(jsonObject);
+                        //alert(xhr.responseText);
+                        
+                        if (jsonObject.status === "error")
+                        {
+                            // TODO change the below to some sort of popping up action idk man
+                            // also TODO if error occurs on delete, more of internal error
+                            // Insert ID of error box div into the quotes.
+                            // document.getElementById("").innerHTML = jsonObject.message;
+                            return;
+                        }
+                        
+                        // edit initials
+                        contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + 
+                            editinput2.charAt(0);
+            
+                        // edit name
+                        contactRow.childNodes[1].innerHTML = '<a class="name-description">' 
+                            + editinput1 + " " + '<span class="name-description">' + editinput2 + '</span></a>';
+            
+                        // edit email
+                        contactRow.childNodes[2].innerText = editinput3;
 
-            contactRow.childNodes[3].innerText = phonenumber;
-            sortTableByColumn(document.querySelector('.contacts-table'), 1);
-            document.querySelector('.edit-bg-modal').style.display = 'none';
+                        // edit description
+                        const descriptionInsert = document.createElement('p');
+                        descriptionInsert.classList.add("description-text");
+                        descriptionInsert.innerHTML = editinput5;
+                        contactRow.childNodes[1].appendChild(descriptionInsert);
+            
+                        // edit phone number
+                        const opar = "(";
+                        const cpar = ")";
+                        const dash = "-";
+                        const ac = editinput4.slice(0, 3);
+                        const num3 = editinput4.slice(3, 6);
+                        const num4 = editinput4.slice(6, 11);
+                        const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
+                        contactRow.childNodes[3].innerText = phonenumber;
+            
+                        // sort table and close dialog
+                        sortTableByColumn(document.querySelector('.contacts-table'), 1);
+                        document.querySelector('.edit-bg-modal').style.display = 'none';
+                    }
+                };
+                xhr.send(jsonPayload);
+            }
+            catch(err)
+            {
+                // Insert ID of error box div into the quotes.
+                // document.getElementById("").innerHTML = err.message;
+                console.log(err.message);
+            }
+            
         }
     }
 }
@@ -468,16 +527,199 @@ function deleteRow(e)
 
     if (b.classList[0] === 'delete-button')
     {
+        var contactId = b.parentElement.dataset.id;
+
+        // show confirm dialog
         document.querySelector('.bg-modal-confirm-delete').style.display = 'flex';
 
         document.querySelector('.confirm-button').onclick = function()
         {
-            document.querySelector('.bg-modal-confirm-delete').style.display = 'none';
-            const contactCell = b.parentElement;
-            const contactRow = contactCell.parentElement;
-            contactRow.remove();
+            // this isnt gonna go here but it is okay for now
+            var jsonPayload = JSON.stringify({"id": contactId});
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/deletecontact.php", true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+            try
+            {
+                xhr.onreadystatechange = function()
+                {
+                    if (this.readyState == 4 && this.status == 200)
+                    {
+                        var jsonObject = JSON.parse(xhr.responseText);
+                        console.log(jsonObject);
+                        //alert(xhr.responseText);
+
+                        if (jsonObject.status === "error")
+                        {
+                            // TODO change the below to some sort of popping up action idk man
+                            // also TODO if error occurs on delete, more of internal error
+                            // Insert ID of error box div into the quotes.
+                            // document.getElementById("").innerHTML = jsonObject.message;
+                            return;
+                        }
+                        
+                        // hide dialog
+                        document.querySelector('.bg-modal-confirm-delete').style.display = 'none';
+                        const contactCell = b.parentElement;
+                        const contactRow = contactCell.parentElement;
+                        contactRow.remove();
+                    }
+                };
+                xhr.send(jsonPayload);
+            }
+            catch(err)
+            {
+                // Insert ID of error box div into the quotes.
+                // document.getElementById("").innerHTML = err.message;
+                console.log(err.message);
+            }
         }
     }
 }
 
+function runSearch()
+{
+    let searchTerm = getSearchInput.value;
 
+    // this isnt gonna go here but it is okay for now
+    var jsonPayload = JSON.stringify({"userid": userId, "searchterm": searchTerm});
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/search.php", true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try
+    {
+        xhr.onreadystatechange = function()
+        {
+            if (this.readyState == 4 && this.status == 200)
+            {
+                var jsonObject = JSON.parse(xhr.responseText);
+                console.log(jsonObject);
+                //alert(xhr.responseText);
+
+                if (jsonObject.error !== "")
+                {
+                    // TODO change the below to some sort of popping up action idk man
+                    // also TODO if error occurs on delete, more of internal error
+                    // Insert ID of error box div into the quotes.
+                    // document.getElementById("").innerHTML = jsonObject.message;
+                    return;
+                }
+                
+                addResultsToTable(jsonObject.results);
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        // Insert ID of error box div into the quotes.
+        // document.getElementById("").innerHTML = err.message;
+        console.log(err.message);
+    }
+}
+
+function addResultsToTable(results)
+{
+    // nukes the current table
+    contactsTable.innerHTML = "";
+
+    for (var i = 0; i < results.length; i++) {
+        var fname = results[i].firstname;
+        var lname = results[i].lastname;
+        var phone = results[i].phone;
+        var email = results[i].email;
+        var descr = results[i].description;
+        var contactId = results[i].id;
+
+        // creates new <tr> element
+        const contactRow = document.createElement('tr');
+        contactRow.classList.add('contactRow');
+
+        // creates new <td> element
+        const pp = document.createElement('td');
+        pp.classList.add('profile-pic');
+
+        // = = = = = START CIRCLE CREATION = = = = =
+        const parentSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        parentSvg.classList.add('circle-svg');
+        parentSvg.setAttribute('width', '60');
+        parentSvg.setAttribute('height', '60');
+        pp.appendChild(parentSvg);
+
+        const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        parentSvg.appendChild(group);
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute('cx', '30');
+        circle.setAttribute('cy', '30');
+        circle.setAttribute('r', '20');
+        circle.setAttribute('stroke', 'white');
+        circle.setAttribute('stroke-width', '2');
+        circle.setAttribute('fill', 'none');
+        group.appendChild(circle);
+
+        const newInitials = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        newInitials.innerHTML = fname.charAt(0) + lname.charAt(0);
+        newInitials.classList.add('initials-item');
+        newInitials.setAttribute('x', '50%');
+        newInitials.setAttribute('y', '50%');
+        newInitials.setAttribute('text-anchor', 'middle');
+        newInitials.setAttribute('fill', 'white');
+        newInitials.setAttribute('stroke', 'none');
+        newInitials.setAttribute('dy', '0.3em');
+        group.appendChild(newInitials);
+        contactRow.appendChild(pp);
+        // = = = = = END CIRCLE CREATION = = = = =
+
+        const newContact = document.createElement('td');
+
+        newContact.innerHTML = '<a class="name-description">' + fname + " " + 
+            '<span class="name-description">' + lname + '</span></a>';
+
+        newContact.classList.add('name-item');
+        contactRow.appendChild(newContact);
+
+        // description
+        const descriptionInsert = document.createElement('p');
+        descriptionInsert.classList.add("description-text");
+        descriptionInsert.innerHTML = descr;
+        newContact.appendChild(descriptionInsert);
+
+        // email
+        const newEmail = document.createElement('td');
+        newEmail.innerText = email;
+        newEmail.classList.add('email-item');
+        contactRow.appendChild(newEmail);
+
+        // phone
+        const newPhone = document.createElement('td');
+        const opar = "(";
+        const cpar = ")";
+        const dash = "-";
+        const ac = phone.slice(0, 3);
+        const num3 = phone.slice(3, 6);
+        const num4 = phone.slice(6, 11);
+        const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
+        newPhone.innerText = phonenumber;
+        newPhone.classList.add('phone-item');
+        contactRow.appendChild(newPhone);
+
+        const editButton = document.createElement('td');
+        editButton.innerHTML = '<button class="edit-button">Edit</button>';
+        editButton.classList.add('edit-btn');
+        editButton.dataset.id = contactId;
+        contactRow.appendChild(editButton);
+
+        const deleteButton = document.createElement('td');
+        deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
+        deleteButton.classList.add('delete-btn');
+        deleteButton.dataset.id = contactId;
+        contactRow.appendChild(deleteButton);
+        
+        contactsTable.appendChild(contactRow);
+    }
+}
