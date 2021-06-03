@@ -423,6 +423,16 @@ body {
 }
 
 @media (max-width: 889px) {
+  .contacts {
+    padding: 0.5em;
+    margin: 0.5em 1em;
+  }
+  .contacts .container h1 {
+    font-size: 18px;
+  }
+  .contacts .container .search .search-bar {
+    width: 150px;
+  }
   .contacts-table {
     display: none;
   }
@@ -438,15 +448,11 @@ body {
   td {
     padding-bottom: 10px;
   }
-  .contacts {
-    padding: 0.5em;
-    margin: 0.5em 1em;
+  .bg-modal .modal-content {
+    width: 80%;
   }
-  .contacts .container h1 {
-    font-size: 18px;
-  }
-  .contacts .container .search .search-bar {
-    width: 150px;
+  .edit-bg-modal .edit-modal-content {
+    width: 80%;
   }
 }
 /*# sourceMappingURL=contacts.css.map */

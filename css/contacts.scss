@@ -492,6 +492,36 @@ body
 
 @media(max-width: 889px)
 {
+    // =================================
+    // Contact div around contact table:
+    // =================================
+
+    .contacts
+    {
+        padding: 0.5em;
+        margin: 0.5em 1em;
+
+        .container
+        {
+            h1 
+            {
+                font-size: 18px;
+            }
+
+            .search
+            {
+                .search-bar
+                {
+                    width: 150px;
+                }
+
+            }
+        }
+    }
+    
+    // =================================
+    // Contact table:
+    // =================================
     .contacts-table 
     {
         display: none;
@@ -517,28 +547,30 @@ body
         padding-bottom: 10px;
     }
 
-    .contacts
+    
+
+    // ============================
+    // Add contact popup on mobile:
+    // ============================
+
+    .bg-modal
     {
-        padding: 0.5em;
-        margin: 0.5em 1em;
-
-        .container
+        .modal-content
         {
-            h1 
-            {
-                font-size: 18px;
-            }
-
-            .search
-            {
-                .search-bar
-                {
-                    width: 150px;
-                }
-
-            }
+            width: 80%;
         }
     }
 
+    // =============================
+    // Edit contact popup on mobile:
+    // =============================
+
+    .edit-bg-modal
+    {
+        .edit-modal-content
+        {
+            width: 80%;
+        }
+    }
 }
 
