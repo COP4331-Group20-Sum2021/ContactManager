@@ -164,12 +164,12 @@ body
 
     .modal-content
     {
-        width: 500px;
-        height: 450px;
+        width: 45%;
+        height: auto;
         background-color: white;
         border-radius: 4px;
         text-align: center;
-        padding: 0;
+        padding: 0.75em;
         position: relative;
         
 
@@ -202,11 +202,8 @@ body
 
         .initials
         {
-            position: relative;
-            top: -500px;
-            text-align: center;
-            font-size: 30px;
-            font-weight: 300;
+            font-size: 2em;
+            font-weight: 500;
         }
 
         .done-button
@@ -234,12 +231,12 @@ body
 
     .edit-modal-content
     {
-        width: 500px;
-        height: 300px;
+        width: 45%;
+        height: auto;
         background-color: white;
         border-radius: 4px;
         text-align: center;
-        padding: 0;
+        padding: 0.75em;
         position: relative;
 
         .edit-close
@@ -260,13 +257,18 @@ body
             margin: 15px auto;
         }
 
+        textarea
+        {
+            width: 50%;
+            display: block;
+            margin: 15px auto;
+            font-family: var(--ff);
+        }
+
         .edit-initials
         {
-            position: relative;
-            top: -285px;
-            text-align: center;
-            font-size: 30px;
-            font-weight: 300;
+            font-size: 2em;
+            font-weight: 500;
         }
 
         .edit-done-button

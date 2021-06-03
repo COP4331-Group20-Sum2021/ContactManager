@@ -290,11 +290,13 @@ function sortTableByColumn(table, column, asc = true)
 
     const sortedRows = rows.sort((a, b) =>
     {
-        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim().split(" ");
-        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim().split(" ");
+        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).querySelector('.name-description').textContent.trim().split(" ");
+        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).querySelector('.name-description').textContent.trim().split(" ");
 
         aColText[1] = aColText[1].toUpperCase();
         bColText[1] = bColText[1].toUpperCase();
+
+        console.log(aColText[1]);
 
         if(aColText[1] == bColText[1])
         {
@@ -331,6 +333,7 @@ function editRow(e)
         const editEmailContact = document.getElementById('edit-email');
         const editPhoneContact = document.getElementById('edit-phone');
         const editInitials = document.getElementById('edit-fl');
+        const editDescriptionContact = document.getElementById('edit-description');
 
         const editCell = b.parentElement;
         const contactRow = editCell.parentElement;
@@ -338,6 +341,7 @@ function editRow(e)
         const nameChild = contactRow.childNodes[1].innerText;
         const emailChild = contactRow.childNodes[2].innerText;
         const phoneChild = contactRow.childNodes[3].innerText;
+        const descChild = contactRow.childNodes[1].querySelector('.description-text').innerHTML;
 
         const nameArr = nameChild.split(" ");
         const numPhone = phoneChild.replace(/[()-]/g, "").replace(" ", "");
@@ -348,11 +352,13 @@ function editRow(e)
         editEmailContact.value = emailChild;
         editPhoneContact.value = numPhone;
         editInitials.innerHTML = initialsChild;
+        editDescriptionContact.value = descChild;
 
         editFirstNameContact.addEventListener('keyup', editFirstName);
         editLastNameContact.addEventListener('keyup', editLastName);
         editEmailContact.addEventListener('keyup', editEmail);
         editPhoneContact.addEventListener('keyup', editPhone);
+        editDescriptionContact.addEventListener('keyup', editDescription);
 
         let editinput1 = nameArr[0];
         function editFirstName(e)
@@ -394,12 +400,23 @@ function editRow(e)
             editinput4 = e.target.value;
         }
 
+        let editinput5 = descChild;
+        function editDescription(e)
+        {
+            editinput5 = e.target.value;
+        }
+
+
         document.querySelector('.edit-done-button').onclick = function(e)
         {
             e.preventDefault();
             contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
-            contactRow.childNodes[1].innerHTML = '<td>' + editinput1 + " " + '<span>' + editinput2 + '<span></td>';
+            contactRow.childNodes[1].innerHTML = '<a class="name-description">' + editinput1 + " " + '<span class="name-description">' + editinput2 + '</span></a>';
             contactRow.childNodes[2].innerText = editinput3;
+            const descriptionInsert = document.createElement('p');
+            descriptionInsert.classList.add("description-text");
+            descriptionInsert.innerHTML = editinput5;
+            contactRow.childNodes[1].appendChild(descriptionInsert);
 
             const opar = "(";
             const cpar = ")";

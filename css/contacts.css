@@ -142,12 +142,12 @@ body {
 }
 
 .bg-modal .modal-content {
-  width: 500px;
-  height: 450px;
+  width: 45%;
+  height: auto;
   background-color: white;
   border-radius: 4px;
   text-align: center;
-  padding: 0;
+  padding: 0.75em;
   position: relative;
 }
 
@@ -177,11 +177,8 @@ body {
 }
 
 .bg-modal .modal-content .initials {
-  position: relative;
-  top: -500px;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 300;
+  font-size: 2em;
+  font-weight: 500;
 }
 
 .bg-modal .modal-content .done-button {
@@ -207,12 +204,12 @@ body {
 }
 
 .edit-bg-modal .edit-modal-content {
-  width: 500px;
-  height: 300px;
+  width: 45%;
+  height: auto;
   background-color: white;
   border-radius: 4px;
   text-align: center;
-  padding: 0;
+  padding: 0.75em;
   position: relative;
 }
 
@@ -233,12 +230,16 @@ body {
   margin: 15px auto;
 }
 
+.edit-bg-modal .edit-modal-content textarea {
+  width: 50%;
+  display: block;
+  margin: 15px auto;
+  font-family: var(--ff);
+}
+
 .edit-bg-modal .edit-modal-content .edit-initials {
-  position: relative;
-  top: -285px;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 300;
+  font-size: 2em;
+  font-weight: 500;
 }
 
 .edit-bg-modal .edit-modal-content .edit-done-button {
