@@ -10,7 +10,7 @@ var lastName = "";
 // =============================================================================
 function doRegister()
 {
-    // Get entrys from the webpage.
+    // Get entries from the webpage.
     var fname = document.getElementById("firstname").value;
     var lname = document.getElementById("lastname").value;
 	var uname = document.getElementById("username").value;
@@ -56,7 +56,7 @@ function doRegister()
 					window.location.href = "contacts.html";
 				}
 			}
-		}
+		};
 		// Send the payload.
 		xhr.send(jsonPayload);
 	}
@@ -137,7 +137,7 @@ function doLogin()
 					window.location.href = "contacts.html";
 				}
 			}
-		}
+		};
 		// Send the payload.
 		xhr.send(jsonPayload);
 	}

@@ -1,4 +1,4 @@
-//readCookie();
+readCookie();
 
 // =============================================================================
 // Selectors:
@@ -153,16 +153,18 @@ function closeEditButton()
 function addContact(e)
 {
     e.preventDefault();
-    document.querySelector('.bg-modal').style.display = 'none';
 
-    if (true)
+    if (input != undefined || input != "" || input2 != undefined || input2 != "")
     {
+        // creates new <tr> element
         const contactRow = document.createElement('tr');
         contactRow.classList.add('contactRow');
 
+        // creates new <td> element
         const pp = document.createElement('td');
         pp.classList.add('profile-pic');
 
+        // = = = = = START CIRCLE CREATION = = = = =
         const parentSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
         parentSvg.classList.add('circle-svg');
         parentSvg.setAttribute('width', '60');
@@ -192,9 +194,13 @@ function addContact(e)
         newInitials.setAttribute('dy', '0.3em');
         group.appendChild(newInitials);
         contactRow.appendChild(pp);
+        // = = = = = END CIRCLE CREATION = = = = =
 
         const newContact = document.createElement('td');
-        newContact.innerHTML = '<a class="name-description">' + input + " " + '<span class="name-description">' + input2 + '</span></a>';
+
+        newContact.innerHTML = '<a class="name-description">' + input + " " + 
+            '<span class="name-description">' + input2 + '</span></a>';
+
         newContact.classList.add('name-item');
         contactRow.appendChild(newContact);
 
@@ -224,22 +230,14 @@ function addContact(e)
         contactRow.appendChild(newPhone);
 
         const editButton = document.createElement('td');
-        const eButton = document.createElement('button');
-        editButton.appendChild(eButton);
         editButton.innerHTML = '<button class="edit-button">Edit</button>';
         editButton.classList.add('edit-btn');
         contactRow.appendChild(editButton);
 
         const deleteButton = document.createElement('td');
-        const dButton = document.createElement('button');
-        deleteButton.appendChild(dButton);
         deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
         deleteButton.classList.add('delete-btn');
         contactRow.appendChild(deleteButton);
-
-        contactsTable.appendChild(contactRow);
-
-        sortTableByColumn(document.querySelector('.contacts-table'), 1);
 
         // =======================
         // Insert contact into API
@@ -248,10 +246,18 @@ function addContact(e)
         var lname = lastNameContact.value;
         var email = emailField.value;
         var phone = phoneField.value;
-        var userid = 1;
-        var desc = "This is temporary";
+        var userid = userId;
+        var desc = descriptionField.value;
 
-        var jsonPayload = JSON.stringify({"firstname": fname, "lastname": lname, "phone": phone, "email": email, "userid": userid, "description": desc});
+        var jsonPayload = JSON.stringify({
+            "firstname": fname.trim(),
+            "lastname": lname.trim(),
+            "phone": phone.trim(),
+            "email": email.trim(),
+            "userid": userid, 
+            "description": desc.trim()
+        });
+
         console.log(jsonPayload);
 
         var xhr = new XMLHttpRequest();
@@ -262,21 +268,38 @@ function addContact(e)
         {
             xhr.onreadystatechange = function()
             {
-                if (this.readyState == 4 && this.status == 200) 
+                if (this.readyState == 4 && this.status == 200)
                 {
                     var jsonObject = JSON.parse(xhr.responseText);
                     console.log(jsonObject);
                     //alert(xhr.responseText);
-
-                    if (jsonObject.status === "error") {
-                        // do something about the error
+                    if (jsonObject.status === "error")
+                    {
+                        // TODO change the below to some sort of popping up action idk man
+                        // Insert ID of error box div into the quotes.
+                        document.getElementById("").innerHTML = jsonObject.message;
+                        return;
                     }
+                    
+                    var contactId = jsonObject.id;
+                    
+                    // what if we did this
+                    deleteButton.dataset.id = contactId;
+                    editButton.dataset.id = contactId;
+
+                    contactsTable.appendChild(contactRow);
+            
+                    sortTableByColumn(document.querySelector('.contacts-table'), 1);
+
+                    document.querySelector('.bg-modal').style.display = 'none';
                 }
             };
             xhr.send(jsonPayload);
         }
         catch(err)
         {
+            // Insert ID of error box div into the quotes.
+            document.getElementById("").innerHTML = err.message;
             console.log(err.message);
         }
     }
@@ -290,8 +313,11 @@ function sortTableByColumn(table, column, asc = true)
 
     const sortedRows = rows.sort((a, b) =>
     {
-        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).querySelector('.name-description').textContent.trim().split(" ");
-        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).querySelector('.name-description').textContent.trim().split(" ");
+        const aColText = a.querySelector(`td:nth-child(${ column + 1 })`)
+        .querySelector('.name-description').textContent.trim().split(" ");
+        
+        const bColText = b.querySelector(`td:nth-child(${ column + 1 })`)
+        .querySelector('.name-description').textContent.trim().split(" ");
 
         aColText[1] = aColText[1].toUpperCase();
         bColText[1] = bColText[1].toUpperCase();
@@ -315,8 +341,6 @@ function sortTableByColumn(table, column, asc = true)
     }
 
     tBody.append(...sortedRows);
-
-
 }
 
 function editRow(e)
@@ -410,8 +434,12 @@ function editRow(e)
         document.querySelector('.edit-done-button').onclick = function(e)
         {
             e.preventDefault();
-            contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + editinput2.charAt(0);
-            contactRow.childNodes[1].innerHTML = '<a class="name-description">' + editinput1 + " " + '<span class="name-description">' + editinput2 + '</span></a>';
+            contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + 
+            editinput2.charAt(0);
+
+            contactRow.childNodes[1].innerHTML = '<a class="name-description">' 
+            + editinput1 + " " + '<span class="name-description">' + editinput2 + '</span></a>';
+
             contactRow.childNodes[2].innerText = editinput3;
             const descriptionInsert = document.createElement('p');
             descriptionInsert.classList.add("description-text");
@@ -451,3 +479,5 @@ function deleteRow(e)
         }
     }
 }
+
+
