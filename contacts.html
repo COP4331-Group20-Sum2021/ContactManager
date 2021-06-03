@@ -16,7 +16,7 @@
             <a class="logo" href="#">Contact<span>Factory</span></a>    
 
             <nav>
-                <a class="log-out" onclick="doLogout();">Log out</a>    
+                <a class="log-out" onclick="doLogout();">Log Out</a>    
             </nav>
         </div>
     </div>
@@ -55,8 +55,11 @@
         <div class="modal-content">
             <div class="close">+</div>
             
-            <svg width="100" height="100">
-                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="none" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                <g>
+                    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="none" />
+                    <text class="initials" id="fl" x="50%" y="50%" text-anchor="middle" fill="black" stroke="none" dy="0.3em"></text>
+                </g>
             </svg>
 
             <form action="">
@@ -64,9 +67,10 @@
                 <input type="text" id="lastName" placeholder="Last Name">
                 <input type="text" id="email" placeholder="Email">
                 <input type="text" id="phone" placeholder="Phone Number">
+                <textarea type="text" id="description" placeholder="Description" 
+                rows="5" cols="35" wrap="soft" style="resize: none"></textarea>
                 <button class="done-button">Done</button>
             </form>
-            <h1 class="initials" id="fl"></h1>
         </div>
     </div>
 
@@ -74,8 +78,11 @@
         <div class="edit-modal-content">
             <div class="edit-close">+</div>
             
-            <svg width="100" height="100">
-                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="none" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                <g>
+                    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="none" />
+                    <text class="edit-initials" id="edit-fl" x="50%" y="50%" text-anchor="middle" fill="black" stroke="none" dy="0.3em"></text>
+                </g>
             </svg>
 
             <form action="">
@@ -83,9 +90,18 @@
                 <input type="text" id="edit-lastName" placeholder="Last Name">
                 <input type="text" id="edit-email" placeholder="Email">
                 <input type="text" id="edit-phone" placeholder="Phone Number">
+                <textarea type="text" id="edit-description" placeholder="Description" 
+                rows="5" cols="35" wrap="soft" style="resize: none"></textarea>
                 <button class="edit-done-button">Done</button>
             </form>
-            <h1 class="edit-initials" id="edit-fl"></h1>
+        </div>
+    </div>
+
+    <div class="bg-modal-description">
+        <div class="description-content">
+            <a class="description-close" onclick="descriptionClose();">+</a>
+            <h4>Description</h4>
+            <p class="description-text"></p>
         </div>
     </div>
 
@@ -96,6 +112,7 @@
             <button class="confirm-button">Delete Contact</button>
         </div>
     </div>
+    
     <script src="js/code.js"></script>
     <script src="js/contacts.js"></script>
 </body>
