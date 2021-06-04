@@ -53,7 +53,7 @@ function doRegister()
 				else
 				{
 					saveCookie();
-					window.location.href = "contacts.html";
+					window.location.href = "index.html";
 				}
 			}
 		};
@@ -134,7 +134,7 @@ function doLogin()
 					firstName = jsonObject.firstName;
 					lastName = jsonObject.lastName;
 					saveCookie();
-					window.location.href = "index.html";
+					window.location.href = "contacts.html";
 				}
 			}
 		};
