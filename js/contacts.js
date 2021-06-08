@@ -141,13 +141,13 @@ function closeButton()
     document.querySelector('.bg-modal').style.display = 'none';
 }
 
-// close add contact popup with 'x' button
+// close delete contact popup with 'x' button
 function closeConfirmButton()
 {
     document.querySelector('.bg-modal-confirm-delete').style.display = 'none';
 }
 
-// close add contact popup with 'x' button
+// close edit contact popup with 'x' button
 function closeEditButton()
 {
     document.querySelector('.edit-bg-modal').style.display = 'none';
@@ -158,154 +158,150 @@ function addContact(e)
 {
     e.preventDefault();
 
-    if (input != undefined || input != "" || input2 != undefined || input2 != "")
+    document.getElementById("search-error").style.display = 'none';
+
+    // creates new <tr> element
+    const contactRow = document.createElement('tr');
+    contactRow.classList.add('contactRow');
+
+    // creates new <td> element
+    const pp = document.createElement('td');
+    pp.classList.add('profile-pic');
+
+    // = = = = = START CIRCLE CREATION = = = = =
+    const parentSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    parentSvg.classList.add('circle-svg');
+    parentSvg.setAttribute('width', '60');
+    parentSvg.setAttribute('height', '60');
+    pp.appendChild(parentSvg);
+
+    const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    parentSvg.appendChild(group);
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx', '30');
+    circle.setAttribute('cy', '30');
+    circle.setAttribute('r', '20');
+    circle.setAttribute('stroke', 'white');
+    circle.setAttribute('stroke-width', '2');
+    circle.setAttribute('fill', 'none');
+    group.appendChild(circle);
+
+    const newInitials = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    newInitials.innerHTML = firstNameContact.value.charAt(0) + lastNameContact.value.charAt(0);
+    newInitials.classList.add('initials-item');
+    newInitials.setAttribute('x', '50%');
+    newInitials.setAttribute('y', '50%');
+    newInitials.setAttribute('text-anchor', 'middle');
+    newInitials.setAttribute('fill', 'white');
+    newInitials.setAttribute('stroke', 'none');
+    newInitials.setAttribute('dy', '0.3em');
+    group.appendChild(newInitials);
+    contactRow.appendChild(pp);
+    // = = = = = END CIRCLE CREATION = = = = =
+
+    const newContact = document.createElement('td');
+
+    newContact.innerHTML = '<a class="name-description">' + input + " " + 
+        '<span class="name-description">' + input2 + '</span></a>';
+
+    newContact.classList.add('name-item');
+    contactRow.appendChild(newContact);
+
+    // description
+    const descriptionInsert = document.createElement('p');
+    descriptionInsert.classList.add("description-text");
+    descriptionInsert.innerHTML = input5;
+    newContact.appendChild(descriptionInsert);
+
+    // email
+    const newEmail = document.createElement('td');
+    newEmail.innerText = input3;
+    newEmail.classList.add('email-item');
+    contactRow.appendChild(newEmail);
+
+    // phone
+    const newPhone = document.createElement('td');
+    const opar = "(";
+    const cpar = ")";
+    const dash = "-";
+    const ac = input4.slice(0, 3);
+    const num3 = input4.slice(3, 6);
+    const num4 = input4.slice(6, 11);
+    const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
+    newPhone.innerText = phonenumber;
+    newPhone.classList.add('phone-item');
+    contactRow.appendChild(newPhone);
+
+    const editButton = document.createElement('td');
+    editButton.innerHTML = '<button class="edit-button">Edit</button>';
+    editButton.classList.add('edit-btn');
+    contactRow.appendChild(editButton);
+
+    const deleteButton = document.createElement('td');
+    deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
+    deleteButton.classList.add('delete-btn');
+    contactRow.appendChild(deleteButton);
+
+    // =======================
+    // Insert contact into API
+    // =======================
+    var fname = firstNameContact.value;
+    var lname = lastNameContact.value;
+    var email = emailField.value;
+    var phone = phoneField.value;
+    var userid = userId;
+    var desc = descriptionField.value;
+
+    var jsonPayload = JSON.stringify({
+        "firstname": fname.trim(),
+        "lastname": lname.trim(),
+        "phone": phone.trim(),
+        "email": email.trim(),
+        "userid": userid, 
+        "description": desc.trim()
+    });
+
+    console.log(jsonPayload);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/insertcontact.php", true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try
     {
-        // creates new <tr> element
-        const contactRow = document.createElement('tr');
-        contactRow.classList.add('contactRow');
-
-        // creates new <td> element
-        const pp = document.createElement('td');
-        pp.classList.add('profile-pic');
-
-        // = = = = = START CIRCLE CREATION = = = = =
-        const parentSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-        parentSvg.classList.add('circle-svg');
-        parentSvg.setAttribute('width', '60');
-        parentSvg.setAttribute('height', '60');
-        pp.appendChild(parentSvg);
-
-        const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        parentSvg.appendChild(group);
-
-        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        circle.setAttribute('cx', '30');
-        circle.setAttribute('cy', '30');
-        circle.setAttribute('r', '20');
-        circle.setAttribute('stroke', 'white');
-        circle.setAttribute('stroke-width', '2');
-        circle.setAttribute('fill', 'none');
-        group.appendChild(circle);
-
-        const newInitials = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        newInitials.innerHTML = firstNameContact.value.charAt(0) + lastNameContact.value.charAt(0);
-        newInitials.classList.add('initials-item');
-        newInitials.setAttribute('x', '50%');
-        newInitials.setAttribute('y', '50%');
-        newInitials.setAttribute('text-anchor', 'middle');
-        newInitials.setAttribute('fill', 'white');
-        newInitials.setAttribute('stroke', 'none');
-        newInitials.setAttribute('dy', '0.3em');
-        group.appendChild(newInitials);
-        contactRow.appendChild(pp);
-        // = = = = = END CIRCLE CREATION = = = = =
-
-        const newContact = document.createElement('td');
-
-        newContact.innerHTML = '<a class="name-description">' + input + " " + 
-            '<span class="name-description">' + input2 + '</span></a>';
-
-        newContact.classList.add('name-item');
-        contactRow.appendChild(newContact);
-
-        // description
-        const descriptionInsert = document.createElement('p');
-        descriptionInsert.classList.add("description-text");
-        descriptionInsert.innerHTML = input5;
-        newContact.appendChild(descriptionInsert);
-
-        // email
-        const newEmail = document.createElement('td');
-        newEmail.innerText = input3;
-        newEmail.classList.add('email-item');
-        contactRow.appendChild(newEmail);
-
-        // phone
-        const newPhone = document.createElement('td');
-        const opar = "(";
-        const cpar = ")";
-        const dash = "-";
-        const ac = input4.slice(0, 3);
-        const num3 = input4.slice(3, 6);
-        const num4 = input4.slice(6, 11);
-        const phonenumber = opar + ac + cpar + " " + num3 + dash + num4;
-        newPhone.innerText = phonenumber;
-        newPhone.classList.add('phone-item');
-        contactRow.appendChild(newPhone);
-
-        const editButton = document.createElement('td');
-        editButton.innerHTML = '<button class="edit-button">Edit</button>';
-        editButton.classList.add('edit-btn');
-        contactRow.appendChild(editButton);
-
-        const deleteButton = document.createElement('td');
-        deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
-        deleteButton.classList.add('delete-btn');
-        contactRow.appendChild(deleteButton);
-
-        // =======================
-        // Insert contact into API
-        // =======================
-        var fname = firstNameContact.value;
-        var lname = lastNameContact.value;
-        var email = emailField.value;
-        var phone = phoneField.value;
-        var userid = userId;
-        var desc = descriptionField.value;
-
-        var jsonPayload = JSON.stringify({
-            "firstname": fname.trim(),
-            "lastname": lname.trim(),
-            "phone": phone.trim(),
-            "email": email.trim(),
-            "userid": userid, 
-            "description": desc.trim()
-        });
-
-        console.log(jsonPayload);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/insertcontact.php", true);
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-        try
+        xhr.onreadystatechange = function()
         {
-            xhr.onreadystatechange = function()
+            if (this.readyState == 4 && this.status == 200)
             {
-                if (this.readyState == 4 && this.status == 200)
+                var jsonObject = JSON.parse(xhr.responseText);
+                console.log(jsonObject);
+                //alert(xhr.responseText);
+                if (jsonObject.status === "error")
                 {
-                    var jsonObject = JSON.parse(xhr.responseText);
-                    console.log(jsonObject);
-                    //alert(xhr.responseText);
-                    if (jsonObject.status === "error")
-                    {
-                        // TODO change the below to some sort of popping up action idk man
-                        // Insert ID of error box div into the quotes.
-                        // document.getElementById("").innerHTML = jsonObject.message;
-                        return;
-                    }
-                    
-                    var contactId = jsonObject.id;
-                    
-                    // what if we did this
-                    deleteButton.dataset.id = contactId;
-                    editButton.dataset.id = contactId;
-
-                    contactsTable.appendChild(contactRow);
-            
-                    sortTableByColumn(document.querySelector('.contacts-table'), 1);
-
-                    document.querySelector('.bg-modal').style.display = 'none';
+                    // Insert ID of error box div into the quotes.
+                    document.getElementById("add-error").innerHTML = jsonObject.message;
+                    return;
                 }
-            };
-            xhr.send(jsonPayload);
-        }
-        catch(err)
-        {
-            // Insert ID of error box div into the quotes.
-            // document.getElementById("").innerHTML = err.message;
-            console.log(err.message);
-        }
+                
+                var contactId = jsonObject.id;
+                
+                deleteButton.dataset.id = contactId;
+                editButton.dataset.id = contactId;
+
+                contactsTable.appendChild(contactRow);
+        
+                sortTableByColumn(document.querySelector('.contacts-table'), 1);
+
+                document.querySelector('.bg-modal').style.display = 'none';
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        document.getElementById("add-error").innerHTML = err.message;
+        console.log(err.message);
     }
 }
 
@@ -354,6 +350,8 @@ function editRow(e)
 
     if (b.classList[0] === 'edit-button')
     {
+        document.getElementById("search-error").style.display = 'none';
+
         var contactId = b.parentElement.dataset.id;
 
         // show dialog
@@ -468,13 +466,11 @@ function editRow(e)
                         
                         if (jsonObject.status === "error")
                         {
-                            // TODO change the below to some sort of popping up action idk man
-                            // also TODO if error occurs on delete, more of internal error
                             // Insert ID of error box div into the quotes.
-                            // document.getElementById("").innerHTML = jsonObject.message;
+                            document.getElementById("edit-error").innerHTML = jsonObject.message;
                             return;
                         }
-                        
+
                         // edit initials
                         contactRow.querySelector("text").innerHTML = editinput1.charAt(0) + 
                             editinput2.charAt(0);
@@ -512,7 +508,7 @@ function editRow(e)
             catch(err)
             {
                 // Insert ID of error box div into the quotes.
-                // document.getElementById("").innerHTML = err.message;
+                document.getElementById("edit-error").innerHTML = err.message;
                 console.log(err.message);
             }
             
@@ -527,6 +523,8 @@ function deleteRow(e)
 
     if (b.classList[0] === 'delete-button')
     {
+        document.getElementById("search-error").style.display = 'none';
+        
         var contactId = b.parentElement.dataset.id;
 
         // show confirm dialog
@@ -556,7 +554,7 @@ function deleteRow(e)
                             // TODO change the below to some sort of popping up action idk man
                             // also TODO if error occurs on delete, more of internal error
                             // Insert ID of error box div into the quotes.
-                            // document.getElementById("").innerHTML = jsonObject.message;
+                            document.getElementById("delete-error").innerHTML = jsonObject.message;
                             return;
                         }
                         
@@ -572,7 +570,7 @@ function deleteRow(e)
             catch(err)
             {
                 // Insert ID of error box div into the quotes.
-                // document.getElementById("").innerHTML = err.message;
+                document.getElementById("delete-error").innerHTML = err.message;
                 console.log(err.message);
             }
         }
@@ -585,7 +583,6 @@ function runSearch()
 
     // this isnt gonna go here but it is okay for now
     var jsonPayload = JSON.stringify({"userid": userId, "searchterm": searchTerm});
-
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/search.php", true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -602,13 +599,12 @@ function runSearch()
 
                 if (jsonObject.error !== "")
                 {
-                    // TODO change the below to some sort of popping up action idk man
-                    // also TODO if error occurs on delete, more of internal error
                     // Insert ID of error box div into the quotes.
-                    // document.getElementById("").innerHTML = jsonObject.message;
+                    document.getElementById("search-error").style.display = 'flex';
+                    document.getElementById("search-error").innerHTML = "! " + jsonObject.message;
                     return;
                 }
-                
+                document.getElementById("search-error").style.display = 'none';
                 addResultsToTable(jsonObject.results);
             }
         };
@@ -617,7 +613,8 @@ function runSearch()
     catch(err)
     {
         // Insert ID of error box div into the quotes.
-        // document.getElementById("").innerHTML = err.message;
+        document.getElementById("search-error").style.display = 'flex';
+        document.getElementById("search-error").innerHTML = "! " + err.message;
         console.log(err.message);
     }
 }

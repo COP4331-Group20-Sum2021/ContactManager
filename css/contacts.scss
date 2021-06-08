@@ -11,6 +11,7 @@
     --secondary-color: #202733;
     --white: #fff;
     --ff: 'Poppins', sans-serif;
+    --error: rgb(187, 36, 36);
 }
 
 body
@@ -89,6 +90,17 @@ body
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 
+    #search-error
+    {
+        display: none;
+        background-color: #b8443b;
+        margin-bottom: 1em;
+        padding: .7em .7em;
+        font-weight: 400;
+        font-size: 1em;
+        border-radius: 5px 5px;
+    }
+
     h1 
     {
         font-size: 27px;
@@ -146,6 +158,8 @@ body
     }
 }
 
+
+
 // =============================================================================
 // Contact field popup:
 // =============================================================================
@@ -171,8 +185,13 @@ body
         text-align: center;
         padding: 0.75em;
         position: relative;
-        
 
+        #add-error
+        {
+            color: var(--error);
+            font-weight: 500;
+        }
+        
         .close
         {
             position: absolute;
@@ -239,6 +258,12 @@ body
         padding: 0.75em;
         position: relative;
 
+        #edit-error
+        {
+            color: var(--error);
+            font-weight: 500;
+        }
+
         .edit-close
         {
             position: absolute;
@@ -303,6 +328,12 @@ body
         text-align: center;
         padding: 0;
         position: relative;
+
+        #delete-error
+        {
+            color: var(--error);
+            font-weight: 500;
+        }
 
         h1 
         {
