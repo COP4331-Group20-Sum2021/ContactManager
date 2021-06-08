@@ -52,7 +52,7 @@ function createContactObject(textArray) {
 	for (let i = 0; i < textArray.length; i++){
 		
 		if (isPhonenumber(textArray[i])){
-			phone = textArray[i];
+			phone = textArray[i].replace(/[^\d]/g, "");;
 			continue;
 		}
 		
@@ -111,13 +111,24 @@ function updateFields(usrObj){
 	document.getElementById("lastName").value = usrObj.lname;
 	document.getElementById("phone").value = usrObj.phone;
 	document.getElementById("email").value = usrObj.email;
+ 
+  var event = new Event('input', {
+      bubbles: true,
+      cancelable: true,
+  });
+  
+  document.getElementById('description').dispatchEvent(event);
+  document.getElementById('firstName').dispatchEvent(event);
+  document.getElementById('lastName').dispatchEvent(event);
+  document.getElementById('email').dispatchEvent(event);
+  document.getElementById('phone').dispatchEvent(event);
 }
 
 // Add Contact to Database using API.
 // Receives the userid of the person
 function ocrContact(userid){
 	var fname = document.getElementById("firstName").value;
-    var lname = document.getElementById("lastName").value;
+  var lname = document.getElementById("lastName").value;
 	var email = document.getElementById("email").value;
 	var phone = document.getElementById("phone").value;
 	var desc = document.getElementById("description").value.replace(/\n/g, " ");;

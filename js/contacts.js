@@ -26,11 +26,11 @@ const searchButton = document.querySelector('.search-button');
 // Event Listeners:
 // =============================================================================
 
-firstNameContact.addEventListener('keyup', getFirstName);
-lastNameContact.addEventListener('keyup', getLastName);
-emailField.addEventListener('keyup', getEmail);
-phoneField.addEventListener('keyup', getPhone);
-descriptionField.addEventListener('keyup', getDescription);
+firstNameContact.addEventListener('input', getFirstName);
+lastNameContact.addEventListener('input', getLastName);
+emailField.addEventListener('input', getEmail);
+phoneField.addEventListener('input', getPhone);
+descriptionField.addEventListener('input', getDescription);
 
 getPlusButton.addEventListener('click', plusButton);
 getDoneButton.addEventListener('click', addContact);
