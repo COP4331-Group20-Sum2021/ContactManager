@@ -199,6 +199,32 @@ body {
 
 .bg-modal .modal-content .done-button {
   font-family: var(--ff);
+  margin-bottom: 1em;
+}
+
+.bg-modal .modal-content h5 {
+  margin: 0;
+  font-weight: 400;
+  margin-bottom: 0.1em;
+}
+
+.bg-modal .modal-content .add-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 1em;
+}
+
+.bg-modal .modal-content .add-buttons .extract-text {
+  font-family: var(--ff);
+  margin-left: 0.5em;
+}
+
+.bg-modal .modal-content .add-buttons .business-card {
+  font-family: var(--ff);
 }
 
 .edit-bg-modal {
@@ -301,7 +327,7 @@ body {
 }
 
 .bg-modal-confirm-delete .confirm-delete-content h1 {
-  color: var(--primary-color);
+  color: var(--error);
 }
 
 .bg-modal-confirm-delete .confirm-delete-content .confirm-delete-close {
