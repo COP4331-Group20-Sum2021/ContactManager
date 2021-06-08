@@ -5,6 +5,7 @@
   --secondary-color: #202733;
   --white: #fff;
   --ff: 'Poppins', sans-serif;
+  --error: rgb(187, 36, 36);
 }
 
 body {
@@ -70,6 +71,16 @@ body {
   overflow: hidden;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.contacts #search-error {
+  display: none;
+  background-color: #b8443b;
+  margin-bottom: 1em;
+  padding: .7em .7em;
+  font-weight: 400;
+  font-size: 1em;
+  border-radius: 5px 5px;
 }
 
 .contacts h1 {
@@ -151,6 +162,11 @@ body {
   position: relative;
 }
 
+.bg-modal .modal-content #add-error {
+  color: var(--error);
+  font-weight: 500;
+}
+
 .bg-modal .modal-content .close {
   position: absolute;
   top: -15px;
@@ -213,6 +229,11 @@ body {
   position: relative;
 }
 
+.edit-bg-modal .edit-modal-content #edit-error {
+  color: var(--error);
+  font-weight: 500;
+}
+
 .edit-bg-modal .edit-modal-content .edit-close {
   position: absolute;
   top: -15px;
@@ -272,6 +293,11 @@ body {
   text-align: center;
   padding: 0;
   position: relative;
+}
+
+.bg-modal-confirm-delete .confirm-delete-content #delete-error {
+  color: var(--error);
+  font-weight: 500;
 }
 
 .bg-modal-confirm-delete .confirm-delete-content h1 {
