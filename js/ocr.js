@@ -46,7 +46,7 @@ function createContactObject(textArray) {
 	var lname = "";
 	var phone = "";
 	var email = "";
-	var descr = "Scanned with OCR: ";
+	var descr = "OCR-Scan: ";
 	
 	// Try to use the scanned info to build the userdata.
 	for (let i = 0; i < textArray.length; i++){
@@ -101,28 +101,26 @@ function isEmail(currentString){
 }
 
 function updateFields(usrObj){
-	document.getElementById("desc").style.visibility = 'visible';
-	document.getElementById("fname").type = 'text';
-	document.getElementById("lname").type = 'text';
-	document.getElementById("email").type = 'text';
-	document.getElementById("phone").type = 'text';
-	
-	document.getElementById('desc').value = usrObj.descr;
-	document.getElementById("fname").value = usrObj.fname;
-	document.getElementById("lname").value = usrObj.lname;
+	// document.getElementById("description").style.visibility = 'visible';
+	// document.getElementById("firstName").type = 'text';
+	// document.getElementById("lastName").type = 'text';
+	// document.getElementById("email").type = 'text';
+	// document.getElementById("phone").type = 'text';
+	document.getElementById('description').value = usrObj.descr;
+	document.getElementById("firstName").value = usrObj.fname;
+	document.getElementById("lastName").value = usrObj.lname;
 	document.getElementById("phone").value = usrObj.phone;
 	document.getElementById("email").value = usrObj.email;
-	
 }
 
 // Add Contact to Database using API.
 // Receives the userid of the person
 function ocrContact(userid){
-	var fname = document.getElementById("fname").value;
-    var lname = document.getElementById("lname").value;
+	var fname = document.getElementById("firstName").value;
+    var lname = document.getElementById("lastName").value;
 	var email = document.getElementById("email").value;
 	var phone = document.getElementById("phone").value;
-	var desc = document.getElementById("desc").value.replace(/\n/g, " ");;
+	var desc = document.getElementById("description").value.replace(/\n/g, " ");;
 	
 	var jsonPayload = JSON.stringify({ "firstname": fname, "lastname" : lname , "phone" : phone, "email" : email, "description": desc, "userid":userid});
 	

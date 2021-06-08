@@ -3,9 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Contacts | ContactManager</title>
+	<title>Contacts | ContactFactory</title>
 	<link rel="stylesheet" href="css/contacts.css">
-    <link rel="shortcut icon" href="#">
+
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -70,7 +72,13 @@
                 <input type="text" id="phone" placeholder="Phone Number">
                 <textarea type="text" id="description" placeholder="Description" 
                 rows="5" cols="35" wrap="soft" style="resize: none"></textarea>
-                <button class="done-button">Done</button>
+                <button class="done-button">Add Contact</button>
+                <h5>Scan text from photos:</h5>
+                <div class="add-buttons">
+                    <button type="button" class="business-card" onclick="document.getElementById('file').click();">Choose File</button>
+                    <input type="file" id="file" name="file" style="display:none;"></form>
+                    <button class="extract-text" onclick="uploadFile()">Extract Text</button>
+                </div>  
             </form>
         </div>
     </div>
@@ -102,7 +110,7 @@
     <div class="bg-modal-description">
         <div class="description-content">
             <a class="description-close" onclick="descriptionClose();">+</a>
-            <h4>Description</h4>
+            <h3>Description</h3>
             <p class="description-text"></p>
         </div>
     </div>
@@ -118,5 +126,7 @@
     
     <script src="js/code.js"></script>
     <script src="js/contacts.js"></script>
+    <script src="js/ocr.js"></script>
+
 </body>
 </html>

@@ -161,7 +161,7 @@ body
 
 
 // =============================================================================
-// Contact field popup:
+// Add contact field popup:
 // =============================================================================
 
 .bg-modal
@@ -228,6 +228,32 @@ body
         .done-button
         {
             font-family: var(--ff);
+            margin-bottom: 1em;
+        }
+
+        h5 
+        {
+            margin: 0;
+            font-weight: 400;
+            margin-bottom: 0.1em;
+        }
+
+        .add-buttons
+        {
+            display: flex;
+            justify-content: center;
+            margin: 0 1em;
+    
+            .extract-text
+            {
+                font-family: var(--ff);
+                margin-left: 0.5em;
+            }
+    
+            .business-card
+            {
+                font-family: var(--ff);
+            }
         }
     }
 }
@@ -337,7 +363,7 @@ body
 
         h1 
         {
-            color: var(--primary-color);
+            color: var(--error);
         }
 
         .confirm-delete-close
