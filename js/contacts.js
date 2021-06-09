@@ -102,6 +102,7 @@ function getDescription(e)
     input5 = e.target.value;
 }
 
+// display description when clicking on name
 function descriptionDisplay(e)
 {
     e.preventDefault();
@@ -124,6 +125,7 @@ function descriptionDisplay(e)
     }
 }
 
+// close description when clicking the 'x' button
 function descriptionClose()
 {
     document.querySelector('.bg-modal-description').style.display = 'none';
@@ -233,13 +235,15 @@ function addContact(e)
     newPhone.classList.add('phone-item');
     contactRow.appendChild(newPhone);
 
+    // create edit button
     const editButton = document.createElement('td');
-    editButton.innerHTML = '<button class="edit-button">Edit</button>';
+    editButton.innerHTML = '<button class="edit-button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>';
     editButton.classList.add('edit-btn');
     contactRow.appendChild(editButton);
 
+    // create delete button
     const deleteButton = document.createElement('td');
-    deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
+    deleteButton.innerHTML = '<button class="delete-button"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>';
     deleteButton.classList.add('delete-btn');
     contactRow.appendChild(deleteButton);
 
@@ -258,7 +262,7 @@ function addContact(e)
         "lastname": lname.trim(),
         "phone": phone.trim(),
         "email": email.trim(),
-        "userid": userid, 
+        "userid": userid,
         "description": desc.trim()
     });
 
@@ -305,6 +309,7 @@ function addContact(e)
     }
 }
 
+// sort table on the front end
 function sortTableByColumn(table, column, asc = true)
 {
     const dirModifier = asc ? 1 : -1;
@@ -343,6 +348,7 @@ function sortTableByColumn(table, column, asc = true)
     tBody.append(...sortedRows);
 }
 
+// edit contact
 function editRow(e)
 {
     e.preventDefault();
@@ -441,6 +447,9 @@ function editRow(e)
         {
             e.preventDefault();
 
+            // =======================
+            // Edit contact in API
+            // =======================
             var jsonPayload = JSON.stringify({
                 "firstname": editinput1.trim(),
                 "lastname": editinput2.trim(),
@@ -516,6 +525,7 @@ function editRow(e)
     }
 }
 
+// delete contact
 function deleteRow(e)
 {
     e.preventDefault();
@@ -532,7 +542,10 @@ function deleteRow(e)
 
         document.querySelector('.confirm-button').onclick = function()
         {
-            // this isnt gonna go here but it is okay for now
+            // =======================
+            // Delete contact in API
+            // =======================
+
             var jsonPayload = JSON.stringify({"id": contactId});
 
             var xhr = new XMLHttpRequest();
@@ -551,8 +564,6 @@ function deleteRow(e)
 
                         if (jsonObject.status === "error")
                         {
-                            // TODO change the below to some sort of popping up action idk man
-                            // also TODO if error occurs on delete, more of internal error
                             // Insert ID of error box div into the quotes.
                             document.getElementById("delete-error").innerHTML = jsonObject.message;
                             return;
@@ -577,11 +588,11 @@ function deleteRow(e)
     }
 }
 
+// run search in API
 function runSearch()
 {
     let searchTerm = getSearchInput.value;
 
-    // this isnt gonna go here but it is okay for now
     var jsonPayload = JSON.stringify({"userid": userId, "searchterm": searchTerm});
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://cop4331-group20.ddns.net/LAMPAPI/search.php", true);
@@ -602,6 +613,7 @@ function runSearch()
                     // Insert ID of error box div into the quotes.
                     document.getElementById("search-error").style.display = 'flex';
                     document.getElementById("search-error").innerHTML = "! " + jsonObject.message;
+                    addResultsToTable(jsonObject.results);
                     return;
                 }
                 document.getElementById("search-error").style.display = 'none';
@@ -619,6 +631,7 @@ function runSearch()
     }
 }
 
+// removes the whole table after search
 function addResultsToTable(results)
 {
     // nukes the current table
@@ -706,13 +719,13 @@ function addResultsToTable(results)
         contactRow.appendChild(newPhone);
 
         const editButton = document.createElement('td');
-        editButton.innerHTML = '<button class="edit-button">Edit</button>';
+        editButton.innerHTML = '<button class="edit-button"> <i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>';
         editButton.classList.add('edit-btn');
         editButton.dataset.id = contactId;
         contactRow.appendChild(editButton);
 
         const deleteButton = document.createElement('td');
-        deleteButton.innerHTML = '<button class="delete-button">Delete</button>';
+        deleteButton.innerHTML = '<button class="delete-button"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>';
         deleteButton.classList.add('delete-btn');
         deleteButton.dataset.id = contactId;
         contactRow.appendChild(deleteButton);

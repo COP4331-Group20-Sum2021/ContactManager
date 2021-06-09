@@ -128,7 +128,7 @@ function updateFields(usrObj){
 // Receives the userid of the person
 function ocrContact(userid){
 	var fname = document.getElementById("firstName").value;
-  var lname = document.getElementById("lastName").value;
+  	var lname = document.getElementById("lastName").value;
 	var email = document.getElementById("email").value;
 	var phone = document.getElementById("phone").value;
 	var desc = document.getElementById("description").value.replace(/\n/g, " ");;
