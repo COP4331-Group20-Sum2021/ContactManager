@@ -99,11 +99,14 @@ body
     {
         display: none;
         background-color: #b8443b;
-        margin-bottom: 1em;
-        padding: .7em .7em;
-        font-weight: 400;
-        font-size: 1em;
+        padding: .7em .7em 0.7em 0.7em;
         border-radius: 5px 5px;
+
+        i 
+        {
+            align-self: center;
+            margin-right: 0.5em;
+        }
     }
 
     h1 

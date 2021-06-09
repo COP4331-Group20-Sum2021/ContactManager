@@ -612,7 +612,7 @@ function runSearch()
                 {
                     // Insert ID of error box div into the quotes.
                     document.getElementById("search-error").style.display = 'flex';
-                    document.getElementById("search-error").innerHTML = "! " + jsonObject.message;
+                    document.getElementById("search-error").innerHTML = '<i class="fa fa-exclamation-triangle"></i>' + jsonObject.message;
                     addResultsToTable(jsonObject.results);
                     return;
                 }
@@ -626,7 +626,7 @@ function runSearch()
     {
         // Insert ID of error box div into the quotes.
         document.getElementById("search-error").style.display = 'flex';
-        document.getElementById("search-error").innerHTML = "! " + err.message;
+        document.getElementById("search-error").innerHTML = '<i class="fa fa-exclamation-triangle"></i>' + err.message;
         console.log(err.message);
     }
 }
