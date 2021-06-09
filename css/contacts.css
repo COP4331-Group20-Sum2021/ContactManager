@@ -1,6 +1,7 @@
-@import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
 :root {
-  --primary-color: #7B8FB0;
+  --primary-color-100: #eaf0f8;
+  --primary-color-500: #7B8FB0;
+  --primary-color-600: #687b99;
   --secondary-color-200: #2F394B;
   --secondary-color: #202733;
   --white: #fff;
@@ -9,7 +10,7 @@
 }
 
 body {
-  background: var(--primary-color);
+  background: var(--primary-color-500);
   margin: 0;
   font-family: var(--ff);
 }
@@ -27,7 +28,7 @@ body {
 }
 
 .navbar .logo span {
-  color: var(--primary-color);
+  color: var(--primary-color-500);
 }
 
 .navbar nav {
@@ -102,36 +103,95 @@ body {
   width: 100%;
 }
 
+.contacts .container .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .contacts .container .search .search-bar {
-  height: 24px;
-  width: 350px;
-  padding: 1px;
-  font-size: 13px;
-  margin: 5px 0;
+  font-size: 0.9em;
+  margin: 0;
+  background-color: var(--primary-color-100);
+  border: 2px solid var(--primary-color-500);
+  padding: 0.4em;
+  border-radius: 5px 0 0 5px;
+  width: 300px;
+  outline: none;
+}
+
+.contacts .container .search .search-bar:focus {
   background-color: var(--white);
 }
 
 .contacts .container .search .search-bar::-webkit-input-placeholder {
-  font-family: FontAwesome, var(--ff);
+  font-family: var(--ff);
   font-weight: 400;
   overflow: visible;
   vertical-align: top;
-  padding-left: 5px;
+  padding-left: 0.5em;
+  display: inline-block !important;
+  color: rgba(204, 204, 204, 0.815);
+}
+
+.contacts .container .search .search-bar:-ms-input-placeholder {
+  font-family: var(--ff);
+  font-weight: 400;
+  overflow: visible;
+  vertical-align: top;
+  padding-left: 0.5em;
+  display: inline-block !important;
+  color: rgba(204, 204, 204, 0.815);
+}
+
+.contacts .container .search .search-bar::-ms-input-placeholder {
+  font-family: var(--ff);
+  font-weight: 400;
+  overflow: visible;
+  vertical-align: top;
+  padding-left: 0.5em;
+  display: inline-block !important;
+  color: rgba(204, 204, 204, 0.815);
+}
+
+.contacts .container .search .search-bar::placeholder {
+  font-family: var(--ff);
+  font-weight: 400;
+  overflow: visible;
+  vertical-align: top;
+  padding-left: 0.5em;
   display: inline-block !important;
   color: rgba(204, 204, 204, 0.815);
 }
 
 .contacts .container .search .search-button {
-  margin: 5px 0;
-  padding: 1px 5px;
-  height: 30px;
-  vertical-align: top;
+  margin: 0;
+  border: none;
   font-family: var(--ff);
+  background-color: var(--primary-color-500);
+  color: white;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  border-radius: 0 5px 5px 0;
+  width: 50px;
+}
+
+.contacts .container .search .search-button:hover {
+  background-color: var(--primary-color-600);
+  cursor: pointer;
 }
 
 .contacts .container img {
   height: 20px;
-  vertical-align: center;
+  -webkit-transition: -webkit-transform 350ms;
+  transition: -webkit-transform 350ms;
+  transition: transform 350ms;
+  transition: transform 350ms, -webkit-transform 350ms;
+}
+
+.contacts .container img:hover {
+  -webkit-transform: rotate(90deg) translateZ(0);
+          transform: rotate(90deg) translateZ(0);
 }
 
 .bg-modal {
@@ -275,6 +335,7 @@ body {
   width: 50%;
   display: block;
   margin: 15px auto;
+  font-family: var(--ff);
 }
 
 .edit-bg-modal .edit-modal-content textarea {
@@ -425,13 +486,59 @@ body {
 }
 
 .contacts-table .contacts-body .delete-btn button {
-  height: 30px;
   font-family: var(--ff);
+  background-color: #910a00;
+  border-radius: 40px;
+  border: 0;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 0.9em;
+  padding: 0.7em 2em;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2e2c2c;
+  -webkit-transition: background-color, color 125ms ease-in-out;
+  transition: background-color, color 125ms ease-in-out;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.contacts-table .contacts-body .delete-btn button:hover {
+  background-color: #7e0d05;
+  color: #2e2c2c;
+}
+
+.contacts-table .contacts-body .delete-btn button:active {
+  position: relative;
+  top: 1px;
 }
 
 .contacts-table .contacts-body .edit-btn button {
-  height: 30px;
   font-family: var(--ff);
+  background-color: var(--primary-color-500);
+  border-radius: 40px;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 0.9em;
+  padding: 0.7em 2em;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2e2c2c;
+  -webkit-transition: background-color, color 125ms ease-in-out;
+  transition: background-color, color 125ms ease-in-out;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.contacts-table .contacts-body .edit-btn button:hover {
+  background-color: var(--primary-color-600);
+  color: #2e2c2c;
+}
+
+.contacts-table .contacts-body .edit-btn button:active {
+  position: relative;
+  top: 1px;
 }
 
 .contacts-table .contacts-body .name-item span {
@@ -483,7 +590,7 @@ body {
     font-size: 18px;
   }
   .contacts .container .search .search-bar {
-    width: 150px;
+    width: 200px;
   }
   .contacts-table {
     display: none;
