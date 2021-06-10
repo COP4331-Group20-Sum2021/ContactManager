@@ -2,6 +2,11 @@
 :root {
   --primary-color: #7B8FB0;
   --secondary-color: #202733;
+  --primary-color-100: #eaf0f8;
+  --primary-color-500: #7B8FB0;
+  --primary-color-600: #687b99;
+  --secondary-color-200: #2F394B;
+  --secondary-color: #202733;
   --white: #fff;
 }
 
@@ -96,10 +101,31 @@ label {
 #firstname, #lastname, #username, #password, #passwordRetype {
   display: block;
   margin: 0 auto;
+  border-radius: 5px;
+}
+
+.error {
+  border-color: red;
+  border-radius: 5px;
+  -webkit-transition: -webkit-box-shadow 150ms ease-in-out;
+  transition: -webkit-box-shadow 150ms ease-in-out;
+  transition: box-shadow 150ms ease-in-out;
+  transition: box-shadow 150ms ease-in-out, -webkit-box-shadow 150ms ease-in-out;
+}
+
+.error:focus {
+  border-color: red;
+  -webkit-box-shadow: 0 0 0 1px red;
+          box-shadow: 0 0 0 1px red;
+  outline: none;
+}
+
+.error:focus.label {
+  color: red;
 }
 
 .register-cta {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-500);
   color: var(--white);
   display: block;
   margin: 0 auto;
@@ -111,6 +137,13 @@ label {
   border-width: .2em;
   border-radius: 5em;
   border-style: solid;
+  cursor: pointer;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+}
+
+.register-cta:hover {
+  background-color: var(--primary-color-600);
 }
 
 #registerResult {

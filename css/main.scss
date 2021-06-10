@@ -3,6 +3,14 @@
 {
     --primary-color: #7B8FB0;
     --secondary-color: #202733;
+
+    --primary-color-100: #eaf0f8;
+    --primary-color-500: #7B8FB0;
+    --primary-color-600: #687b99;
+
+    --secondary-color-200: #2F394B;
+    --secondary-color: #202733;
+    
     --white: #fff;
 }
 
@@ -94,11 +102,30 @@ label
 {
     display:block;
     margin: 0 auto;
+    border-radius: 5px;
+}
+
+.error
+{
+    border-color: red;
+    border-radius: 5px;
+    transition: box-shadow 150ms ease-in-out;
+
+    &:focus
+    {
+        &.label
+        {
+            color: red;
+        }
+        border-color: red;
+        box-shadow: 0 0 0 1px red;
+        outline: none;
+    }
 }
 
 .login-cta
 {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-500);
     color: white;
     display: block;
     margin: 0 auto;
@@ -110,6 +137,13 @@ label
     border-width: .2em;
     border-radius: 5em;
     border-style: solid;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+
+    &:hover
+    {
+        background-color: var(--primary-color-600);
+    }
 }
 
 #loginResult

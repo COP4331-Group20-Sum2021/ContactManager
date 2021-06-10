@@ -49,11 +49,15 @@ function doRegister()
 				if (jsonObject.status == "error")
 				{
 					document.getElementById("registerResult").innerHTML = jsonObject.message;
+
+					if(jsonObject.message == "Username already in use.")
+						document.getElementById("username").classList.add('error');
 				}
 				else
 				{
 					saveCookie();
 					window.location.href = "index.html";
+					document.getElementById("username").classList.remove('error');
 				}
 			}
 		};
@@ -62,6 +66,9 @@ function doRegister()
 	}
 	catch(err)
 	{
+		if(jsonObject.message == "Username already in use.")
+						document.getElementById("username").classList.add('error');
+
         // Send a register error.
 		document.getElementById("registerResult").innerHTML = err;
 	}
@@ -72,16 +79,34 @@ function validRegister(fname, lname, uname, pword, retype)
 	if (fname == undefined || fname == "" || lname == undefined || lname == "" ||
 		uname == undefined || uname == "" || pword == undefined || pword == "" || retype == undefined || retype == "")
 	{
+		document.getElementById("firstname").classList.add('error');
+		document.getElementById("lastname").classList.add('error');
+		document.getElementById("username").classList.add('error');
+		document.getElementById("password").classList.add('error');
+		document.getElementById("passwordRetype").classList.add('error');
+
 		document.getElementById("registerResult").innerHTML = "Field Missing. Please try again.";
 		return 1;
 	}
 	else if (pword.localeCompare(retype) != 0)
 	{
+		document.getElementById("password").classList.add('error');
+		document.getElementById("passwordRetype").classList.add('error');
+
+		document.getElementById("firstname").classList.remove('error');
+		document.getElementById("lastname").classList.remove('error');
+		document.getElementById("username").classList.remove('error');
+
 		document.getElementById("registerResult").innerHTML = "Passwords do not match. Please try again.";
 		return 1;
 	}
 	else
 	{
+		document.getElementById("firstname").classList.remove('error');
+		document.getElementById("lastname").classList.remove('error');
+		document.getElementById("username").classList.remove('error');
+		document.getElementById("password").classList.remove('error');
+		document.getElementById("passwordRetype").classList.remove('error');
 		return 0;
 	}
 }
@@ -127,6 +152,12 @@ function doLogin()
 				if (jsonObject.id < 1)
 				{
 					document.getElementById("loginResult").innerHTML = jsonObject.error;
+
+					if(jsonObject.error == "Invalid user name.")
+						document.getElementById("username").classList.add('error');
+					
+					if(jsonObject.error == "Invalid password.")
+						document.getElementById("password").classList.add('error');
 				}
 				else
 				{
@@ -135,6 +166,8 @@ function doLogin()
 					lastName = jsonObject.lastName;
 					saveCookie();
 					window.location.href = "contacts.html";
+					document.getElementById("username").classList.remove('error');
+					document.getElementById("password").classList.remove('error');
 				}
 			}
 		};
@@ -145,6 +178,12 @@ function doLogin()
 	{
 		// Send a login error.
 		document.getElementById("loginResult").innerHTML = err;
+
+		if(jsonObject.error == "Invalid user name.")
+						document.getElementById("username").classList.add('error');
+					
+		if(jsonObject.error == "Invalid password.")
+			document.getElementById("password").classList.add('error');
 	}
 }
 
@@ -153,10 +192,15 @@ function validLogin(login, password)
 	if (login == undefined || login == "" || password == undefined || password == "")
 	{
 		document.getElementById("loginResult").innerHTML = "Field Missing. Please try again.";
+		document.getElementById("username").classList.add('error');
+		document.getElementById("password").classList.add('error');
+		
 		return 1;
 	}
 	else
 	{
+		document.getElementById("username").classList.remove('error');
+		document.getElementById("password").classList.remove('error');
 		return 0;
 	}
 }
