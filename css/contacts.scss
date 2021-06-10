@@ -642,16 +642,20 @@ body
         {
             h1 
             {
-                font-size: 18px;
+                font-size: 20px;
             }
 
             .search
             {
                 .search-bar
                 {
-                    width: 200px;
+                    width: 150px;
                 }
 
+                .search-button
+                {
+                    width: 30px;
+                }
             }
         }
     }
@@ -707,6 +711,69 @@ body
         .edit-modal-content
         {
             width: 80%;
+        }
+    }
+}
+
+@media(max-width: 350px)
+{
+    .navbar
+    {
+        .logo 
+        {
+            font-size: 1em;
+            align-self: center;
+        }
+
+        nav
+        {
+            padding:0;
+            align-items: center;
+            
+
+            .log-out
+            {
+                align-self: center;
+                font-size: 0.8em;
+                margin: auto;
+            }
+        }
+    }
+
+    // =================================
+    // Contact div around contact table:
+    // =================================
+
+    .contacts
+    {
+        padding: 0.5em;
+        margin: 0.5em 1em;
+
+        .container
+        {
+            h1 
+            {
+                font-size: 16px;
+            }
+
+            .search
+            {
+                .search-bar
+                {
+                    font-size: 0.7em;
+                    width: 58px;
+                }
+
+                .search-button
+                {
+                    width: 30px;
+                }
+            }
+
+            img 
+            {
+                height: 15px;
+            }
         }
     }
 }

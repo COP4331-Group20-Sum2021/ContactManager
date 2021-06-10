@@ -591,10 +591,13 @@ body {
     margin: 0.5em 1em;
   }
   .contacts .container h1 {
-    font-size: 18px;
+    font-size: 20px;
   }
   .contacts .container .search .search-bar {
-    width: 200px;
+    width: 150px;
+  }
+  .contacts .container .search .search-button {
+    width: 30px;
   }
   .contacts-table {
     display: none;
@@ -616,6 +619,45 @@ body {
   }
   .edit-bg-modal .edit-modal-content {
     width: 80%;
+  }
+}
+
+@media (max-width: 350px) {
+  .navbar .logo {
+    font-size: 1em;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  .navbar nav {
+    padding: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .navbar nav .log-out {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    font-size: 0.8em;
+    margin: auto;
+  }
+  .contacts {
+    padding: 0.5em;
+    margin: 0.5em 1em;
+  }
+  .contacts .container h1 {
+    font-size: 16px;
+  }
+  .contacts .container .search .search-bar {
+    font-size: 0.7em;
+    width: 58px;
+  }
+  .contacts .container .search .search-button {
+    width: 30px;
+  }
+  .contacts .container img {
+    height: 15px;
   }
 }
 /*# sourceMappingURL=contacts.css.map */
