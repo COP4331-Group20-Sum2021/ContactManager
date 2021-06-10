@@ -185,6 +185,10 @@ body {
   cursor: pointer;
 }
 
+.contacts .container .search .search-button i {
+  pointer-events: none;
+}
+
 .contacts .container img {
   height: 20px;
   -webkit-transition: -webkit-transform 350ms;
@@ -517,6 +521,10 @@ body {
   top: 1px;
 }
 
+.contacts-table .contacts-body .delete-btn i {
+  pointer-events: none;
+}
+
 .contacts-table .contacts-body .edit-btn button {
   font-family: var(--ff);
   background-color: var(--primary-color-500);
@@ -543,6 +551,10 @@ body {
 .contacts-table .contacts-body .edit-btn button:active {
   position: relative;
   top: 1px;
+}
+
+.contacts-table .contacts-body .edit-btn i {
+  pointer-events: none;
 }
 
 .contacts-table .contacts-body .name-item span {
